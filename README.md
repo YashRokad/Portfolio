@@ -68,6 +68,7 @@ server/
 |---|---|---|
 | `GET` | `/api/projects` | Card-level fields for every project |
 | `GET` | `/api/projects/:slug` | One full case study, plus a `next` pointer |
+| `GET` | `/api/shots` | Design-shot list for the scroll-driven section |
 | `GET` | `/api/testimonials` | Testimonial list |
 | `GET` | `/api/about` | Everything about the person and the site's standing copy |
 | `POST` | `/api/messages` | Validates and appends to `server/data/messages.json` |
@@ -83,10 +84,12 @@ No component calls `fetch` directly — everything goes through `data-client/api
 | Global | Smooth scroll on GSAP's ticker | `hooks/useSmoothScroll.js` |
 | Global nav | Magnetic pill on desktop links; full-screen mobile takeover whose close is a true timeline reverse | `components/Header/Header.jsx` |
 | Route change | Five-panel curtain wipe gating the actual navigation | `components/Transition/TransitionProvider.jsx` |
-| Home hero | Char-stagger headline, drifting mesh, animated scroll cue | `components/Hero/Hero.jsx` |
+| Home hero | Full-bleed image with scroll parallax, char-stagger wordmark, pill marquee, scroll cue | `components/Hero/Hero.jsx` |
+| Design shots | Pinned section where scroll drives a *fractional* index — the name column slides continuously and images cross-fade by distance from it, so there is no step or snap | `components/DesignShots/DesignShots.jsx` |
 | Selected work | Masked row reveal + cursor-following live preview panel | `components/WorkList` + `components/Preview` |
 | Work grid | `Flip` filter re-flow, staggered card reveal, Ken-Burns image scale | `pages/Work/Work.jsx` |
 | Grid → detail | `Flip` shared-element morph from card image to detail hero, with a cross-fade fallback | `animations/flipBridge.js` + `parts/ProjectHero.jsx` |
+| Detail hero | Date + oversized light-weight name, meta ledger, breathing accent glow, full-bleed image | `parts/ProjectHero.jsx` |
 | Detail | Sticky section rail driven by per-section ScrollTriggers | `parts/SectionRail.jsx` |
 | Detail | Metrics count up while scrambling their digits | `hooks/useCountUp.js` |
 | Detail | Journey map pinned and scrolled horizontally | `parts/JourneyMap.jsx` |
@@ -144,7 +147,11 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 |---|---|
 | `name`, `role`, `location` | Wordmark, hero meta, footer |
 | `portrait` | Home about-teaser and About page portrait — **drop a real photo at `client/public/media/portrait.svg`, or change this path** |
-| `heroHeadline`, `heroSub` | Home hero |
+| `heroImage` | Full-bleed home hero backdrop — **drop the real photograph at `client/public/media/hero-backdrop.svg`, or point this at a `.jpg`** |
+| `wordmark` | The oversized name across the bottom of the hero |
+| `ledger[] {label, body}` | The About page label/answer rows |
+| `heroHeadline` | The standing statement mid-left in the hero |
+| `heroSub` | The paragraph under the hero wordmark |
 | `aboutHeadline`, `introStatement` | About page headline and lead; `introStatement` also leads the Work page |
 | `philosophy[] {title, body}` | About — approach cards |
 | `timeline[] {period, role, org, note}` | About — career timeline |
@@ -158,6 +165,19 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 | `contact {email, phoneNote, socials[]}` | Contact page, footer, mobile menu |
 | `faq[] {q, a}` | Contact mini-FAQ |
 | `closingCta {line, action}` | Footer marquee and the home closing banner |
+
+### `shots.js` — the design-shots section
+
+| Field | Feeds |
+|---|---|
+| `name`, `subtitle` | The scrolling name column |
+| `tags[]` | Pills over the top-right of the image |
+| `year`, `note` | Caption block over the bottom of the image |
+| `accent` | The year colour and the stacked-card accent |
+| `image` | The cross-fading image |
+
+Order in the file is the scroll order. Add or remove entries freely — the
+scroll runway is computed from the count.
 
 ### `testimonials.js`
 
@@ -193,3 +213,6 @@ and delete the `generateMedia()` call from `seed.js`.
   run; `messages.json` is only created if missing.
 - Hospitality and SaaS filter tabs are present but currently empty — the empty state is
   built and handled.
+- The About page was simplified to a single ledger at the client's direction. The
+  philosophy cards, the separate career timeline section and the pinned split-scroll
+  were removed; `about.philosophy` is still in the data if any of it should come back.

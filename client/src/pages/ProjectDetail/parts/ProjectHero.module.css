@@ -1,34 +1,111 @@
-.root { padding-block: calc(var(--sp-11) + var(--sp-2)) var(--sp-8); }
-.inner { display: grid; gap: var(--sp-7); }
-.head { display: grid; gap: var(--sp-4); }
-.title { visibility: hidden; max-width: 14ch; }
-.tagline {
-  font-size: var(--fs-body-lg);
-  color: var(--text-secondary);
-  max-width: 46ch;
-  line-height: 1.45;
-}
-
-.figure {
-  border-radius: var(--radius-lg);
+.root {
+  position: relative;
+  padding-top: calc(var(--sp-11) + var(--sp-2));
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-elevated);
+  isolation: isolate;
 }
-.image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  will-change: transform, clip-path;
-}
-@media (max-width: 640px) { .image { aspect-ratio: 4 / 3; } }
 
-.meta {
+/* Accent bleed from the right, echoing the project's signature hue. */
+.glow {
+  position: absolute;
+  top: -18%;
+  right: -22%;
+  width: 62vw;
+  height: 62vw;
+  max-height: 900px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, var(--p-accent, var(--accent)), transparent 62%);
+  opacity: 0.22;
+  filter: blur(60px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.head {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
-  gap: var(--sp-5);
-  padding-top: var(--sp-5);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+  padding-bottom: var(--sp-9);
+}
+@media (max-width: 900px) { .head { grid-template-columns: 1fr; gap: var(--sp-7); } }
+
+.left { display: grid; gap: var(--sp-6); align-content: start; }
+
+.date {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.title {
+  visibility: hidden;
+  /* Lighter than the rest of the site on purpose — the case study opens
+     quietly and lets the outcome line carry the weight. */
+  font-size: clamp(3rem, 8.5vw, 8rem);
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+  max-width: 12ch;
+}
+
+.action {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
+}
+.action:hover { color: var(--p-accent, var(--accent)); border-color: var(--p-accent, var(--accent)); }
+.arrow { transition: transform var(--dur-micro) var(--ease-snap); }
+.action:hover .arrow { transform: translateY(3px); }
+
+.right { display: grid; gap: var(--sp-7); align-content: start; padding-top: clamp(0rem, 5vw, 4rem); }
+
+.lead {
+  font-size: var(--fs-body-lg);
+  line-height: 1.4;
+  letter-spacing: var(--ls-heading);
+  color: var(--text-primary);
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+.meta { display: grid; }
+.metaRow {
+  display: grid;
+  grid-template-columns: minmax(6rem, 10rem) minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding-block: var(--sp-4);
   border-top: 1px solid var(--border-subtle);
 }
-.metaItem { display: grid; gap: var(--sp-2); align-content: start; }
-.metaItem dd { font-weight: var(--fw-medium); color: var(--text-primary); font-size: var(--fs-caption); }
+.metaRow:last-child { border-bottom: 1px solid var(--border-subtle); }
+.metaLabel { font-size: var(--fs-caption); color: var(--text-tertiary); }
+.metaValue {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  text-align: right;
+}
+@media (max-width: 520px) {
+  .metaRow { grid-template-columns: 1fr; gap: var(--sp-1); }
+  .metaValue { text-align: left; }
+}
+
+/* ---- Full-bleed image ---- */
+.figure { width: 100%; overflow: hidden; background: var(--bg-elevated); }
+.image {
+  width: 100%;
+  height: clamp(320px, 62svh, 720px);
+  object-fit: cover;
+  will-change: transform;
+}

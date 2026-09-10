@@ -24,6 +24,8 @@ router.get('/projects/:slug', (req, res) => {
   });
 });
 
+router.get('/shots', (_req, res) => res.json(read('shots', [])));
+
 router.get('/testimonials', (_req, res) => res.json(read('testimonials', [])));
 
 router.get('/about', (_req, res) => res.json(read('about', {})));

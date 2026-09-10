@@ -21,3 +21,16 @@
   padding-right: var(--sp-5);
 }
 .sep { color: var(--accent); opacity: 0.65; }
+
+/* Pill variant — used for the hero's areas-of-practice row. */
+.item[data-variant='pill'] {
+  padding: var(--sp-2) var(--sp-5);
+  margin-right: var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: rgba(236, 235, 231, 0.06);
+  backdrop-filter: blur(8px);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}

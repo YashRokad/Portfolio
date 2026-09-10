@@ -13,6 +13,7 @@ import s from './Marquee.module.css';
  */
 export default function Marquee({
   items = [], speed = 26, direction = 1, className = '', separator = '—', ariaLabel,
+  variant = 'plain',
 }) {
   const rootRef = useRef(null);
   const rowRef = useRef(null);
@@ -77,9 +78,9 @@ export default function Marquee({
       aria-hidden={key === 0 ? undefined : 'true'}
     >
       {items.map((item, i) => (
-        <span className={s.item} key={`${item}-${i}`}>
+        <span className={s.item} data-variant={variant} key={`${item}-${i}`}>
           {item}
-          <span className={s.sep} aria-hidden="true">{separator}</span>
+          {separator && <span className={s.sep} aria-hidden="true">{separator}</span>}
         </span>
       ))}
     </span>

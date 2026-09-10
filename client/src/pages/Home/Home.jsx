@@ -1,6 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
 import Hero from '../../components/Hero/Hero';
 import WorkList from '../../components/WorkList/WorkList';
+import DesignShots from '../../components/DesignShots/DesignShots';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import Stat from '../../components/Stat/Stat';
 import Testimonials from '../../components/Testimonials/Testimonials';
@@ -18,6 +19,7 @@ export default function Home() {
   const { about } = useOutletContext();
   const { data: projects } = useResource('projects', api.getProjects);
   const { data: testimonials } = useResource('testimonials', api.getTestimonials);
+  const { data: shots } = useResource('shots', api.getShots);
   usePageTitle(about ? `${about.name} — ${about.role}` : 'Product Designer');
 
   const capabilitiesScope = useReveal({ stagger: 0.07, y: 44 });
@@ -30,10 +32,13 @@ export default function Home() {
   return (
     <>
       <Hero
-        headline={about?.heroHeadline ?? ''}
+        wordmark={about?.wordmark ?? about?.name ?? ''}
+        statement={about?.heroHeadline ?? ''}
         sub={about?.heroSub ?? ''}
-        role={about?.role ?? ''}
         location={about?.location ?? ''}
+        email={about?.contact?.email ?? ''}
+        image={about?.heroImage ?? ''}
+        tags={(about?.capabilities ?? []).map((c) => c.title)}
         play={Boolean(about)}
       />
 
@@ -54,6 +59,13 @@ export default function Home() {
           <WorkList projects={featured} />
         </div>
       </section>
+
+      {/* ---- Design shots ---- */}
+      <DesignShots
+        shots={shots ?? []}
+        eyebrow="Design shots"
+        title="Brand, systems and environmental work — pieces rather than case studies."
+      />
 
       {/* ---- Capabilities ---- */}
       <section ref={capabilitiesScope} className={`section ${s.caps}`}>

@@ -7,5 +7,14 @@
     "budget": "Not sure yet",
     "message": "Six early arrivals a morning and no way to warn the yard. Can you look at our inbound flow?",
     "receivedAt": "2026-09-10T05:30:34.331Z"
+  },
+  {
+    "id": "msg_mtv4jz83",
+    "name": "Priya Raghunathan",
+    "email": "priya@vantera.example",
+    "company": "",
+    "budget": "Not sure yet",
+    "message": "We have a downtime capture problem on three lines and a taxonomy nobody uses.",
+    "receivedAt": "2026-09-10T06:06:39.891Z"
   }
 ]

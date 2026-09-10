@@ -27,6 +27,7 @@ export const api = {
   /** @returns {Promise<ProjectCard[]>} */
   getProjects: () => request('/projects'),
   getProject: (slug) => request(`/projects/${encodeURIComponent(slug)}`),
+  getShots: () => request('/shots'),
   getTestimonials: () => request('/testimonials'),
   getAbout: () => request('/about'),
   sendMessage: (body) => request('/messages', { method: 'POST', body: JSON.stringify(body) }),

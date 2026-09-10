@@ -1,0 +1,165 @@
+.root {
+  position: relative;
+  background: var(--bg-base);
+  border-block: 1px solid var(--border-subtle);
+}
+
+.pin {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--sp-8);
+}
+
+.inner {
+  display: grid;
+  gap: var(--sp-6);
+  width: 100%;
+}
+
+.head { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); align-items: baseline; }
+.title { color: var(--text-secondary); font-size: var(--fs-caption); max-width: 46ch; }
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+/* ---- Name column ---- */
+.namesViewport {
+  /* One row is visible either side of the active name, faded out at the
+     edges so the column reads as a continuous reel. The list is positioned
+     by transform, so this stays a plain block. */
+  position: relative;
+  height: 46svh;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 74%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 74%, transparent);
+}
+.names {
+  width: 100%;
+  display: grid;
+  gap: clamp(3rem, 9vh, 7rem);
+  will-change: transform;
+}
+.name { display: grid; gap: var(--sp-2); }
+.nameText {
+  font-size: clamp(1.6rem, 3.4vw, 3rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+.nameSub { font-size: var(--fs-caption); color: var(--text-tertiary); }
+
+/* ---- Image frame ---- */
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-elevated);
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+}
+.img { width: 100%; height: 100%; object-fit: cover; }
+
+.tags {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  display: flex;
+  gap: var(--sp-2);
+}
+.tag {
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-sm);
+  background: rgba(13, 14, 16, 0.45);
+  backdrop-filter: blur(10px);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.slideMeta {
+  position: absolute;
+  left: var(--sp-5);
+  right: var(--sp-5);
+  bottom: var(--sp-5);
+  display: grid;
+  gap: var(--sp-2);
+}
+.year {
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--shot-accent, var(--accent));
+}
+.note {
+  font-size: var(--fs-caption);
+  color: var(--text-primary);
+  max-width: 44ch;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+}
+
+.progressTrack { height: 2px; background: var(--border-subtle); overflow: hidden; }
+.progressBar {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* ---- Stacked fallback ---- */
+.stack { display: none; }
+
+@media (max-width: 860px) {
+  .pin { display: none; }
+  .stack {
+    display: grid;
+    gap: var(--sp-7);
+    padding: var(--section-y) var(--gutter);
+    max-width: var(--max-w);
+    margin-inline: auto;
+  }
+  .stackItem { display: grid; gap: var(--sp-4); }
+  .stackImg {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+  .stackCopy { display: grid; gap: var(--sp-2); }
+  .tags[data-inline] { position: static; margin-top: var(--sp-2); }
+  .tag { background: var(--bg-elevated); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pin { display: none; }
+  .stack {
+    display: grid;
+    gap: var(--sp-7);
+    padding: var(--section-y) var(--gutter);
+    max-width: var(--max-w);
+    margin-inline: auto;
+  }
+  .stackItem {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--sp-6);
+    align-items: center;
+  }
+  .stackImg { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-md); }
+  .stackCopy { display: grid; gap: var(--sp-2); }
+  .tags[data-inline] { position: static; margin-top: var(--sp-2); }
+  .tag { background: var(--bg-elevated); }
+}

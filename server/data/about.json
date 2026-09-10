@@ -3,10 +3,30 @@
   "role": "Senior Product Designer",
   "location": "Mumbai, working with teams across GMT−8 to GMT+5:30",
   "portrait": "/media/portrait.svg",
+  "heroImage": "/media/hero-backdrop.svg",
+  "wordmark": "Yash Rokad",
   "heroHeadline": "I design the software that decides how somebody’s Tuesday goes.",
   "heroSub": "Ten years inside enterprise verticals nobody puts on a showreel — payables, claims, shop floors, dock yards. The work is figuring out what the people using it are actually afraid of, then removing that.",
   "aboutHeadline": "Ten years spent in the rooms where software gets worked around.",
   "introStatement": "I work on operational software: the systems people are required to use, on a deadline, often badly lit and rarely willingly. That constraint is the interesting part. When someone cannot walk away from your product, every unclear label becomes a cost the business pays forever.",
+  "ledger": [
+    {
+      "label": "What I do",
+      "body": "I design operational software: the systems people are required to use, on a deadline, often badly lit and rarely willingly. Payables, claims, shop floors, dock yards."
+    },
+    {
+      "label": "My background",
+      "body": "Ten years across agency and in-house, from a Mumbai studio shipping twenty-one projects in two years to leading design on platforms running in fourteen plants and eleven distribution centres."
+    },
+    {
+      "label": "My approach",
+      "body": "Research on the bad day, not the convenient one. Design the explanation, not just the outcome — in enterprise work someone always has to defend the software’s decision to somebody else. One load-bearing rule beats ten guidelines."
+    },
+    {
+      "label": "Outside work",
+      "body": "I restore mechanical watches badly and slowly, which is the only hobby I have found that punishes impatience as reliably as design research does."
+    }
+  ],
   "philosophy": [
     {
       "title": "Research where the work happens",

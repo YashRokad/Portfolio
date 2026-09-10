@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { projects } from './content/projects.js';
+import { shots } from './content/shots.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, '..', 'client', 'public', 'media');
@@ -132,6 +133,79 @@ function uiShot(slug, index, accent, caption) {
   return svg(w, h, body);
 }
 
+/* Full-bleed hero backdrop. A stand-in for the photograph that will replace
+   it — same filename, drop a .jpg in and update the path in about.js. */
+function heroBackdrop() {
+  const r = rng('hero');
+  const w = 2400; const h = 1400;
+  let body = `
+  <defs>
+    <radialGradient id="hg" cx="0.62" cy="0.34" r="0.78">
+      <stop offset="0" stop-color="#5c6b34" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#242a1b" stop-opacity="1"/>
+      <stop offset="1" stop-color="${BG}" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="hg2" cx="0.24" cy="0.78" r="0.6">
+      <stop offset="0" stop-color="#d8f24e" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#d8f24e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${BG}" stop-opacity="0.4"/>
+      <stop offset="0.45" stop-color="${BG}" stop-opacity="0"/>
+      <stop offset="1" stop-color="${BG}" stop-opacity="0.92"/>
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="url(#hg)"/>
+  <rect width="${w}" height="${h}" fill="url(#hg2)"/>`;
+
+  /* A soft interference field — reads as depth behind the wordmark without
+     competing with it. */
+  for (let i = 0; i < 42; i += 1) {
+    const cy = 120 + r() * (h - 240);
+    const amp = 30 + r() * 150;
+    let d = `M -50 ${cy}`;
+    for (let x = 0; x <= w + 100; x += 120) {
+      d += ` Q ${x + 60} ${cy + (r() - 0.5) * amp} ${x + 120} ${cy}`;
+    }
+    body += `<path d="${d}" fill="none" stroke="#d8f24e" stroke-opacity="${0.07 + r() * 0.13}" stroke-width="${0.6 + r() * 1.4}"/>`;
+  }
+  body += `<rect width="${w}" height="${h}" fill="url(#hv)"/>`;
+  return svg(w, h, body);
+}
+
+/* Design-shot imagery — bolder and more graphic than the case-study covers,
+   because this section is about visual craft rather than product screens. */
+function shotImage(slug, accent) {
+  const r = rng(`shot${slug}`);
+  const w = 1600; const h = 1200;
+  let body = `
+  <defs>
+    <linearGradient id="sg" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.9"/>
+      <stop offset="0.55" stop-color="${accent}" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#0a0b0c" stop-opacity="1"/>
+    </linearGradient>
+    <clipPath id="sc"><rect width="${w}" height="${h}"/></clipPath>
+  </defs>
+  <g clip-path="url(#sc)">
+    <rect width="${w}" height="${h}" fill="#0a0b0c"/>
+    <rect width="${w}" height="${h}" fill="url(#sg)"/>`;
+
+  const cx = w * (0.32 + r() * 0.36);
+  const cy = h * (0.34 + r() * 0.3);
+  for (let i = 0; i < 26; i += 1) {
+    const rad = 30 + i * 34;
+    body += `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#0a0b0c" stroke-opacity="${0.06 + (i % 3) * 0.05}" stroke-width="${i % 4 === 0 ? 3 : 1}"/>`;
+  }
+  for (let i = 0; i < 14; i += 1) {
+    const x = r() * w;
+    body += `<rect x="${x}" y="0" width="${1 + r() * 3}" height="${h}" fill="#0a0b0c" opacity="${0.05 + r() * 0.12}"/>`;
+  }
+  body += `<rect x="0" y="0" width="${w}" height="${h}" fill="none" stroke="rgba(255,255,255,0.08)"/>`;
+  body += '</g>';
+  return svg(w, h, body);
+}
+
 function portrait() {
   const w = 900; const h = 1200;
   const body = `
@@ -154,6 +228,10 @@ const favicon = () => svg(64, 64,
 
 export function generateMedia() {
   fs.mkdirSync(OUT, { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'hero-backdrop.svg'), heroBackdrop());
+  shots.forEach((shot) => {
+    fs.writeFileSync(path.join(OUT, path.basename(shot.image)), shotImage(shot.slug, shot.accent));
+  });
   projects.forEach((p) => {
     fs.writeFileSync(path.join(OUT, `${p.slug}-cover.svg`), cover(p.slug, p.title, p.accent));
     p.visualDesign.gallery.forEach((shot, i) => {
