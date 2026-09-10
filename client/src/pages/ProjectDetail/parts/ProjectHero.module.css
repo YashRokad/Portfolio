@@ -57,8 +57,8 @@
   align-items: center;
   gap: var(--sp-4);
   padding: var(--sp-3) var(--sp-5);
-  border-top: 1px solid var(--border-strong);
-  border-bottom: 1px solid var(--border-strong);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-button);
   font-size: var(--fs-caption);
   font-weight: var(--fw-medium);
   color: var(--text-secondary);

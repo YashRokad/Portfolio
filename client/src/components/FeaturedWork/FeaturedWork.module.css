@@ -92,7 +92,7 @@
   gap: var(--sp-3);
   padding: var(--sp-3) var(--sp-5);
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-button);
   font-weight: var(--fw-semibold);
   font-size: var(--fs-caption);
   will-change: transform;

@@ -302,6 +302,25 @@
       "a": "Brand identity, marketing sites, and illustration — I know good people for all three. I also will not run a research study designed to confirm a decision that has already been made."
     }
   ],
+  "footer": {
+    "newsletterLabel": "Newsletter",
+    "newsletterLine": "Notes on designing operational software — sent only when there is something worth reading.",
+    "location": [
+      "Mumbai, Maharashtra",
+      "Working with teams across GMT−8 to GMT+5:30"
+    ],
+    "contacts": [
+      {
+        "label": "For new projects",
+        "value": "hello@yashrokad.design"
+      },
+      {
+        "label": "For everything else",
+        "value": "studio@yashrokad.design"
+      }
+    ],
+    "credit": "Built by hand — React, GSAP, Manrope."
+  },
   "closingCta": {
     "line": "Have a system that people are required to use and quietly work around?",
     "action": "Start a conversation"

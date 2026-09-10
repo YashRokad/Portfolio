@@ -16,6 +16,7 @@ export function seed({ force = false } = {}) {
   write('testimonials', testimonials);
   write('shots', shots);
   if (force || !exists('messages')) write('messages', []);
+  if (force || !exists('subscribers')) write('subscribers', []);
   const dir = generateMedia();
   return { projects: projects.length, shots: shots.length, testimonials: testimonials.length, media: dir };
 }
@@ -24,6 +25,7 @@ export function seed({ force = false } = {}) {
 export function ensureSeeded() {
   if (!exists('projects') || !exists('about') || !exists('testimonials') || !exists('shots')) seed();
   if (!exists('messages')) write('messages', []);
+  if (!exists('subscribers')) write('subscribers', []);
   return read('projects', []).length;
 }
 

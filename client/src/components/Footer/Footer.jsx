@@ -1,62 +1,166 @@
-import { useRef } from 'react';
-import Marquee from '../Marquee/Marquee';
+import { useRef, useState } from 'react';
+import { gsap, DUR, EASE } from '../../animations/gsapConfig';
+import { useMotion } from '../../hooks/useMotionPreference';
+import { useReveal } from '../../hooks/useReveal';
+import { api } from '../../data-client/api';
 import Magnetic from '../Magnetic/Magnetic';
 import TransitionLink from '../Transition/TransitionLink';
-import { useReveal } from '../../hooks/useReveal';
 import s from './Footer.module.css';
 
+const MENU = [
+  { to: '/', label: 'Home' },
+  { to: '/work', label: 'Work' },
+  { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
+];
+
 export default function Footer({ about }) {
-  const scope = useReveal({ stagger: 0.06, y: 32, deps: [about?.name] });
+  const scope = useReveal({ stagger: 0.06, y: 28, deps: [about?.name] });
   const year = useRef(new Date().getFullYear()).current;
+
+  const footer = about?.footer ?? {};
   const socials = about?.contact?.socials ?? [];
-  const email = about?.contact?.email ?? 'hello@yashrokad.design';
-  const cta = about?.closingCta?.line ?? 'Let’s build something worth using';
+  const name = about?.name ?? 'Yash Rokad';
 
   return (
     <footer ref={scope} className={s.footer}>
-      <TransitionLink to="/contact" className={s.marqueeLink} aria-label={`${cta} — go to contact`} data-cursor="view" data-cursor-label="Talk">
-        <Marquee
-          className={s.marquee}
-          items={Array.from({ length: 4 }, () => cta)}
-          speed={30}
-          ariaLabel="Closing call to action"
-        />
-      </TransitionLink>
-
       <div className={`shell ${s.inner}`}>
-        <div className={s.lead} data-reveal>
-          <p className="eyebrow">Start here</p>
-          <a className={s.email} href={`mailto:${email}`} data-cursor="copy" data-cursor-label="Email">{email}</a>
+        <div className={s.left}>
+          <TransitionLink to="/" className={s.wordmark} data-reveal>
+            <span className={s.mark} aria-hidden="true" />
+            {name}
+          </TransitionLink>
+
+          <div className={s.newsletter} data-reveal>
+            <p className={s.colLabel}>{footer.newsletterLabel ?? 'Newsletter'}</p>
+            <p className={s.newsletterLine}>{footer.newsletterLine}</p>
+            <SubscribeForm />
+          </div>
         </div>
 
-        <nav className={s.links} aria-label="Footer">
-          <ul className={s.linkCol} data-reveal>
-            <li className="meta">Pages</li>
-            <li><TransitionLink to="/" className={s.link}>Index</TransitionLink></li>
-            <li><TransitionLink to="/work" className={s.link}>Work</TransitionLink></li>
-            <li><TransitionLink to="/about" className={s.link}>About</TransitionLink></li>
-            <li><TransitionLink to="/contact" className={s.link}>Contact</TransitionLink></li>
-          </ul>
-          <ul className={s.linkCol} data-reveal>
-            <li className="meta">Elsewhere</li>
-            {socials.map((soc) => (
-              <li key={soc.label}>
-                <Magnetic strength={0.4}>
+        <nav className={s.cols} aria-label="Footer">
+          <div className={s.col} data-reveal>
+            <p className={s.colLabel}>Menu</p>
+            <ul>
+              {MENU.map((item) => (
+                <li key={item.to}>
+                  <TransitionLink to={item.to} className={s.link}>{item.label}</TransitionLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={s.col} data-reveal>
+            <p className={s.colLabel}>Social</p>
+            <ul>
+              {socials.map((soc) => (
+                <li key={soc.label}>
                   <a className={s.link} href={soc.href} target="_blank" rel="noreferrer noopener">
                     {soc.label}
-                    <span className={s.handle}>{soc.handle}</span>
                   </a>
-                </Magnetic>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={s.col} data-reveal>
+            <p className={s.colLabel}>Location</p>
+            <address className={s.address}>
+              {(footer.location ?? [about?.location]).filter(Boolean).map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+            </address>
+          </div>
+
+          <ul className={s.contacts}>
+            {(footer.contacts ?? []).map((c) => (
+              <li key={c.label} data-reveal>
+                <p className={s.colLabel}>{c.label}</p>
+                <a className={s.contactValue} href={`mailto:${c.value}`}>{c.value}</a>
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className={s.baseline} data-reveal>
-          <p className="meta">© {year} {about?.name ?? 'Yash Rokad'}. Built by hand — React, GSAP, Manrope.</p>
-          <p className="meta">{about?.location ?? ''}</p>
-        </div>
+        <p className={s.baseline} data-reveal>
+          © {year} {name}. {footer.credit}
+        </p>
       </div>
+
+      {/* Oversized wordmark, sunk into the base of the page. */}
+      <p className={s.watermark} aria-hidden="true">{name}</p>
     </footer>
+  );
+}
+
+/* ------------------------------------------------------------------ form */
+
+function SubscribeForm() {
+  const [email, setEmail] = useState('');
+  const [state, setState] = useState('idle'); // idle | sending | done | error
+  const [error, setError] = useState(null);
+  const ruleRef = useRef(null);
+  const { reduced } = useMotion();
+
+  const focusRule = (on) => {
+    if (!ruleRef.current) return;
+    if (reduced) { gsap.set(ruleRef.current, { scaleX: on ? 1 : 0 }); return; }
+    gsap.to(ruleRef.current, {
+      scaleX: on ? 1 : 0,
+      transformOrigin: on ? 'left center' : 'right center',
+      duration: DUR.quick,
+      ease: EASE.editorial,
+      overwrite: true,
+    });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (state === 'sending') return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) {
+      setError('That email address looks off.');
+      setState('error');
+      return;
+    }
+    setState('sending');
+    setError(null);
+    try {
+      await api.subscribe(email.trim());
+      setState('done');
+      setEmail('');
+    } catch (err) {
+      setError(err.errors?.email ?? 'That did not send. Email works too.');
+      setState('error');
+    }
+  };
+
+  return (
+    <form className={s.form} onSubmit={onSubmit} noValidate>
+      <label className={s.field} htmlFor="subscribe-email">
+        <span className="visuallyHidden">Email address</span>
+        <input
+          id="subscribe-email"
+          className={s.input}
+          type="email"
+          value={email}
+          placeholder="you@company.com"
+          onChange={(e) => { setEmail(e.target.value); if (error) { setError(null); setState('idle'); } }}
+          onFocus={() => focusRule(true)}
+          onBlur={() => focusRule(false)}
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error ? 'subscribe-error' : undefined}
+        />
+        <span ref={ruleRef} className={s.rule} aria-hidden="true" />
+      </label>
+
+      <Magnetic strength={0.25}>
+        <button type="submit" className={s.submit} disabled={state === 'sending'}>
+          {state === 'sending' ? 'Sending…' : 'Subscribe'}
+        </button>
+      </Magnetic>
+
+      {error && <p id="subscribe-error" className={s.formError} role="alert">{error}</p>}
+      {state === 'done' && <p className={s.formOk} role="status">You’re on the list.</p>}
+    </form>
   );
 }

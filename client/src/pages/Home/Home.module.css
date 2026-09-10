@@ -60,8 +60,8 @@
   font-size: var(--fs-eyebrow);
   color: var(--text-tertiary);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
-  padding: var(--sp-1) var(--sp-3);
+  padding: var(--sp-1) 0;
+  margin-right: var(--sp-4);
 }
 
 /* ---- Skills strip ---- */

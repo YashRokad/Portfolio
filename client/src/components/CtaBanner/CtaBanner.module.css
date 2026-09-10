@@ -13,8 +13,8 @@
   align-items: center;
   gap: var(--sp-3);
   padding: var(--sp-4) var(--sp-6);
-  border-radius: var(--radius-pill);
-  background: var(--accent);
+  border-radius: var(--radius-button);
+  background: var(--fill-solid);
   color: var(--accent-ink);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-heading);

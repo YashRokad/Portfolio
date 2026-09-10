@@ -31,4 +31,5 @@ export const api = {
   getTestimonials: () => request('/testimonials'),
   getAbout: () => request('/about'),
   sendMessage: (body) => request('/messages', { method: 'POST', body: JSON.stringify(body) }),
+  subscribe: (email) => request('/subscribers', { method: 'POST', body: JSON.stringify({ email }) }),
 };

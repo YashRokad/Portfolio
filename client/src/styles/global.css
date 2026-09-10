@@ -84,10 +84,10 @@
   left: var(--sp-3);
   z-index: 200;
   padding: var(--sp-3) var(--sp-5);
-  background: var(--accent);
+  background: var(--fill-solid);
   color: var(--accent-ink);
   font-weight: var(--fw-bold);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-button);
   transform: translateY(-200%);
 }
 .skipLink:focus-visible { transform: translateY(0); }

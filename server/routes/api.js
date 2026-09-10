@@ -53,4 +53,20 @@ router.post('/messages', (req, res) => {
   return res.status(201).json({ ok: true, id: entry.id });
 });
 
+router.post('/subscribers', (req, res) => {
+  const { email } = req.body || {};
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    return res.status(400).json({ errors: { email: 'That email address looks off.' } });
+  }
+
+  const subscribers = read('subscribers', []);
+  const address = email.trim().toLowerCase();
+  // Signing up twice is not an error worth showing anyone.
+  if (!subscribers.some((s) => s.email === address)) {
+    subscribers.push({ email: address, subscribedAt: new Date().toISOString() });
+    write('subscribers', subscribers);
+  }
+  return res.status(201).json({ ok: true });
+});
+
 export default router;

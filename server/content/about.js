@@ -122,6 +122,17 @@ export const about = {
     { q: 'What do you need from us?', a: 'Access to real users doing the real task, one decision-maker who can say yes, and permission to report what I find even when it is inconvenient. Nothing else is negotiable; everything else is.' },
     { q: 'What is out of scope?', a: 'Brand identity, marketing sites, and illustration — I know good people for all three. I also will not run a research study designed to confirm a decision that has already been made.' },
   ],
+  footer: {
+    newsletterLabel: 'Newsletter',
+    newsletterLine: 'Notes on designing operational software — sent only when there is something worth reading.',
+    location: ['Mumbai, Maharashtra', 'Working with teams across GMT\u22128 to GMT+5:30'],
+    contacts: [
+      { label: 'For new projects', value: 'hello@yashrokad.design' },
+      { label: 'For everything else', value: 'studio@yashrokad.design' },
+    ],
+    credit: 'Built by hand — React, GSAP, Manrope.',
+  },
+
   closingCta: {
     line: 'Have a system that people are required to use and quietly work around?',
     action: 'Start a conversation',

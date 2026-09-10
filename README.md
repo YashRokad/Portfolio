@@ -72,7 +72,8 @@ server/
 | `GET` | `/api/shots` | Design-shot list for the scroll-driven section |
 | `GET` | `/api/testimonials` | Testimonial list |
 | `GET` | `/api/about` | Everything about the person and the site's standing copy |
-| `POST` | `/api/messages` | Validates and appends to `server/data/messages.json` |
+| `POST` | `/api/messages` | Validates and appends to `server/data/messages.json`. Still live, but nothing in the UI posts to it since the contact form was removed |
+| `POST` | `/api/subscribers` | Footer newsletter signup — appends to `server/data/subscribers.json`, de-duplicated by address |
 
 No component calls `fetch` directly — everything goes through `data-client/api.js`.
 
@@ -83,6 +84,13 @@ the section number and its name set as a heading, and a wide content column
 beside it. That rail is what gives the page a spine now that there are no
 card outlines. Sections marked `wide` narrow the rail so tables and galleries
 get more room.
+
+### Shape
+
+Corners are square. `--radius-sm/md/lg` are all `0`; the only rounding in the
+product is `--radius-button` at 8px on actual buttons, and `--radius-pill` on
+the handful of genuinely circular things (avatars, status dots). Solid button
+fills use `--fill-solid`, a mild white rather than pure `#fff`.
 
 ### Colour
 
@@ -117,8 +125,8 @@ outlines around content.
 | Detail | Personas fully open, goals set against frustrations in two columns | `parts/PersonaCard.jsx` |
 | Detail | Inertia-draggable visual-design gallery | `parts/Gallery.jsx` |
 | About | Timeline reveal with a scrubbed connecting line; two opposing marquees; pinned split-scroll | `pages/About/About.jsx` |
-| Contact | Magnetic email, clipboard copy with an icon morph, pulsing availability dot, GSAP focus states | `pages/Contact/Contact.jsx` |
-| Footer | Marquee CTA, magnetic social links | `components/Footer/Footer.jsx` |
+| Contact | The address set as the page headline with a char-stagger reveal, magnetic pull, clipboard copy with an icon morph, pulsing availability dot | `pages/Contact/Contact.jsx` |
+| Footer | Newsletter signup with a drawn focus rule, magnetic subscribe button, oversized sunken wordmark | `components/Footer/Footer.jsx` |
 
 Every animation is created inside a `gsap.context()` scoped to its component and reverted
 on unmount, so no ScrollTriggers survive a route change.
@@ -186,7 +194,8 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 | `stats[] {value, suffix, label, note}` | Home proof strip counters |
 | `personalNote` | Home about-teaser and About page |
 | `availability {status, label, detail}` | Contact status dot (`available` green, `busy` amber) and CTA bodies |
-| `contact {email, phoneNote, socials[]}` | Contact page, footer, mobile menu |
+| `contact {email, phoneNote, socials[]}` | Contact page headline, footer, menu panel |
+| `footer {newsletterLabel, newsletterLine, location[], contacts[{label, value}], credit}` | The footer's newsletter block, Location column, contact row and copyright line |
 | `faq[] {q, a}` | Contact mini-FAQ |
 | `closingCta {line, action}` | Footer marquee and the home closing banner |
 
@@ -236,6 +245,9 @@ and delete the `generateMedia()` call from `seed.js`.
 - Case-study content is invented. Company names are fictional.
 - The seed script overwrites `projects.json`, `about.json` and `testimonials.json` on every
   run; `messages.json` is only created if missing.
+- The contact page has no form — the email address is the page. The footer's newsletter
+  signup is the only form left, and `studio@yashrokad.design` in the footer contacts is
+  invented placeholder copy.
 - APTEN's audit matrix lists competitors only — its own column was removed at the
   client's direction, so the `ours` column flag is supported but currently unused.
 - APTEN is seeded as the second case study, transcribed from the supplied research PDFs.

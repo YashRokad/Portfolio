@@ -36,6 +36,7 @@
   --text-tertiary: #8b8a87;     /* 5.6:1 — meta and labels, still AA */
   --accent: #ffffff;            /* the accent is simply white */
   --accent-ink: #0d0d0d;        /* text placed on top of --accent */
+  --fill-solid: #ecebe8;        /* mild white for solid buttons, never pure */
   --accent-soft: rgba(255, 255, 255, 0.09);
   --border-subtle: rgba(247, 246, 244, 0.07);
   --border-strong: rgba(247, 246, 244, 0.16);
@@ -112,9 +113,12 @@
   --grid-cols: 12;
   --grid-gap: clamp(1rem, 2vw, 1.75rem);
 
-  --radius-sm: 4px;
-  --radius-md: 10px;
-  --radius-lg: 20px;
+  /* Nothing is rounded except buttons and the few genuinely circular things
+     (avatars, status dots). Square corners everywhere else. */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-button: 8px;
   --radius-pill: 999px;
 
   --z-base: 1;
