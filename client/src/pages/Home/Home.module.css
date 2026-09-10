@@ -1,0 +1,137 @@
+.work { border-top: 1px solid var(--border-subtle); }
+.workHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-7);
+}
+.allLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
+}
+.allLink:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ---- Capabilities ---- */
+.caps { background: var(--bg-base); }
+.capGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1px;
+  margin-top: var(--sp-7);
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.capCard {
+  display: grid;
+  gap: var(--sp-3);
+  align-content: start;
+  padding: var(--sp-6);
+  background: var(--bg-base);
+  transition: background var(--dur-micro) linear;
+}
+.capCard:hover { background: var(--bg-elevated); }
+.capIndex {
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--accent);
+}
+.capBody { color: var(--text-secondary); font-size: var(--fs-caption); line-height: 1.55; }
+.capList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
+}
+.capList li {
+  font-size: var(--fs-eyebrow);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-3);
+}
+
+/* ---- Skills strip ---- */
+.skillsStrip {
+  padding-block: var(--sp-5);
+  border-block: 1px solid var(--border-subtle);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-heading);
+  color: var(--text-secondary);
+}
+
+/* ---- Process ---- */
+.processList { margin-top: var(--sp-7); border-top: 1px solid var(--border-subtle); }
+.processRow {
+  display: grid;
+  grid-template-columns: 4rem minmax(8rem, 14rem) minmax(0, 1fr);
+  gap: var(--sp-5);
+  align-items: baseline;
+  padding-block: var(--sp-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.processStep { font-size: var(--fs-caption); font-weight: var(--fw-bold); color: var(--accent); }
+.processTitle { letter-spacing: var(--ls-heading); }
+.processBody { color: var(--text-secondary); max-width: 46ch; }
+@media (max-width: 760px) {
+  .processRow { grid-template-columns: 3rem 1fr; }
+  .processTitle { grid-column: 2; }
+  .processBody { grid-column: 2; }
+}
+
+/* ---- Proof ---- */
+.proof { background: var(--bg-elevated); }
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--sp-6);
+  margin-top: var(--sp-6);
+}
+
+/* ---- Voices ---- */
+.voicesBody { margin-top: var(--sp-7); }
+
+/* ---- Teaser ---- */
+.teaserInner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+@media (max-width: 860px) { .teaserInner { grid-template-columns: 1fr; } }
+
+.portrait {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+.portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+
+.teaserCopy { display: grid; gap: var(--sp-5); align-content: start; }
+.teaserLead { max-width: 40ch; }
+.teaserNote { color: var(--text-secondary); max-width: 46ch; font-size: var(--fs-caption); }
+.teaserLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-weight: var(--fw-semibold);
+  border-bottom: 1px solid var(--border-strong);
+  padding-bottom: var(--sp-1);
+  will-change: transform;
+}
+.teaserLink:hover { color: var(--accent); border-color: var(--accent); }

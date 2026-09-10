@@ -1,0 +1,136 @@
+/* ==========================================================================
+   DESIGN TOKENS — single source of truth.
+   Nothing outside this file (and reset.css) should declare a raw hex or a
+   raw px value for color, type, spacing, radius, or motion.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 800;
+  src: url('/fonts/manrope-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 800;
+  src: url('/fonts/manrope-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  /* ---------- 1. Color ------------------------------------------------- */
+  /* Base is a cool-leaning charcoal, never pure black. */
+  --bg-base: #0d0e10;
+  --bg-elevated: #16181c;
+  --bg-elevated-2: #1e2126;
+  --text-primary: #ecebe7;      /* warm off-white, 15.6:1 on --bg-base */
+  --text-secondary: #9ba0a8;    /* 7.4:1 on --bg-base — passes AA body */
+  --text-tertiary: #868d96;     /* meta and labels — still passes AA (4.8:1) on the lightest surface */
+  --accent: #d8f24e;            /* acid citron: premium against charcoal, not SaaS blue */
+  --accent-ink: #12140a;        /* text placed on top of --accent */
+  --accent-soft: rgba(216, 242, 78, 0.14);
+  --border-subtle: rgba(236, 235, 231, 0.1);
+  --border-strong: rgba(236, 235, 231, 0.22);
+  --overlay-scrim: rgba(8, 9, 10, 0.72);
+  --scrim-image: rgba(13, 14, 16, 0.55);   /* gradient over cover images */
+  --shadow-lifted: 0 30px 80px rgba(0, 0, 0, 0.55);
+  --cursor-ring: rgba(236, 235, 231, 0.5);
+
+  /* Ambient hero mesh — tinted from the accent and two industry hues */
+  --mesh-1: rgba(216, 242, 78, 0.34);
+  --mesh-2: rgba(124, 196, 255, 0.26);
+  --mesh-3: rgba(201, 166, 255, 0.22);
+
+  /* Semantic state — journey emotional tone, form validity, availability */
+  --state-positive: #6be3c0;
+  --state-caution: #ffb26b;
+  --state-negative: #ff8fa8;
+
+  /* Per-industry signature hues — used only as thin accents on cards/charts */
+  --hue-fintech: #7cc4ff;
+  --hue-insurance: #c9a6ff;
+  --hue-manufacturing: #ffb26b;
+  --hue-logistics: #6be3c0;
+  --hue-hospitality: #ff8fa8;
+  --hue-saas: #d8f24e;
+
+  /* ---------- 2. Typography (Manrope only) ----------------------------- */
+  --font-sans: 'Manrope', system-ui, sans-serif;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+
+  /* Fluid modular scale, ~1.25 minor third at the small end. */
+  --fs-eyebrow: clamp(0.688rem, 0.66rem + 0.14vw, 0.78rem);
+  --fs-caption: clamp(0.75rem, 0.72rem + 0.15vw, 0.84rem);
+  --fs-body: clamp(0.95rem, 0.9rem + 0.24vw, 1.06rem);
+  --fs-body-lg: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  --fs-h4: clamp(1.2rem, 1.08rem + 0.6vw, 1.56rem);
+  --fs-h3: clamp(1.5rem, 1.28rem + 1.1vw, 2.2rem);
+  --fs-h2: clamp(2rem, 1.5rem + 2.4vw, 3.6rem);
+  --fs-h1: clamp(2.6rem, 1.8rem + 3.6vw, 5rem);
+  --fs-display: clamp(3.2rem, 1.4rem + 8vw, 9.5rem);
+
+  --lh-tight: 0.94;
+  --lh-snug: 1.1;
+  --lh-heading: 1.16;
+  --lh-body: 1.62;
+
+  --ls-display: -0.045em;
+  --ls-heading: -0.028em;
+  --ls-body: -0.006em;
+  --ls-eyebrow: 0.18em;
+
+  /* ---------- 3. Spacing (4px base) ------------------------------------ */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+  --sp-10: 8rem;
+  --sp-11: 12rem;
+
+  --section-y: clamp(4rem, 9vw, 9rem);
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --max-w: 84rem;
+  --max-w-prose: 38rem;
+  --grid-cols: 12;
+  --grid-gap: clamp(1rem, 2vw, 1.75rem);
+
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --z-base: 1;
+  --z-sticky: 40;
+  --z-header: 60;
+  --z-menu: 70;
+  --z-transition: 90;
+  --z-cursor: 100;
+
+  /* ---------- 4. Motion ------------------------------------------------ */
+  --dur-micro: 0.24s;
+  --dur-standard: 0.7s;
+  --dur-hero: 1.4s;
+  --ease-editorial: cubic-bezier(0.16, 0.9, 0.24, 1);
+  --ease-snap: cubic-bezier(0.3, 1.5, 0.5, 1);
+
+  /* ---------- 5. Texture ----------------------------------------------- */
+  --grain-opacity: 0.035;
+}

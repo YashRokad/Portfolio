@@ -1,0 +1,23 @@
+.root {
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+.row {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.copy {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  white-space: nowrap;
+}
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-5);
+  padding-right: var(--sp-5);
+}
+.sep { color: var(--accent); opacity: 0.65; }

@@ -1,0 +1,32 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: clamp(230px, 24vw, 380px);
+  aspect-ratio: 4 / 3;
+  margin: calc(clamp(230px, 24vw, 380px) * -0.375) 0 0 calc(clamp(230px, 24vw, 380px) * -0.5);
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  will-change: transform;
+}
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--preview-accent, var(--border-strong));
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lifted);
+}
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  visibility: hidden;
+  will-change: clip-path, transform;
+}

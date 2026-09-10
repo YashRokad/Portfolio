@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="900" height="1200" role="img">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#2a2e35"/>
+      <stop offset="1" stop-color="#0d0e10"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1200" fill="url(#pg)"/>
+  <circle cx="450" cy="470" r="190" fill="#1e2126"/>
+  <path d="M170 1200 C 200 880, 320 760, 450 760 C 580 760, 700 880, 730 1200 Z" fill="#1e2126"/>
+  <circle cx="450" cy="470" r="190" fill="none" stroke="#d8f24e" stroke-opacity="0.35" stroke-width="2"/>
+  <text x="60" y="1140" fill="rgba(236,235,231,0.55)" font-family="Manrope, sans-serif" font-size="24" font-weight="600" letter-spacing="4">PORTRAIT PLACEHOLDER</text></svg>

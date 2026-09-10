@@ -1,0 +1,37 @@
+.root { display: grid; gap: var(--sp-4); }
+
+.viewport { overflow: hidden; }
+/* Without the drag layer the same track becomes a snapping scroller. */
+.viewport:not([data-drag]) {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--sp-3);
+}
+
+.track {
+  display: flex;
+  gap: var(--grid-gap);
+  will-change: transform;
+}
+.viewport[data-drag] .track { width: max-content; }
+
+.item {
+  flex: 0 0 clamp(280px, 46vw, 620px);
+  scroll-snap-align: start;
+  will-change: transform;
+}
+
+.figure { display: grid; gap: var(--sp-3); }
+.img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.caption { font-size: var(--fs-caption); color: var(--text-tertiary); }
+.hint { color: var(--p-accent, var(--accent)); opacity: 0.75; }

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "t1",
+    "quote": "Yash spent two nights on our shop floor before he drew anything. The reason codes in that product are in our supervisors’ own words, and that is the entire reason they get used.",
+    "name": "Priya Raghunathan",
+    "role": "Plant Operations Manager",
+    "org": "Vantera Industrial",
+    "initials": "PR",
+    "accent": "#ffb26b"
+  },
+  {
+    "id": "t2",
+    "quote": "He came back from discovery and told us the roadmap we had just approved was solving the wrong half of the problem. He was right, and he had the transcripts to prove it.",
+    "name": "Marcus Hale",
+    "role": "VP Finance Products",
+    "org": "Kestrel Pay",
+    "initials": "MH",
+    "accent": "#7cc4ff"
+  },
+  {
+    "id": "t3",
+    "quote": "Our claims intake went from the thing customers complained about to the thing they mention unprompted in surveys. Same policies, same adjusters — just a design that stopped frightening people.",
+    "name": "Elaine Fenwick",
+    "role": "Director of Claims Experience",
+    "org": "Merrowfield Mutual",
+    "initials": "EF",
+    "accent": "#c9a6ff"
+  },
+  {
+    "id": "t4",
+    "quote": "Eleven sites, three unions and two carriers who did not trust us. He got all of them reading the same clock. I still do not entirely know how.",
+    "name": "Lorena Batiste",
+    "role": "Network Inbound Lead",
+    "org": "Northbay Freight Network",
+    "initials": "LB",
+    "accent": "#6be3c0"
+  }
+]

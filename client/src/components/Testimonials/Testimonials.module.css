@@ -1,0 +1,50 @@
+.root { display: grid; gap: var(--sp-7); }
+
+.quoteWrap { position: relative; display: grid; gap: var(--sp-5); max-width: 52rem; }
+.mark {
+  position: absolute;
+  top: -0.45em;
+  left: -0.55em;
+  font-size: clamp(5rem, 12vw, 9rem);
+  line-height: 1;
+  font-weight: var(--fw-black);
+  color: var(--t-accent, var(--accent));
+  opacity: 0.16;
+  pointer-events: none;
+}
+.quote {
+  position: relative;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: 1.32;
+  letter-spacing: var(--ls-heading);
+  text-wrap: pretty;
+}
+.attr { display: grid; gap: var(--sp-1); }
+.name { font-style: normal; font-weight: var(--fw-semibold); color: var(--t-accent, var(--accent)); }
+
+.dots { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+.dot {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  background: var(--bg-elevated);
+  transition:
+    transform var(--dur-micro) var(--ease-snap),
+    color var(--dur-micro) linear,
+    border-color var(--dur-micro) linear;
+}
+.dot:hover { transform: translateY(-4px) scale(1.06); color: var(--text-primary); }
+.dot[data-active] {
+  color: var(--dot-accent);
+  border-color: var(--dot-accent);
+  transform: scale(1.08);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--dot-accent) 14%, transparent);
+}

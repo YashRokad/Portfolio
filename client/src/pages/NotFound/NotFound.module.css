@@ -1,0 +1,14 @@
+.root {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: start;
+  min-height: 70svh;
+  align-content: center;
+  padding-block: var(--sp-10);
+}
+.link {
+  font-weight: var(--fw-semibold);
+  color: var(--accent);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: var(--sp-1);
+}

@@ -1,0 +1,22 @@
+.root { display: grid; gap: var(--sp-8); padding-block: calc(var(--sp-11) + var(--sp-2)) var(--sp-10); }
+.block { display: grid; gap: var(--sp-5); padding-top: var(--sp-5); border-top: 1px solid var(--border-subtle); }
+code { font-family: var(--font-sans); font-size: var(--fs-caption); color: var(--text-tertiary); }
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--sp-4); }
+.swatch { display: grid; gap: var(--sp-2); }
+.chip {
+  display: block;
+  height: 64px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.typeList { display: grid; gap: var(--sp-4); }
+.typeList li { display: grid; gap: var(--sp-1); }
+.weights { display: flex; flex-wrap: wrap; gap: var(--sp-3); font-size: var(--fs-h4); }
+
+.spaceList { display: grid; gap: var(--sp-3); }
+.spaceList li { display: flex; align-items: center; gap: var(--sp-4); }
+.bar { display: block; height: 14px; background: var(--accent); border-radius: 2px; }
+
+.motionList { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
