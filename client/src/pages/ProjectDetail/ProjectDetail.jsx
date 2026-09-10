@@ -1,12 +1,12 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import ProjectHero from './parts/ProjectHero';
-import SectionRail from './parts/SectionRail';
 import JourneyMap from './parts/JourneyMap';
 import Gallery from './parts/Gallery';
 import PersonaCard from './parts/PersonaCard';
 import AuditTable from './parts/AuditTable';
 import ImageBand from './parts/ImageBand';
+import ScrollProgress from '../../components/ScrollProgress/ScrollProgress';
 import Stat from '../../components/Stat/Stat';
 import TransitionLink from '../../components/Transition/TransitionLink';
 import Magnetic from '../../components/Magnetic/Magnetic';
@@ -15,21 +15,6 @@ import { api } from '../../data-client/api';
 import { useResource } from '../../data-client/useApi';
 import usePageTitle from '../../hooks/usePageTitle';
 import s from './ProjectDetail.module.css';
-
-/** The eleven case-study sections, in the order the work actually happened. */
-const SECTIONS = [
-  { id: 'overview', label: 'Project title' },
-  { id: 'about', label: 'About project' },
-  { id: 'metrics', label: 'Impact metrics' },
-  { id: 'research', label: 'User problem' },
-  { id: 'pain-points', label: 'Pain points' },
-  { id: 'audit', label: 'Competitive audit' },
-  { id: 'personas', label: 'User personas' },
-  { id: 'journey', label: 'User journey map' },
-  { id: 'solutions', label: 'Solutions' },
-  { id: 'visual', label: 'Visual design' },
-  { id: 'next', label: 'Next project' },
-];
 
 /** Section eyebrow: the number and the name, used identically everywhere. */
 function Marker({ n, children }) {
@@ -43,6 +28,7 @@ function Marker({ n, children }) {
 
 export default function ProjectDetail() {
   const { slug } = useParams();
+  const articleRef = useRef(null);
   const loader = useCallback(() => api.getProject(slug), [slug]);
   const { data: project, error, loading } = useResource(`project:${slug}`, loader);
   const ready = Boolean(project);
@@ -75,9 +61,9 @@ export default function ProjectDetail() {
   const bands = project.bands ?? {};
 
   return (
-    <article className={s.root} style={{ '--p-accent': accent }}>
+    <article ref={articleRef} className={s.root} style={{ '--p-accent': accent }}>
       <ProjectHero project={project} />
-      <SectionRail sections={SECTIONS} accent={accent} />
+      <ScrollProgress targetRef={articleRef} accent={accent} />
 
       {/* ---------------------------------------------- 02 About project */}
       <section ref={aboutScope} id="about" className={s.about}>

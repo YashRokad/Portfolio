@@ -24,8 +24,12 @@ export function TransitionProvider({ children }) {
     if (busy.current) return;
     if (to === location.pathname) return;
 
-    if (skipCurtain) {           // a Flip morph owns this navigation
+    if (skipCurtain) {
+      // A Flip morph owns this navigation, but the scroll offset still has to
+      // reset or the new page opens partway down. The stashed Flip state is
+      // viewport-relative, so the morph still starts from where the card was.
       navigate(to);
+      scrollToTop();
       return;
     }
     clearFlip();

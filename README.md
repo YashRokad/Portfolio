@@ -92,7 +92,7 @@ No component calls `fetch` directly — everything goes through `data-client/api
 | Work grid | `Flip` filter re-flow, staggered card reveal, Ken-Burns image scale | `pages/Work/Work.jsx` |
 | Grid → detail | `Flip` shared-element morph from card image to detail hero, with a cross-fade fallback | `animations/flipBridge.js` + `parts/ProjectHero.jsx` |
 | Detail hero | Date + oversized light-weight name, meta ledger, breathing accent glow, full-bleed image | `parts/ProjectHero.jsx` |
-| Detail | Right-edge chapter rail — ticks only, label on hover, active state driven by per-section ScrollTriggers | `parts/SectionRail.jsx` |
+| Detail | Full-width read-progress bar flush to the bottom edge, driven from a ScrollTrigger on the article | `components/ScrollProgress/ScrollProgress.jsx` |
 | Detail | Full-bleed chapter bands that unmask and parallax between sections | `parts/ImageBand.jsx` |
 | Detail | Competitive matrix with the "ours" column pulled forward; falls back to ruled verdicts | `parts/AuditTable.jsx` |
 | Detail | Metrics count up while scrambling their digits | `hooks/useCountUp.js` |
