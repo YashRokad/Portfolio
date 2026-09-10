@@ -34,8 +34,10 @@
 /* ---- Metrics ---- */
 .metricGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
-  gap: var(--sp-6);
+  /* 11rem keeps four metrics on one row inside the case-study column rather
+     than orphaning the fourth; three-metric projects still fill the row. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: var(--sp-6) var(--sp-5);
 }
 .metricCard { border-top: 2px solid var(--p-accent, var(--accent)); }
 .metricCard > * { border-top: none; padding-top: var(--sp-4); }
