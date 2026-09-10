@@ -18,6 +18,14 @@ export const projects = [
     client: 'Kestrel Pay',
     accent: '#7cc4ff',
     cover: '/media/ledgerline-cover.svg',
+    bands: {
+      about: '/media/ledgerline-band-about.svg',
+      aboutCaption: 'The product in context',
+      problem: '/media/ledgerline-band-problem.svg',
+      problemCaption: 'Where the work actually happens',
+      solution: '/media/ledgerline-band-solution.svg',
+      solutionCaption: 'The system, assembled',
+    },
     about:
       'Kestrel Pay processed payables for mid-market manufacturers, but its reconciliation console had been grown, not designed — eleven years of finance-team requests bolted onto one table. Close took nine days, and three of those were analysts re-checking work the system had already done. The mandate was to raise auto-match rates without hiding the machine: controllers sign their name to the close, so every automated decision had to be inspectable, reversible, and defensible to an auditor who arrives four months later.',
     metrics: [
@@ -118,6 +126,186 @@ export const projects = [
   },
 
   {
+    slug: 'apten',
+    title: 'APTEN',
+    tagline: 'PLACEHOLDER — outcome line pending. A structured RFP replaces cold-calling warehouses.',
+    summary: 'A B2B marketplace that turns 3PL selection into a structured, evidenced process.',
+    industry: 'Logistics',
+    year: '2026',
+    role: 'PLACEHOLDER — role pending',
+    timeline: 'PLACEHOLDER — 8 research phases · timeline pending',
+    team: 'PLACEHOLDER — team pending',
+    tools: ['Figma', 'FigJam'],
+    client: 'APTEN',
+    accent: '#7cc4ff',
+    cover: '/media/apten-cover.svg',
+    bands: {
+      about: '/media/apten-band-about.svg',
+      aboutCaption: 'PLACEHOLDER — replace with a real platform shot',
+      problem: '/media/apten-band-problem.svg',
+      problemCaption: 'PLACEHOLDER — replace with a research or flow artefact',
+      solution: '/media/apten-band-solution.svg',
+      solutionCaption: 'PLACEHOLDER — replace with the Data Room or RFP flow',
+    },
+    about:
+      'APTEN is a B2B marketplace that connects brands and manufacturers with third-party logistics providers through a structured RFP process. Instead of brands cold-calling warehouses, the platform handles the whole path — profile and volume data intake, algorithmic matching, long list to short list curation, a shared Data Room for evaluation, proposal comparison, and final award and onboarding.',
+    metrics: [
+      { value: 8, suffix: '', label: 'Research phases', note: 'PLACEHOLDER — replace with a real outcome metric.' },
+      { value: 5, suffix: '', label: 'Competitors audited', note: 'PLACEHOLDER — replace with a real outcome metric.' },
+      { value: 6, suffix: '', label: 'Sourced problem themes', note: 'PLACEHOLDER — replace with a real outcome metric.' },
+      { value: 10, suffix: '', label: 'Problem–solution pairs', note: 'PLACEHOLDER — replace with a real outcome metric.' },
+    ],
+    research: {
+      intro:
+        'Desk research against genuine user-generated content and formal industry data, not assumption. Every claim below is traceable to a named source; where evidence was a single anecdote, it is labelled as one rather than generalised.',
+      methods: [
+        { name: 'Merchant forum mining', detail: 'Shopify Community threads where brands describe 3PL billing and fulfilment failures in their own words.' },
+        { name: 'Formal industry survey', detail: 'SCALA UK survey via Fleet News — 20% of UK companies report difficulties with their 3PL.' },
+        { name: 'Specialist consultancy analysis', detail: 'Staci Americas and Fulfillrite on how 3PL RFPs are actually run, and the red flags brands miss.' },
+        { name: 'Verified review teardown', detail: 'G2 reviews of Clutch and Freightos, read for distrust of the matching platforms themselves.' },
+      ],
+      insight:
+        'Only 35% of customers agree with the 54% of 3PLs who rate their own performance as highly successful — a 19-point gap between what is claimed and what is experienced.',
+      insightAttribution: 'SCALA UK industry survey, via Fleet News',
+    },
+    painPoints: [
+      {
+        label: 'Rates move after you commit',
+        detail: 'Quoted pricing changes once inventory and money are already in. Documented cases moved $10 to $14.50 per order and $8 to $25 per label.',
+        evidence: 'Practical Ecommerce (Beardbrand); Shopify Community; Fulfillrite — Theme 1, high severity, three independent sources.',
+      },
+      {
+        label: 'Capability is indistinguishable from sales talk',
+        detail: 'Brands cannot separate real operational capacity from a team that says yes to everything, and there is no verified data to check it against before signing.',
+        evidence: 'SCALA/Fleet News UK survey; Fulfillrite red-flags analysis — Theme 2, high severity.',
+      },
+      {
+        label: 'The RFP is rushed and shallow',
+        detail: 'RFPs get launched reactively as a fix to an existing crisis, sent to too many vendors without pre-filtering, and without the operational data needed to price accurately.',
+        evidence: 'Staci Americas — Theme 3, recurring pattern across client engagements.',
+      },
+      {
+        label: 'The matching platforms are themselves distrusted',
+        detail: 'Reviewers report pay-for-placement undermining "verified" review claims, and platform fees that only surface at checkout.',
+        evidence: 'G2 reviews of Clutch.co and Freightos — Theme 6, formal review data.',
+      },
+    ],
+    competitiveAudit: {
+      matrix: {
+        caption: 'Where APTEN sits against the incumbents',
+        dimensionLabel: 'Dimension',
+        columns: [
+          { name: 'Fulfill.com' },
+          { name: 'W&F.com' },
+          { name: 'Freightos' },
+          { name: 'Clutch' },
+          { name: 'Thomasnet' },
+          { name: 'APTEN', ours: true },
+        ],
+        rows: [
+          { label: 'Domain', values: ['3PL matching', '3PL matching', 'Freight booking', 'B2B services', 'Industrial supply', '3PL matching'] },
+          { label: 'Self-service browsing', values: ['No', 'No', 'Yes', 'Yes', 'Yes', 'Yes'] },
+          { label: 'RFP / proposal tools', values: ['No', 'No', 'Partial', 'No', 'RFI only', 'Yes — 4-step wizard'] },
+          { label: 'Data Room', values: ['No', 'No', 'No', 'No', 'No', 'Yes'] },
+          { label: 'Consultant layer', values: ['No', 'No', 'No', 'No', 'No', 'Yes'] },
+          { label: 'Post-match contract mgmt', values: ['No', 'No', 'No', 'No', 'No', 'Yes'] },
+          { label: 'Verified reviews', values: ['Yes', 'Limited', 'Limited', 'Yes', 'No', 'Yes'] },
+        ],
+      },
+      competitors: [
+        { name: 'Fulfill.com', verdict: 'Algorithmic matching plus human consultation, but fully form-gated with no RFP mechanism, no document exchange and a 3–5 day turnaround.' },
+        { name: 'WarehousingAndFulfillment.com', verdict: 'Twenty years of curation and an 8% provider approval rate, wrapped in a basic UI with no proposal management and no transparency on how matching works.' },
+        { name: 'Clutch.co', verdict: 'The most mature verified-review infrastructure in B2B services — undermined, per its own reviewers, by paid placement.' },
+      ],
+      whitespace:
+        'Every incumbent stops at the introduction. None of them owns the evaluation — no shared document room, no structured proposal comparison, no contract record that holds after signing. That gap is exactly where the documented harm happens.',
+    },
+    personas: [
+      {
+        name: 'The Fulfillment Decision-Maker',
+        role: 'Operations / Fulfillment Lead',
+        company: 'Growing DTC / B2B brand',
+        region: 'UK / US',
+        tech: 'Moderate–high',
+        quote: 'I can’t expect a fulfillment partner to care about my brand as much as I do.',
+        goals: [
+          'Find a 3PL that genuinely fits their volume and SKU profile without weeks of unstructured comparison.',
+          'Lock in pricing and SLA terms that will not change after signing.',
+          'See real operational performance data before committing, not just sales claims.',
+        ],
+        frustrations: [
+          'A quoted rate changed materially after signing — real cases moved $10 to $14.50 per order.',
+          'Hard to tell real capability from a sales team that says yes to everything.',
+          'No pre-commitment visibility into performance, against a measured 19-point claim-versus-experience gap.',
+        ],
+        note: 'They own the outcome when a 3PL relationship goes wrong — fielding the customer complaints and explaining the billing discrepancies to finance.',
+      },
+      {
+        name: 'The Business Development Lead',
+        role: 'Business Development / Sales Lead',
+        company: 'Mid-size 3PL provider',
+        region: 'UK / US',
+        tech: 'Moderate',
+        quote: 'Generic pitches about warehouse locations and carrier relationships won’t win business anymore.',
+        goals: [
+          'Be matched with brands whose volume genuinely fits operational capacity, instead of chasing poor-fit prospects.',
+          'Differentiate on real operational outcomes rather than generic infrastructure claims.',
+          'Trust that platform fees are transparent and tied to genuinely qualified leads.',
+        ],
+        frustrations: [
+          'The average 3PL sale needs six to eight touchpoints, but most reps give up after two or three.',
+          'Consultant and agency referral channels are underused across the industry.',
+          'Suspicion that competitors can buy visibility rather than earn it.',
+        ],
+        note: 'Thinner evidence than persona one — the two trust frustrations are extrapolated from adjacent competitor review data, not confirmed 3PL-side complaints. Primary interviews would strengthen it.',
+      },
+    ],
+    journey: {
+      label: 'The brand user, from first search to signed contract',
+      stages: [
+        { name: 'Awareness', detail: 'Recognises the current fulfilment approach will not survive their order volume. Often already mid-crisis.', emotion: 'Overwhelmed', tone: 'low' },
+        { name: 'Consideration', detail: 'Weighs APTEN against a manual search and the incumbent directories.', emotion: 'Sceptical', tone: 'mid' },
+        { name: 'Onboarding & setup', detail: 'Signs up, completes the business profile, uploads order history, builds the product catalog.', emotion: 'Focused', tone: 'neutral' },
+        { name: 'Define requirements', detail: 'Selects services, sets locations and budget, works the RFP dashboard and the Define Scope wizard.', emotion: 'Hopeful', tone: 'neutral' },
+        { name: 'Engagement & evaluation', detail: 'Invites 3PLs into the Data Room, reads documents, asks questions, compares proposals.', emotion: 'Scrutinising', tone: 'mid' },
+        { name: 'Award & handoff', detail: 'Names a finalist, awards the winner, starts the Fulfilment Contract wizard.', emotion: 'Relieved', tone: 'high' },
+      ],
+    },
+    solutions: [
+      {
+        name: 'Server-side Cost Summary and a locking contract wizard',
+        resolves: 'Rates move after you commit',
+        detail: 'Cost is calculated server-side and the Fulfilment Contract wizard locks terms to match the Data Room proposal exactly. Post-signing changes require a logged, visible Change Request.',
+      },
+      {
+        name: 'Mandatory, verified Performance Metrics',
+        resolves: 'Capability is indistinguishable from sales talk',
+        detail: 'A 3PL cannot receive RFP invitations until dispatch time, order accuracy and return processing are filled in and admin-verified, and they must be refreshed on a cadence so the data stays current.',
+      },
+      {
+        name: 'A staged, pre-checked RFP flow',
+        resolves: 'The RFP is rushed and shallow',
+        detail: 'Define Scope, then Long List, then Short List — with a structured pre-RFP checklist that nudges order-history and volume data to completion before the brand can proceed.',
+      },
+      {
+        name: 'Transparency as a first-class feature',
+        resolves: 'The matching platforms are themselves distrusted',
+        detail: 'A plain-language "how matching works" explainer, a "why this match" note tied to Volume Profile data on every suggestion, and the $100 deposit and 3PL billing model stated in full before signup.',
+      },
+    ],
+    visualDesign: {
+      statement:
+        'PLACEHOLDER — the visual design rationale for APTEN is still to be written. Replace this with the argument for why this interface language suits a high-consequence procurement tool.',
+      gallery: [
+        { src: '/media/apten-ui-1.svg', caption: 'PLACEHOLDER — replace with a real screen' },
+        { src: '/media/apten-ui-2.svg', caption: 'PLACEHOLDER — replace with a real screen' },
+        { src: '/media/apten-ui-3.svg', caption: 'PLACEHOLDER — replace with a real screen' },
+        { src: '/media/apten-ui-4.svg', caption: 'PLACEHOLDER — replace with a real screen' },
+        { src: '/media/apten-ui-5.svg', caption: 'PLACEHOLDER — replace with a real screen' },
+      ],
+    },
+  },
+  {
     slug: 'fair-weather',
     title: 'Fair Weather',
     tagline: 'First notice of loss that stops turning a bad day into a bad month.',
@@ -131,6 +319,14 @@ export const projects = [
     client: 'Merrowfield Mutual',
     accent: '#c9a6ff',
     cover: '/media/fair-weather-cover.svg',
+    bands: {
+      about: '/media/fair-weather-band-about.svg',
+      aboutCaption: 'The product in context',
+      problem: '/media/fair-weather-band-problem.svg',
+      problemCaption: 'Where the work actually happens',
+      solution: '/media/fair-weather-band-solution.svg',
+      solutionCaption: 'The system, assembled',
+    },
     about:
       'Merrowfield Mutual wrote home and small-commercial property policies across storm-exposed coastal states. Their first-notice-of-loss form was a faithful digital copy of a paper document: 62 fields, ordered by how the claims system stored data rather than how a person remembers an incident. Two thirds of policyholders abandoned it and phoned instead, at a call-handling cost the business had stopped questioning. The hard part was not the form. It was that claims intake happens on the worst day of someone’s year, often outdoors, often on a cracked phone, often while a contractor waits.',
     metrics: [
@@ -244,6 +440,14 @@ export const projects = [
     client: 'Vantera Industrial',
     accent: '#ffb26b',
     cover: '/media/shopfloor-signal-cover.svg',
+    bands: {
+      about: '/media/shopfloor-signal-band-about.svg',
+      aboutCaption: 'The product in context',
+      problem: '/media/shopfloor-signal-band-problem.svg',
+      problemCaption: 'Where the work actually happens',
+      solution: '/media/shopfloor-signal-band-solution.svg',
+      solutionCaption: 'The system, assembled',
+    },
     about:
       'Vantera ran fourteen plants on an OEE platform that produced immaculate weekly reports nobody used to change anything. Downtime reasons were logged by supervisors from memory at end of shift, which meant the data was roughly right and completely useless — everything landed in a bucket called "Other, minor stop". The mandate was to make capture fast enough to happen at the machine, in the moment, by someone wearing gloves. The constraint that shaped everything: a supervisor has about ninety uninterrupted seconds, and the room is too loud to think in.',
     metrics: [
@@ -357,6 +561,14 @@ export const projects = [
     client: 'Northbay Freight Network',
     accent: '#6be3c0',
     cover: '/media/dwell-cover.svg',
+    bands: {
+      about: '/media/dwell-band-about.svg',
+      aboutCaption: 'The product in context',
+      problem: '/media/dwell-band-problem.svg',
+      problemCaption: 'Where the work actually happens',
+      solution: '/media/dwell-band-solution.svg',
+      solutionCaption: 'The system, assembled',
+    },
     about:
       'Northbay ran eleven distribution centres where dock appointments were booked in a portal, confirmed by email, and then ignored by everyone. Drivers waited an average of 94 minutes past their slot; carriers billed detention; site managers blamed carriers; carriers blamed sites. The mandate was to cut detention spend. The difficulty was political rather than technical — an accurate appointment makes a site look bad, so every honest signal in the system had been quietly rounded off by the people it embarrassed.',
     metrics: [

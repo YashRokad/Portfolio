@@ -1,0 +1,38 @@
+.root {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  will-change: clip-path;
+}
+.root[data-height='tall'] { height: clamp(300px, 66svh, 760px); }
+.root[data-height='short'] { height: clamp(220px, 42svh, 480px); }
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.caption {
+  position: absolute;
+  left: var(--gutter);
+  bottom: var(--sp-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-pill);
+  background: rgba(13, 14, 16, 0.62);
+  backdrop-filter: blur(10px);
+  font-size: var(--fs-caption);
+  color: var(--text-primary);
+  max-width: calc(100% - var(--gutter) * 2);
+}
+.dot {
+  width: 6px; height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--p-accent, var(--accent));
+}

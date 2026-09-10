@@ -5,6 +5,24 @@
   overflow: hidden;
 }
 .head { margin-bottom: var(--sp-7); }
+
+/* Matches the section marker used across the rest of the case study. */
+.marker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.markerNum {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--p-accent, var(--accent));
+  font-variant-numeric: tabular-nums;
+}
 .title { max-width: 20ch; margin-top: var(--sp-4); }
 
 .viewport { width: 100%; overflow: hidden; }

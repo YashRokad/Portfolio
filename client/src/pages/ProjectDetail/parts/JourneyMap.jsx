@@ -84,7 +84,10 @@ export default function JourneyMap({ journey, accent }) {
     <section ref={root} id="journey" className={s.root} style={{ '--p-accent': accent }}>
       <div className={s.head}>
         <div className="shell">
-          <p className="eyebrow">08 — User journey map</p>
+          <p className={s.marker}>
+            <span className={s.markerNum}>08</span>
+            User journey map
+          </p>
           <h2 className={`h2 ${s.title}`}>{journey.label}</h2>
         </div>
       </div>

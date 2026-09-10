@@ -92,7 +92,9 @@ No component calls `fetch` directly — everything goes through `data-client/api
 | Work grid | `Flip` filter re-flow, staggered card reveal, Ken-Burns image scale | `pages/Work/Work.jsx` |
 | Grid → detail | `Flip` shared-element morph from card image to detail hero, with a cross-fade fallback | `animations/flipBridge.js` + `parts/ProjectHero.jsx` |
 | Detail hero | Date + oversized light-weight name, meta ledger, breathing accent glow, full-bleed image | `parts/ProjectHero.jsx` |
-| Detail | Sticky section rail driven by per-section ScrollTriggers | `parts/SectionRail.jsx` |
+| Detail | Right-edge chapter rail — ticks only, label on hover, active state driven by per-section ScrollTriggers | `parts/SectionRail.jsx` |
+| Detail | Full-bleed chapter bands that unmask and parallax between sections | `parts/ImageBand.jsx` |
+| Detail | Competitive matrix with the "ours" column pulled forward; falls back to ruled verdicts | `parts/AuditTable.jsx` |
 | Detail | Metrics count up while scrambling their digits | `hooks/useCountUp.js` |
 | Detail | Journey map pinned and scrolled horizontally | `parts/JourneyMap.jsx` |
 | Detail | Persona expand, staggered pain-point cards | `parts/PersonaCard.jsx`, `ProjectDetail.jsx` |
@@ -128,15 +130,17 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 | `industry` | Filter tab matching on `/work`, badges, detail eyebrow |
 | `year`, `role`, `timeline`, `team`, `tools[]`, `client` | Detail hero meta block (§1) and the About-project client line |
 | `accent` | Per-project accent driving borders, badges, rail ticks, preview frame |
-| `cover` | Card image, preview panel, detail hero, next-project thumbnail |
+| `cover` | Card image, detail hero, next-project thumbnail |
+| `bands {about, problem, solution}` + matching `*Caption` | The three full-bleed chapter bands on the detail page. Every one is optional — omit a key and that band simply does not render, so a case study with fewer visuals has fewer bands |
 | `about` | §2 About project |
 | `metrics[]` `{value, prefix, suffix, decimals, label, note}` | §3 Impact metrics — `value` is the number the counter scrambles into |
 | `research.intro`, `research.methods[] {name, detail}` | §4 method cards |
 | `research.insight`, `research.insightAttribution` | §4 pull-quote callout |
-| `painPoints[] {label, detail}` | §5 pain-point cards |
-| `competitiveAudit.competitors[] {name, verdict}` | §6 audit rows |
+| `painPoints[] {label, detail, evidence?}` | §5 ruled rows — `evidence` renders as a sourced footnote under the detail, and is optional |
+| `competitiveAudit.matrix {caption, dimensionLabel, columns[{name, ours}], rows[{label, values[]}]}` | §6 comparison table when present — mark your own column `ours: true`. Cells reading yes/no/none are toned automatically |
+| `competitiveAudit.competitors[] {name, verdict}` | §6 ruled fallback when there is no `matrix` |
 | `competitiveAudit.whitespace` | §6 whitespace-opportunity panel |
-| `personas[] {name, role, goal, frustration, quote}` | §7 persona cards (initials are derived from `name`) |
+| `personas[] {name, role, quote, company?, region?, tech?, goals[]?, frustrations[]?, note?}` | §7 quote-led cards. `goals`/`frustrations` take arrays; the older singular `goal`/`frustration` still work. `note` is the closing context line |
 | `journey.label`, `journey.stages[] {name, detail, emotion, tone}` | §8 pinned horizontal map. `tone` is `low` / `mid` / `high` / `neutral` and colours the card edge and emotion dot |
 | `solutions[] {name, resolves, detail}` | §9 — `resolves` should quote the matching `painPoints[].label` |
 | `visualDesign.statement` | §10 curatorial statement |
@@ -214,6 +218,10 @@ and delete the `generateMedia()` call from `seed.js`.
 - Case-study content is invented. Company names are fictional.
 - The seed script overwrites `projects.json`, `about.json` and `testimonials.json` on every
   run; `messages.json` is only created if missing.
+- APTEN is seeded as the second case study, transcribed from the supplied research PDFs.
+  Fields still carrying a PLACEHOLDER marker: tagline, role, timeline, team, all four
+  impact metrics, the visual-design statement, every gallery caption and the three band
+  captions.
 - The home page runs hero → design shots → one featured case study → what I do →
   process → proof → testimonials → about teaser → CTA. Only the first project is
   featured; the full grid lives on `/work`.

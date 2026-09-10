@@ -235,6 +235,44 @@ function capabilityImage(slug, accent) {
   return svg(w, h, body);
 }
 
+/* Wide chapter bands that sit full-bleed between case-study sections. */
+function bandImage(slug, index, accent) {
+  const r = rng(`band${slug}${index}`);
+  const w = 2200; const h = 1200;
+  let body = `
+  <defs>
+    <linearGradient id="bg${index}" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="${accent}" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#08090a" stop-opacity="1"/>
+    </linearGradient>
+    <clipPath id="bc${index}"><rect width="${w}" height="${h}"/></clipPath>
+  </defs>
+  <g clip-path="url(#bc${index})">
+    <rect width="${w}" height="${h}" fill="#0a0b0c"/>
+    <rect width="${w}" height="${h}" fill="url(#bg${index})"/>`;
+
+  /* A loose wireframe motif — reads as product without pretending to be a
+     real screenshot. */
+  const cols = 5 + Math.floor(r() * 3);
+  for (let c = 0; c < cols; c += 1) {
+    const x = 120 + c * ((w - 240) / cols);
+    const cw = (w - 240) / cols - 40;
+    const ch = 200 + r() * 620;
+    const y = (h - ch) / 2 + (r() - 0.5) * 160;
+    body += `<rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="18" fill="#08090a" fill-opacity="${0.3 + r() * 0.4}" stroke="rgba(255,255,255,0.09)"/>`;
+    for (let l = 0; l < 4; l += 1) {
+      body += `<rect x="${x + 30}" y="${y + 34 + l * 30}" width="${cw * (0.3 + r() * 0.5)}" height="9" rx="4" fill="rgba(255,255,255,${0.06 + r() * 0.12})"/>`;
+    }
+  }
+  for (let i = 0; i < 20; i += 1) {
+    const y = r() * h;
+    body += `<line x1="0" y1="${y}" x2="${w}" y2="${y}" stroke="#08090a" stroke-opacity="${0.04 + r() * 0.08}" stroke-width="${1 + r() * 3}"/>`;
+  }
+  body += '</g>';
+  return svg(w, h, body);
+}
+
 function portrait() {
   const w = 900; const h = 1200;
   const body = `
@@ -266,6 +304,9 @@ export function generateMedia() {
   });
   projects.forEach((p) => {
     fs.writeFileSync(path.join(OUT, `${p.slug}-cover.svg`), cover(p.slug, p.title, p.accent));
+    ['about', 'problem', 'solution'].forEach((band, i) => {
+      fs.writeFileSync(path.join(OUT, `${p.slug}-band-${band}.svg`), bandImage(p.slug, i, p.accent));
+    });
     p.visualDesign.gallery.forEach((shot, i) => {
       fs.writeFileSync(path.join(OUT, path.basename(shot.src)), uiShot(p.slug, i, p.accent, shot.caption));
     });

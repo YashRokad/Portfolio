@@ -4,8 +4,9 @@ import { scrollToEl } from '../../../hooks/useSmoothScroll';
 import s from './SectionRail.module.css';
 
 /**
- * Sticky in-page rail. Active state is driven by a ScrollTrigger per section
- * rather than by scroll maths, so it stays accurate through pinned sections.
+ * Chapter progress along the right edge. A tick per section, the label
+ * revealed only on hover or when active — deliberately not a table of
+ * contents, which is what made the page read like documentation.
  */
 export default function SectionRail({ sections = [], accent }) {
   const [active, setActive] = useState(sections[0]?.id);
@@ -43,8 +44,8 @@ export default function SectionRail({ sections = [], accent }) {
               aria-current={active === section.id ? 'true' : undefined}
               onClick={() => scrollToEl(document.getElementById(section.id))}
             >
-              <span className={s.num}>{String(i + 1).padStart(2, '0')}</span>
               <span className={s.label}>{section.label}</span>
+              <span className={s.num}>{String(i + 1).padStart(2, '0')}</span>
               <span className={s.tick} aria-hidden="true" />
             </button>
           </li>

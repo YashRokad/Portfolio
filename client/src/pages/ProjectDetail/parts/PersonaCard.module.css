@@ -1,8 +1,9 @@
 .root {
   display: grid;
-  gap: var(--sp-4);
+  gap: var(--sp-5);
   align-content: start;
-  padding: var(--sp-6);
+  height: 100%;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -10,28 +11,47 @@
 }
 .root[data-open] { border-color: var(--p-accent, var(--accent)); }
 
-.head { display: flex; align-items: center; gap: var(--sp-4); }
+/* The quote leads — it is the only part written by the user, not about them. */
+.quote {
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  font-weight: var(--fw-medium);
+  line-height: 1.32;
+  letter-spacing: var(--ls-heading);
+  text-wrap: pretty;
+  padding-left: var(--sp-5);
+  border-left: 2px solid var(--p-accent, var(--accent));
+}
+.quote::before { content: '“'; }
+.quote::after { content: '”'; }
+
+.identity { display: flex; align-items: center; gap: var(--sp-4); }
 .avatar {
   display: grid;
   place-items: center;
-  width: 52px; height: 52px;
+  width: 48px; height: 48px;
   flex: 0 0 auto;
   border-radius: var(--radius-pill);
   border: 1px solid var(--p-accent, var(--accent));
   color: var(--p-accent, var(--accent));
   font-weight: var(--fw-bold);
   font-size: var(--fs-caption);
-  letter-spacing: 0.04em;
 }
+.name { font-size: var(--fs-h4); font-weight: var(--fw-semibold); letter-spacing: var(--ls-heading); }
+.role { font-size: var(--fs-caption); color: var(--text-secondary); }
 
-.goal, .frustration { color: var(--text-secondary); display: grid; gap: var(--sp-1); font-size: var(--fs-caption); line-height: 1.55; }
-.goalLabel {
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5rem), 1fr));
+  gap: var(--sp-4);
+}
+.facts > div { display: grid; gap: var(--sp-1); padding-top: var(--sp-3); border-top: 1px solid var(--border-subtle); }
+.facts dt {
   font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-bold);
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
+.facts dd { font-size: var(--fs-caption); font-weight: var(--fw-medium); }
 
 .toggle {
   justify-self: start;
@@ -51,22 +71,44 @@
 }
 .root[data-open] .chev { transform: rotate(-135deg) translateY(-1px); }
 
-.body {
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
+.body { height: 0; overflow: hidden; opacity: 0; visibility: hidden; }
+.columns {
   display: grid;
-  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--sp-5);
 }
-.quote {
-  font-size: var(--fs-body-lg);
-  font-weight: var(--fw-medium);
-  line-height: 1.4;
-  letter-spacing: var(--ls-heading);
+.colLabel {
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+.colLabel[data-kind='goal'] { color: var(--state-positive); }
+.colLabel[data-kind='pain'] { color: var(--state-negative); }
+
+.bullets { display: grid; gap: var(--sp-3); }
+.bullets li {
+  position: relative;
   padding-left: var(--sp-4);
-  border-left: 2px solid var(--p-accent, var(--accent));
-  text-wrap: pretty;
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
-.quote::before { content: '“'; }
-.quote::after { content: '”'; }
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px; height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.note {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+  line-height: 1.55;
+}
