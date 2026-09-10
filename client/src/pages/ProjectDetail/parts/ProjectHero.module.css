@@ -15,9 +15,9 @@
   max-height: 900px;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, var(--p-accent, var(--accent)), transparent 62%);
-  opacity: 0.22;
-  filter: blur(60px);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5), transparent 62%);
+  opacity: 0.05;
+  filter: blur(80px);
   pointer-events: none;
   will-change: transform;
 }
@@ -64,7 +64,7 @@
   color: var(--text-secondary);
   transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
 }
-.action:hover { color: var(--p-accent, var(--accent)); border-color: var(--p-accent, var(--accent)); }
+.action:hover { color: var(--text-primary); border-color: var(--border-strong); }
 .arrow { transition: transform var(--dur-micro) var(--ease-snap); }
 .action:hover .arrow { transform: translateY(3px); }
 
@@ -102,7 +102,7 @@
 }
 
 /* ---- Full-bleed image ---- */
-.figure { width: 100%; overflow: hidden; background: var(--bg-elevated); }
+.figure { width: 100%; overflow: hidden; }
 .image {
   width: 100%;
   height: clamp(320px, 62svh, 720px);

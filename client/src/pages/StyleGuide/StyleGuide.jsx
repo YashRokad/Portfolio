@@ -10,8 +10,8 @@ const COLORS = [
   '--bg-base', '--bg-elevated', '--bg-elevated-2', '--text-primary',
   '--text-secondary', '--text-tertiary', '--accent', '--accent-soft',
   '--border-subtle', '--border-strong', '--overlay-scrim',
-  '--hue-fintech', '--hue-insurance', '--hue-manufacturing',
-  '--hue-logistics', '--hue-hospitality', '--hue-saas',
+  '--state-positive', '--state-caution', '--state-negative',
+  '--tone-low', '--tone-mid', '--tone-neutral', '--tone-high',
 ];
 const TYPE = [
   ['--fs-display', 'Display', 'var(--fw-black)'],

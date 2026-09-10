@@ -30,8 +30,7 @@
   width: 100%;
   height: clamp(320px, 72svh, 820px);
   overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
   will-change: clip-path;
 }
 .image {
@@ -48,11 +47,9 @@
   position: absolute;
   top: var(--sp-5);
   left: var(--sp-5);
-  padding: var(--sp-2) var(--sp-4);
-  border-radius: var(--radius-pill);
-  background: rgba(13, 14, 16, 0.5);
-  backdrop-filter: blur(10px);
+  color: var(--text-primary);
   font-size: var(--fs-eyebrow);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.8);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;

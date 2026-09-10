@@ -159,7 +159,7 @@ export default function ProjectDetail() {
           <div className={s.personaGrid}>
             {project.personas.map((persona) => (
               <div key={persona.name} data-reveal>
-                <PersonaCard persona={persona} accent={accent} />
+                <PersonaCard persona={persona} />
               </div>
             ))}
           </div>

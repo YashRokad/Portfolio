@@ -22,15 +22,13 @@
 }
 .sep { color: var(--accent); opacity: 0.65; }
 
-/* Pill variant — used for the hero's areas-of-practice row. */
+/* Practice row in the hero: type and a hairline divider, no chrome. */
 .item[data-variant='pill'] {
-  padding: var(--sp-2) var(--sp-5);
-  margin-right: var(--sp-3);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  background: rgba(236, 235, 231, 0.06);
-  backdrop-filter: blur(8px);
+  padding: 0 var(--sp-5) 0 0;
+  margin-right: var(--sp-5);
+  border-right: 1px solid var(--border-subtle);
   font-size: var(--fs-caption);
   font-weight: var(--fw-medium);
+  color: var(--text-secondary);
   white-space: nowrap;
 }

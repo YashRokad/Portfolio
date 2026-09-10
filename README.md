@@ -32,7 +32,7 @@ Open http://localhost:5173. `/styleguide` renders every design token.
 | Scroll | Lenis, driven from GSAP's ticker so ScrollTrigger never disagrees with it |
 | Styling | Hand-written CSS Modules + a token layer. No UI kit. |
 | Font | Manrope only, self-hosted variable font (300–800) |
-| Theme | Dark only |
+| Theme | Dark only, and monochrome — white is the accent |
 
 ## 2. Layout
 
@@ -76,6 +76,15 @@ server/
 
 No component calls `fetch` directly — everything goes through `data-client/api.js`.
 
+### Colour
+
+The interface is monochrome by design. `--accent` is white; hierarchy comes
+from weight, scale and opacity rather than hue. `--state-negative` is the one
+survivor — a form error has to be able to shout. Journey emotion is drawn as a
+four-bar level (`--tone-low` … `--tone-high`), not as red-amber-green.
+Separation is carried by space and hairline rules; there are no card fills or
+outlines around content.
+
 ## 4. Animation inventory
 
 | Where | What | Lives in |
@@ -96,8 +105,8 @@ No component calls `fetch` directly — everything goes through `data-client/api
 | Detail | Full-bleed chapter bands that unmask and parallax between sections | `parts/ImageBand.jsx` |
 | Detail | Competitive matrix with the "ours" column pulled forward; falls back to ruled verdicts | `parts/AuditTable.jsx` |
 | Detail | Metrics count up while scrambling their digits | `hooks/useCountUp.js` |
-| Detail | Journey map pinned and scrolled horizontally | `parts/JourneyMap.jsx` |
-| Detail | Persona expand, staggered pain-point cards | `parts/PersonaCard.jsx`, `ProjectDetail.jsx` |
+| Detail | Journey map as a real map — stages across, dimensions down, sticky row labels, emotional register drawn as level rather than colour | `parts/JourneyMap.jsx` |
+| Detail | Personas fully open, goals set against frustrations in two columns | `parts/PersonaCard.jsx` |
 | Detail | Inertia-draggable visual-design gallery | `parts/Gallery.jsx` |
 | About | Timeline reveal with a scrubbed connecting line; two opposing marquees; pinned split-scroll | `pages/About/About.jsx` |
 | Contact | Magnetic email, clipboard copy with an icon morph, pulsing availability dot, GSAP focus states | `pages/Contact/Contact.jsx` |
@@ -129,7 +138,8 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 | `summary` | Short card line (list endpoint only) |
 | `industry` | Filter tab matching on `/work`, badges, detail eyebrow |
 | `year`, `role`, `timeline`, `team`, `tools[]`, `client` | Detail hero meta block (§1) and the About-project client line |
-| `accent` | Per-project accent driving borders, badges, rail ticks, preview frame |
+| `accent` | Per-project UI accent. White across the board — the interface carries no hue |
+| `artTone` | A quiet grey used *only* by the media generator, so covers and bands differ slightly without colouring the UI |
 | `cover` | Card image, detail hero, next-project thumbnail |
 | `bands {about, problem, solution}` + matching `*Caption` | The three full-bleed chapter bands on the detail page. Every one is optional — omit a key and that band simply does not render, so a case study with fewer visuals has fewer bands |
 | `about` | §2 About project |
@@ -141,7 +151,7 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 | `competitiveAudit.competitors[] {name, verdict}` | §6 ruled fallback when there is no `matrix` |
 | `competitiveAudit.whitespace` | §6 whitespace-opportunity panel |
 | `personas[] {name, role, quote, company?, region?, tech?, goals[]?, frustrations[]?, note?}` | §7 quote-led cards. `goals`/`frustrations` take arrays; the older singular `goal`/`frustration` still work. `note` is the closing context line |
-| `journey.label`, `journey.stages[] {name, detail, emotion, tone}` | §8 pinned horizontal map. `tone` is `low` / `mid` / `high` / `neutral` and colours the card edge and emotion dot |
+| `journey.label`, `journey.stages[] {name, goal, actions, touchpoints, pain, opportunity, emotion, tone}` | §8 journey map table — one column per stage, one row per dimension. Any dimension absent from every stage drops its row entirely; a stage carrying only the older `detail` field falls back into the Actions row. `tone` (`low`/`mid`/`neutral`/`high`) drives the four-bar emotional register |
 | `solutions[] {name, resolves, detail}` | §9 — `resolves` should quote the matching `painPoints[].label` |
 | `visualDesign.statement` | §10 curatorial statement |
 | `visualDesign.gallery[] {src, caption}` | §10 draggable gallery |
@@ -218,6 +228,8 @@ and delete the `generateMedia()` call from `seed.js`.
 - Case-study content is invented. Company names are fictional.
 - The seed script overwrites `projects.json`, `about.json` and `testimonials.json` on every
   run; `messages.json` is only created if missing.
+- APTEN's audit matrix lists competitors only — its own column was removed at the
+  client's direction, so the `ours` column flag is supported but currently unused.
 - APTEN is seeded as the second case study, transcribed from the supplied research PDFs.
   Fields still carrying a PLACEHOLDER marker: tagline, role, timeline, team, all four
   impact metrics, the visual-design statement, every gallery caption and the three band

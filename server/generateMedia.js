@@ -14,18 +14,22 @@ import { about } from './content/about.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, '..', 'client', 'public', 'media');
 
-const BG = '#0d0e10';
-const PANEL = '#16181c';
-const PANEL2 = '#1e2126';
-const LINE = 'rgba(236,235,231,0.10)';
-const DIM = 'rgba(236,235,231,0.22)';
-const TEXT = 'rgba(236,235,231,0.55)';
+const BG = '#0d0d0d';
+const PANEL = '#131313';
+const PANEL2 = '#191919';
+const LINE = 'rgba(247,246,244,0.08)';
+const DIM = 'rgba(247,246,244,0.2)';
+const TEXT = 'rgba(247,246,244,0.5)';
 
 /* Small deterministic PRNG so regenerating produces identical assets. */
 function rng(seed) {
   let s = [...seed].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
   return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
 }
+
+/* Imagery is drawn from a quiet per-item tone, never from the UI accent —
+   the interface is monochrome, the artwork only barely less so. */
+const art = (item) => item.artTone || '#bdbcb9';
 
 const svg = (w, h, body) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img">${body}</svg>\n`;
@@ -142,12 +146,12 @@ function heroBackdrop() {
   let body = `
   <defs>
     <radialGradient id="hg" cx="0.62" cy="0.34" r="0.78">
-      <stop offset="0" stop-color="#5c6b34" stop-opacity="1"/>
-      <stop offset="0.45" stop-color="#242a1b" stop-opacity="1"/>
+      <stop offset="0" stop-color="#3a3a3a" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#1c1c1c" stop-opacity="1"/>
       <stop offset="1" stop-color="${BG}" stop-opacity="1"/>
     </radialGradient>
     <radialGradient id="hg2" cx="0.24" cy="0.78" r="0.6">
-      <stop offset="0" stop-color="#d8f24e" stop-opacity="0.3"/>
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.12"/>
       <stop offset="1" stop-color="#d8f24e" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="hv" x1="0" y1="0" x2="0" y2="1">
@@ -168,7 +172,7 @@ function heroBackdrop() {
     for (let x = 0; x <= w + 100; x += 120) {
       d += ` Q ${x + 60} ${cy + (r() - 0.5) * amp} ${x + 120} ${cy}`;
     }
-    body += `<path d="${d}" fill="none" stroke="#d8f24e" stroke-opacity="${0.07 + r() * 0.13}" stroke-width="${0.6 + r() * 1.4}"/>`;
+    body += `<path d="${d}" fill="none" stroke="#ffffff" stroke-opacity="${0.04 + r() * 0.07}" stroke-width="${0.6 + r() * 1.4}"/>`;
   }
   body += `<rect width="${w}" height="${h}" fill="url(#hv)"/>`;
   return svg(w, h, body);
@@ -182,8 +186,8 @@ function shotImage(slug, accent) {
   let body = `
   <defs>
     <linearGradient id="sg" x1="0.1" y1="0" x2="0.9" y2="1">
-      <stop offset="0" stop-color="${accent}" stop-opacity="0.9"/>
-      <stop offset="0.55" stop-color="${accent}" stop-opacity="0.42"/>
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.42"/>
+      <stop offset="0.55" stop-color="${accent}" stop-opacity="0.16"/>
       <stop offset="1" stop-color="#0a0b0c" stop-opacity="1"/>
     </linearGradient>
     <clipPath id="sc"><rect width="${w}" height="${h}"/></clipPath>
@@ -215,8 +219,8 @@ function capabilityImage(slug, accent) {
   let body = `
   <defs>
     <linearGradient id="cg" x1="0.15" y1="0" x2="0.85" y2="1">
-      <stop offset="0" stop-color="${accent}" stop-opacity="0.95"/>
-      <stop offset="0.6" stop-color="${accent}" stop-opacity="0.35"/>
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.5"/>
+      <stop offset="0.6" stop-color="${accent}" stop-opacity="0.14"/>
       <stop offset="1" stop-color="#08090a" stop-opacity="1"/>
     </linearGradient>
     <clipPath id="cc"><rect width="${w}" height="${h}"/></clipPath>
@@ -242,8 +246,8 @@ function bandImage(slug, index, accent) {
   let body = `
   <defs>
     <linearGradient id="bg${index}" x1="0" y1="0" x2="1" y2="0.7">
-      <stop offset="0" stop-color="${accent}" stop-opacity="0.55"/>
-      <stop offset="0.5" stop-color="${accent}" stop-opacity="0.18"/>
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.3"/>
+      <stop offset="0.5" stop-color="${accent}" stop-opacity="0.1"/>
       <stop offset="1" stop-color="#08090a" stop-opacity="1"/>
     </linearGradient>
     <clipPath id="bc${index}"><rect width="${w}" height="${h}"/></clipPath>
@@ -285,30 +289,30 @@ function portrait() {
   <rect width="${w}" height="${h}" fill="url(#pg)"/>
   <circle cx="450" cy="470" r="190" fill="${PANEL2}"/>
   <path d="M170 1200 C 200 880, 320 760, 450 760 C 580 760, 700 880, 730 1200 Z" fill="${PANEL2}"/>
-  <circle cx="450" cy="470" r="190" fill="none" stroke="#d8f24e" stroke-opacity="0.35" stroke-width="2"/>
+  <circle cx="450" cy="470" r="190" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="2"/>
   <text x="60" y="1140" fill="${TEXT}" font-family="Manrope, sans-serif" font-size="24" font-weight="600" letter-spacing="4">PORTRAIT PLACEHOLDER</text>`;
   return svg(w, h, body);
 }
 
 const favicon = () => svg(64, 64,
-  `<rect width="64" height="64" rx="14" fill="#0d0e10"/><path d="M14 18 L32 40 L50 18" fill="none" stroke="#d8f24e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="32" y1="40" x2="32" y2="48" stroke="#d8f24e" stroke-width="6" stroke-linecap="round"/>`);
+  `<rect width="64" height="64" rx="14" fill="#0d0d0d"/><path d="M14 18 L32 40 L50 18" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="32" y1="40" x2="32" y2="48" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>`);
 
 export function generateMedia() {
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'hero-backdrop.svg'), heroBackdrop());
   about.capabilities.forEach((cap) => {
-    fs.writeFileSync(path.join(OUT, path.basename(cap.image)), capabilityImage(cap.slug, cap.accent));
+    fs.writeFileSync(path.join(OUT, path.basename(cap.image)), capabilityImage(cap.slug, art(cap)));
   });
   shots.forEach((shot) => {
-    fs.writeFileSync(path.join(OUT, path.basename(shot.image)), shotImage(shot.slug, shot.accent));
+    fs.writeFileSync(path.join(OUT, path.basename(shot.image)), shotImage(shot.slug, art(shot)));
   });
   projects.forEach((p) => {
-    fs.writeFileSync(path.join(OUT, `${p.slug}-cover.svg`), cover(p.slug, p.title, p.accent));
+    fs.writeFileSync(path.join(OUT, `${p.slug}-cover.svg`), cover(p.slug, p.title, art(p)));
     ['about', 'problem', 'solution'].forEach((band, i) => {
-      fs.writeFileSync(path.join(OUT, `${p.slug}-band-${band}.svg`), bandImage(p.slug, i, p.accent));
+      fs.writeFileSync(path.join(OUT, `${p.slug}-band-${band}.svg`), bandImage(p.slug, i, art(p)));
     });
     p.visualDesign.gallery.forEach((shot, i) => {
-      fs.writeFileSync(path.join(OUT, path.basename(shot.src)), uiShot(p.slug, i, p.accent, shot.caption));
+      fs.writeFileSync(path.join(OUT, path.basename(shot.src)), uiShot(p.slug, i, art(p), shot.caption));
     });
   });
   fs.writeFileSync(path.join(OUT, 'portrait.svg'), portrait());

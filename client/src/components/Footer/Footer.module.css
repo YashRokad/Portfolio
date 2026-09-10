@@ -15,7 +15,7 @@
   color: var(--text-primary);
   transition: color var(--dur-micro) linear;
 }
-.marqueeLink:hover .marquee { color: var(--accent); }
+.marqueeLink:hover .marquee { opacity: 0.55; }
 
 .inner {
   display: grid;
@@ -33,7 +33,7 @@
   padding-bottom: var(--sp-2);
   transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
 }
-.email:hover { color: var(--accent); border-color: var(--accent); }
+.email:hover { border-color: var(--text-primary); }
 
 .links {
   display: grid;
@@ -52,7 +52,7 @@
   color: var(--text-secondary);
   transition: color var(--dur-micro) linear;
 }
-.link:hover { color: var(--accent); }
+.link:hover { color: var(--text-primary); }
 .handle { font-size: var(--fs-caption); color: var(--text-tertiary); }
 
 .baseline {

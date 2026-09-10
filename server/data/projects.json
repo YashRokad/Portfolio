@@ -17,7 +17,8 @@
       "Storybook"
     ],
     "client": "Kestrel Pay",
-    "accent": "#7cc4ff",
+    "accent": "#ffffff",
+    "artTone": "#c9c8c5",
     "cover": "/media/ledgerline-cover.svg",
     "bands": {
       "about": "/media/ledgerline-band-about.svg",
@@ -239,7 +240,8 @@
       "FigJam"
     ],
     "client": "APTEN",
-    "accent": "#7cc4ff",
+    "accent": "#ffffff",
+    "artTone": "#b6b5b2",
     "cover": "/media/apten-cover.svg",
     "bands": {
       "about": "/media/apten-band-about.svg",
@@ -340,10 +342,6 @@
           },
           {
             "name": "Thomasnet"
-          },
-          {
-            "name": "APTEN",
-            "ours": true
           }
         ],
         "rows": [
@@ -354,8 +352,7 @@
               "3PL matching",
               "Freight booking",
               "B2B services",
-              "Industrial supply",
-              "3PL matching"
+              "Industrial supply"
             ]
           },
           {
@@ -363,7 +360,6 @@
             "values": [
               "No",
               "No",
-              "Yes",
               "Yes",
               "Yes",
               "Yes"
@@ -376,8 +372,7 @@
               "No",
               "Partial",
               "No",
-              "RFI only",
-              "Yes — 4-step wizard"
+              "RFI only"
             ]
           },
           {
@@ -387,8 +382,7 @@
               "No",
               "No",
               "No",
-              "No",
-              "Yes"
+              "No"
             ]
           },
           {
@@ -398,8 +392,7 @@
               "No",
               "No",
               "No",
-              "No",
-              "Yes"
+              "No"
             ]
           },
           {
@@ -409,8 +402,7 @@
               "No",
               "No",
               "No",
-              "No",
-              "Yes"
+              "No"
             ]
           },
           {
@@ -420,8 +412,7 @@
               "Limited",
               "Limited",
               "Yes",
-              "No",
-              "Yes"
+              "No"
             ]
           }
         ]
@@ -487,37 +478,61 @@
       "stages": [
         {
           "name": "Awareness",
-          "detail": "Recognises the current fulfilment approach will not survive their order volume. Often already mid-crisis.",
+          "goal": "Recognise that the current fulfilment approach will not survive their order volume.",
+          "actions": "Searches online, asks peers for referrals — often already mid-crisis with the incumbent.",
+          "touchpoints": "Search results, industry blogs, word of mouth, competitor directories",
+          "pain": "RFPs get triggered reactively, in response to an active problem, never planned.",
+          "opportunity": "Speak directly to the reactive-search moment; help a rushed brand define real requirements before comparing anyone.",
           "emotion": "Overwhelmed",
           "tone": "low"
         },
         {
           "name": "Consideration",
-          "detail": "Weighs APTEN against a manual search and the incumbent directories.",
+          "goal": "Decide whether APTEN is a trustworthy way to find a 3PL at all.",
+          "actions": "Weighs the value proposition against a manual search and the incumbent platforms.",
+          "touchpoints": "Marketing site, landing page",
+          "pain": "Matching platforms carry documented distrust; a 19-point claim-versus-experience gap sits behind it.",
+          "opportunity": "Surface trust signals early — transparent deposit framing, evidence that matches are not pay-to-play.",
           "emotion": "Sceptical",
           "tone": "mid"
         },
         {
           "name": "Onboarding & setup",
-          "detail": "Signs up, completes the business profile, uploads order history, builds the product catalog.",
+          "goal": "Get business profile and operational data into the platform accurately.",
+          "actions": "Signs up, completes the business profile, uploads order history, builds the product catalog.",
+          "touchpoints": "Sign-up, onboarding wizard, Profile module, five-step Volume Profile",
+          "pain": "Gathering detailed operational history takes real time, but pricing accuracy later depends on it.",
+          "opportunity": "Reinforce graceful degradation — the \"insufficient data\" fallback belongs throughout onboarding, not only in the Data Room.",
           "emotion": "Focused",
           "tone": "neutral"
         },
         {
           "name": "Define requirements",
-          "detail": "Selects services, sets locations and budget, works the RFP dashboard and the Define Scope wizard.",
+          "goal": "Get matched with 3PLs that genuinely fit, without months of vetting.",
+          "actions": "Selects services, sets locations and budget, reviews the RFP dashboard and its matches.",
+          "touchpoints": "Define Requirements screen, RFP dashboard, Define Scope wizard, 3PL profiles",
+          "pain": "The matching logic is unspecified — the brand has no visibility into why a given 3PL surfaced.",
+          "opportunity": "Highest-leverage point to close the trust gap: even a lightweight \"why this match\" tied to Volume Profile data.",
           "emotion": "Hopeful",
           "tone": "neutral"
         },
         {
           "name": "Engagement & evaluation",
-          "detail": "Invites 3PLs into the Data Room, reads documents, asks questions, compares proposals.",
+          "goal": "Verify a shortlisted 3PL’s claims before committing money and inventory.",
+          "actions": "Invites 3PLs into the Data Room, reads documents, asks questions, compares proposals.",
+          "touchpoints": "Data Room, FAQ and Q&A, Ask a Question modal, proposal review",
+          "pain": "Quoted rates have moved after signing — $10 to $14.50 per order, $8 to $25 per label.",
+          "opportunity": "Resolve the open question in favour of server-side Cost Summary calculation — it closes a documented harm.",
           "emotion": "Scrutinising",
           "tone": "mid"
         },
         {
           "name": "Award & handoff",
-          "detail": "Names a finalist, awards the winner, starts the Fulfilment Contract wizard.",
+          "goal": "Formalise the partnership, confident the terms will hold.",
+          "actions": "Names a finalist, awards the winner, begins the Fulfilment Contract wizard.",
+          "touchpoints": "Award action, Fulfilment Contract wizard, Relationships kanban",
+          "pain": "This is exactly where documented cases show terms changing between agreement and execution.",
+          "opportunity": "Make the locked, platform-tracked contract record a headline value proposition, not a quiet backend detail.",
           "emotion": "Relieved",
           "tone": "high"
         }
@@ -588,7 +603,8 @@
       "Optimal Workshop"
     ],
     "client": "Merrowfield Mutual",
-    "accent": "#c9a6ff",
+    "accent": "#ffffff",
+    "artTone": "#a3a29f",
     "cover": "/media/fair-weather-cover.svg",
     "bands": {
       "about": "/media/fair-weather-band-about.svg",
@@ -813,7 +829,8 @@
       "On-site observation"
     ],
     "client": "Vantera Industrial",
-    "accent": "#ffb26b",
+    "accent": "#ffffff",
+    "artTone": "#d6d5d2",
     "cover": "/media/shopfloor-signal-cover.svg",
     "bands": {
       "about": "/media/shopfloor-signal-band-about.svg",
@@ -1038,7 +1055,8 @@
       "Metabase"
     ],
     "client": "Northbay Freight Network",
-    "accent": "#6be3c0",
+    "accent": "#ffffff",
+    "artTone": "#8f8e8b",
     "cover": "/media/dwell-cover.svg",
     "bands": {
       "about": "/media/dwell-band-about.svg",

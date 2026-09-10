@@ -1,12 +1,5 @@
-.root {
-  padding-block: var(--section-y);
-  background: var(--bg-elevated);
-  border-block: 1px solid var(--border-subtle);
-  overflow: hidden;
-}
-.head { margin-bottom: var(--sp-7); }
+.root { padding-block: var(--section-y); }
 
-/* Matches the section marker used across the rest of the case study. */
 .marker {
   display: inline-flex;
   align-items: baseline;
@@ -17,88 +10,122 @@
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
-.markerNum {
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-bold);
-  color: var(--p-accent, var(--accent));
-  font-variant-numeric: tabular-nums;
-}
-.title { max-width: 20ch; margin-top: var(--sp-4); }
+.markerNum { font-size: var(--fs-caption); font-weight: var(--fw-bold); color: var(--text-primary); }
 
-.viewport { width: 100%; overflow: hidden; }
-.track {
-  display: flex;
-  gap: var(--grid-gap);
-  padding-inline: var(--gutter);
-  will-change: transform;
+.title {
+  margin-top: var(--sp-4);
+  margin-bottom: var(--sp-7);
+  font-size: clamp(1.35rem, 2.6vw, 2.2rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.02em;
+  max-width: 26ch;
 }
 
-.card {
-  flex: 0 0 clamp(260px, 26vw, 360px);
-  display: grid;
-  gap: var(--sp-3);
-  align-content: start;
-  padding: var(--sp-6);
+/* No inline padding here — the gutter is carried by the first and last
+   columns instead, so the sticky label column covers everything beneath it
+   rather than leaving a strip of bleed-through at the edge. */
+.scroller {
+  overflow-x: auto;
+  padding-bottom: var(--sp-3);
+  scroll-snap-type: x proximity;
+}
+
+.table {
+  border-collapse: collapse;
+  min-width: 100%;
+  max-width: none;
+  table-layout: fixed;
+}
+
+/* Dimension labels stay put while the stages move past them. */
+.corner, .rowLabel {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  width: calc(9.5rem + var(--gutter));
+  min-width: calc(9.5rem + var(--gutter));
+  padding: var(--sp-4) var(--sp-5) var(--sp-4) var(--gutter);
+  text-align: left;
+  vertical-align: top;
   background: var(--bg-base);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  border-top: 2px solid var(--p-accent, var(--accent));
-  will-change: transform;
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  white-space: nowrap;
 }
-.card[data-tone='low'] { border-top-color: var(--state-negative); }
-.card[data-tone='mid'] { border-top-color: var(--state-caution); }
-.card[data-tone='high'] { border-top-color: var(--state-positive); }
+.corner { color: var(--text-primary); }
 
-.stageIndex {
+.stage {
+  background: var(--bg-base);
+  width: clamp(15rem, 21vw, 20rem);
+  min-width: 15rem;
+  padding: var(--sp-4) var(--sp-5) var(--sp-5) 0;
+  text-align: left;
+  vertical-align: bottom;
+  scroll-snap-align: start;
+}
+.stageNum {
+  display: block;
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-eyebrow);
   color: var(--text-tertiary);
+  margin-bottom: var(--sp-2);
 }
-.stageName { letter-spacing: var(--ls-heading); }
-.stageDetail { color: var(--text-secondary); font-size: var(--fs-caption); line-height: 1.55; }
-.emotion {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  margin-top: var(--sp-2);
-  padding-top: var(--sp-3);
-  border-top: 1px solid var(--border-subtle);
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-semibold);
-}
-.emotionDot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-}
-.card[data-tone='low'] .emotion { color: var(--state-negative); }
-.card[data-tone='mid'] .emotion { color: var(--state-caution); }
-.card[data-tone='high'] .emotion { color: var(--state-positive); }
-.card[data-tone='neutral'] .emotion { color: var(--text-secondary); }
-
-.progressTrack {
-  height: 2px;
-  margin-top: var(--sp-6);
-  background: var(--border-subtle);
-  overflow: hidden;
-}
-.progressBar {
+.stageName {
   display: block;
-  height: 100%;
-  background: var(--p-accent, var(--accent));
-  transform: scaleX(0);
-  transform-origin: left center;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  white-space: normal;
 }
-.hint { margin-top: var(--sp-3); }
 
-@media (max-width: 860px) {
-  .viewport { overflow: visible; }
-  .track {
-    flex-direction: column;
-    padding-inline: 0;
+.cell {
+  padding: var(--sp-4) var(--sp-5) var(--sp-4) 0;
+  background: var(--bg-base);
+  vertical-align: top;
+  font-size: var(--fs-caption);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-subtle);
+}
+thead th { border-bottom: 1px solid var(--border-strong); }
+
+.cell[data-kind='goal'] { color: var(--text-primary); font-weight: var(--fw-medium); }
+.cell[data-kind='pain'] { color: var(--text-tertiary); }
+.cell[data-kind='opportunity'] { color: var(--text-secondary); font-style: italic; }
+.empty { color: var(--text-tertiary); opacity: 0.5; }
+
+/* ---- Emotion register ---- */
+.emotionName {
+  display: block;
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-2);
+}
+.meter { display: flex; gap: 3px; }
+.meter i {
+  display: block;
+  width: 16px;
+  height: 3px;
+  background: var(--tone-low);
+  opacity: 0.35;
+}
+.meter i[data-on] { background: var(--tone-high); opacity: 1; }
+
+.hint { margin-top: var(--sp-5); }
+
+/* The last column carries the closing gutter. */
+.stage:last-child, .cell:last-child { padding-right: var(--gutter); }
+
+@media (max-width: 760px) {
+  .corner, .rowLabel {
+    width: calc(6.5rem + var(--gutter));
+    min-width: calc(6.5rem + var(--gutter));
+    padding-right: var(--sp-4);
   }
-  .card { flex: 1 1 auto; }
-  .viewport { padding-inline: var(--gutter); }
-  .progressTrack, .hint { display: none; }
+  .stage { min-width: 13rem; }
 }

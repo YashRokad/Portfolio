@@ -85,12 +85,13 @@
 
 .tag {
   font-size: var(--fs-eyebrow);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
-  padding: var(--sp-1) var(--sp-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding-right: var(--sp-4);
   white-space: nowrap;
 }
+.tag + .tag { border-left: 1px solid var(--border-subtle); padding-left: var(--sp-4); }
 
 /* ---- The still ---- */
 .still {
@@ -100,7 +101,7 @@
   width: clamp(150px, 12vw, 205px);
   aspect-ratio: 3 / 4;
   margin-left: clamp(-102px, -6vw, -75px);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   overflow: hidden;
   pointer-events: none;
   opacity: 0;

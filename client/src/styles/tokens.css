@@ -26,40 +26,40 @@
 
 :root {
   /* ---------- 1. Color ------------------------------------------------- */
-  /* Base is a cool-leaning charcoal, never pure black. */
-  --bg-base: #0d0e10;
-  --bg-elevated: #16181c;
-  --bg-elevated-2: #1e2126;
-  --text-primary: #ecebe7;      /* warm off-white, 15.6:1 on --bg-base */
-  --text-secondary: #9ba0a8;    /* 7.4:1 on --bg-base — passes AA body */
-  --text-tertiary: #868d96;     /* meta and labels — still passes AA (4.8:1) on the lightest surface */
-  --accent: #d8f24e;            /* acid citron: premium against charcoal, not SaaS blue */
-  --accent-ink: #12140a;        /* text placed on top of --accent */
-  --accent-soft: rgba(216, 242, 78, 0.14);
-  --border-subtle: rgba(236, 235, 231, 0.1);
-  --border-strong: rgba(236, 235, 231, 0.22);
-  --overlay-scrim: rgba(8, 9, 10, 0.72);
-  --scrim-image: rgba(13, 14, 16, 0.55);   /* gradient over cover images */
-  --shadow-lifted: 0 30px 80px rgba(0, 0, 0, 0.55);
-  --cursor-ring: rgba(236, 235, 231, 0.5);
+  /* Neutral, not cool. Surfaces step by a couple of points only — separation
+     comes from space and type, not from boxes. */
+  --bg-base: #0d0d0d;
+  --bg-elevated: #131313;
+  --bg-elevated-2: #191919;
+  --text-primary: #f7f6f4;      /* 18.0:1 on --bg-base */
+  --text-secondary: #a8a7a4;    /* 8.1:1 — passes AA body */
+  --text-tertiary: #8b8a87;     /* 5.6:1 — meta and labels, still AA */
+  --accent: #ffffff;            /* the accent is simply white */
+  --accent-ink: #0d0d0d;        /* text placed on top of --accent */
+  --accent-soft: rgba(255, 255, 255, 0.09);
+  --border-subtle: rgba(247, 246, 244, 0.07);
+  --border-strong: rgba(247, 246, 244, 0.16);
+  --overlay-scrim: rgba(6, 6, 6, 0.72);
+  --scrim-image: rgba(13, 13, 13, 0.55);   /* gradient over cover images */
+  --shadow-lifted: 0 30px 80px rgba(0, 0, 0, 0.6);
+  --cursor-ring: rgba(247, 246, 244, 0.5);
 
-  /* Ambient hero mesh — tinted from the accent and two industry hues */
-  --mesh-1: rgba(216, 242, 78, 0.34);
-  --mesh-2: rgba(124, 196, 255, 0.26);
-  --mesh-3: rgba(201, 166, 255, 0.22);
+  /* Ambient hero mesh — light on dark, no hue */
+  --mesh-1: rgba(255, 255, 255, 0.16);
+  --mesh-2: rgba(255, 255, 255, 0.09);
+  --mesh-3: rgba(255, 255, 255, 0.06);
 
-  /* Semantic state — journey emotional tone, form validity, availability */
-  --state-positive: #6be3c0;
-  --state-caution: #ffb26b;
-  --state-negative: #ff8fa8;
+  /* Semantic state. Kept monochrome except where a form error genuinely has
+     to shout — colour is the exception here, not the system. */
+  --state-positive: rgba(247, 246, 244, 0.92);
+  --state-caution: rgba(247, 246, 244, 0.6);
+  --state-negative: #e08a8a;
 
-  /* Per-industry signature hues — used only as thin accents on cards/charts */
-  --hue-fintech: #7cc4ff;
-  --hue-insurance: #c9a6ff;
-  --hue-manufacturing: #ffb26b;
-  --hue-logistics: #6be3c0;
-  --hue-hospitality: #ff8fa8;
-  --hue-saas: #d8f24e;
+  /* Journey emotional register, expressed as weight rather than hue. */
+  --tone-low: rgba(247, 246, 244, 0.32);
+  --tone-mid: rgba(247, 246, 244, 0.58);
+  --tone-neutral: rgba(247, 246, 244, 0.72);
+  --tone-high: rgba(247, 246, 244, 1);
 
   /* ---------- 2. Typography (Manrope only) ----------------------------- */
   --font-sans: 'Manrope', system-ui, sans-serif;

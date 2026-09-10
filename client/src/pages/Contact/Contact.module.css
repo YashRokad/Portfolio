@@ -17,22 +17,21 @@
   transition: color var(--dur-micro) linear;
   word-break: break-word;
 }
-.email:hover { color: var(--accent); }
+.email:hover { opacity: 0.7; }
 
 .copy {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
-  padding: var(--sp-2) var(--sp-4);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--border-subtle);
   font-size: var(--fs-caption);
   font-weight: var(--fw-semibold);
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
 }
 .copy:hover { color: var(--text-primary); border-color: var(--border-strong); }
-.copy[data-copied] { color: var(--accent); border-color: var(--accent); }
+.copy[data-copied] { color: var(--text-primary); border-color: var(--text-primary); }
 .copyIcon { display: grid; place-items: center; }
 
 /* ---- Availability ---- */
@@ -56,19 +55,19 @@
 .socials { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 .social {
   display: inline-block;
-  padding: var(--sp-2) var(--sp-5);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
+  padding: var(--sp-2) 0;
+  margin-right: var(--sp-6);
+  border-bottom: 1px solid var(--border-subtle);
   font-size: var(--fs-caption);
   font-weight: var(--fw-medium);
   color: var(--text-secondary);
   will-change: transform;
   transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
 }
-.social:hover { color: var(--accent); border-color: var(--accent); }
+.social:hover { color: var(--text-primary); border-color: var(--text-primary); }
 
 /* ---- Form ---- */
-.formSection { border-top: 1px solid var(--border-subtle); background: var(--bg-elevated); }
+.formSection { border-top: 1px solid var(--border-subtle); }
 .formGrid {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -134,7 +133,7 @@ select.input { appearance: none; cursor: pointer; }
 .submit:disabled { opacity: 0.6; cursor: progress; }
 .submitDot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-ink); }
 
-.success { color: var(--accent); font-weight: var(--fw-medium); font-size: var(--fs-caption); }
+.success { color: var(--text-primary); font-weight: var(--fw-medium); font-size: var(--fs-caption); }
 .error { color: var(--state-negative); font-weight: var(--fw-medium); font-size: var(--fs-caption); }
 
 /* ---- FAQ ---- */

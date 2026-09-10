@@ -129,7 +129,8 @@
         "Insight set",
         "Opportunity map"
       ],
-      "accent": "#d8f24e",
+      "accent": "#ffffff",
+      "artTone": "#c9c8c5",
       "image": "/media/cap-discovery.svg"
     },
     {
@@ -141,7 +142,8 @@
         "Service blueprints",
         "Moments of truth"
       ],
-      "accent": "#7cc4ff",
+      "accent": "#ffffff",
+      "artTone": "#b6b5b2",
       "image": "/media/cap-service.svg"
     },
     {
@@ -153,7 +155,8 @@
         "High-fidelity UI",
         "Prototypes"
       ],
-      "accent": "#c9a6ff",
+      "accent": "#ffffff",
+      "artTone": "#a3a29f",
       "image": "/media/cap-product.svg"
     },
     {
@@ -165,7 +168,8 @@
         "Component library",
         "Contribution model"
       ],
-      "accent": "#6be3c0",
+      "accent": "#ffffff",
+      "artTone": "#d6d5d2",
       "image": "/media/cap-systems.svg"
     },
     {
@@ -177,7 +181,8 @@
         "Critique cadence",
         "Handoff standards"
       ],
-      "accent": "#ffb26b",
+      "accent": "#ffffff",
+      "artTone": "#8f8e8b",
       "image": "/media/cap-ops.svg"
     },
     {
@@ -189,7 +194,8 @@
         "Pitch narrative",
         "Feasibility framing"
       ],
-      "accent": "#ff8fa8",
+      "accent": "#ffffff",
+      "artTone": "#bfbebb",
       "image": "/media/cap-vision.svg"
     }
   ],

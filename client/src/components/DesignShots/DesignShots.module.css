@@ -62,9 +62,8 @@
   position: relative;
   width: 100%;
   height: clamp(340px, 62svh, 760px);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  background: var(--bg-elevated);
 }
 .slide {
   position: absolute;
@@ -81,14 +80,11 @@
   gap: var(--sp-2);
 }
 .tag {
-  padding: var(--sp-2) var(--sp-4);
-  border-radius: var(--radius-sm);
-  background: rgba(13, 14, 16, 0.45);
-  backdrop-filter: blur(10px);
   font-size: var(--fs-caption);
   font-weight: var(--fw-medium);
   color: var(--text-primary);
   white-space: nowrap;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.8);
 }
 
 .slideMeta {
@@ -101,9 +97,10 @@
 }
 .year {
   font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-eyebrow);
-  color: var(--shot-accent, var(--accent));
+  color: var(--text-primary);
+  opacity: 0.7;
 }
 .note {
   font-size: var(--fs-caption);

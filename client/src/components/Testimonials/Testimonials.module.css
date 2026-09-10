@@ -8,8 +8,8 @@
   font-size: clamp(5rem, 12vw, 9rem);
   line-height: 1;
   font-weight: var(--fw-black);
-  color: var(--t-accent, var(--accent));
-  opacity: 0.16;
+  color: var(--text-primary);
+  opacity: 0.08;
   pointer-events: none;
 }
 .quote {
@@ -21,7 +21,7 @@
   text-wrap: pretty;
 }
 .attr { display: grid; gap: var(--sp-1); }
-.name { font-style: normal; font-weight: var(--fw-semibold); color: var(--t-accent, var(--accent)); }
+.name { font-style: normal; font-weight: var(--fw-semibold); color: var(--text-primary); }
 
 .dots { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 .dot {
@@ -32,10 +32,9 @@
   display: grid;
   place-items: center;
   font-size: var(--fs-caption);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
   letter-spacing: 0.04em;
   color: var(--text-tertiary);
-  background: var(--bg-elevated);
   transition:
     transform var(--dur-micro) var(--ease-snap),
     color var(--dur-micro) linear,
@@ -43,8 +42,7 @@
 }
 .dot:hover { transform: translateY(-4px) scale(1.06); color: var(--text-primary); }
 .dot[data-active] {
-  color: var(--dot-accent);
-  border-color: var(--dot-accent);
-  transform: scale(1.08);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--dot-accent) 14%, transparent);
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+  transform: scale(1.06);
 }

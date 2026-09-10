@@ -6,7 +6,8 @@
     "role": "Plant Operations Manager",
     "org": "Vantera Industrial",
     "initials": "PR",
-    "accent": "#ffb26b"
+    "accent": "#ffffff",
+    "artTone": "#c9c8c5"
   },
   {
     "id": "t2",
@@ -15,7 +16,8 @@
     "role": "VP Finance Products",
     "org": "Kestrel Pay",
     "initials": "MH",
-    "accent": "#7cc4ff"
+    "accent": "#ffffff",
+    "artTone": "#b6b5b2"
   },
   {
     "id": "t3",
@@ -24,7 +26,8 @@
     "role": "Director of Claims Experience",
     "org": "Merrowfield Mutual",
     "initials": "EF",
-    "accent": "#c9a6ff"
+    "accent": "#ffffff",
+    "artTone": "#a3a29f"
   },
   {
     "id": "t4",
@@ -33,6 +36,7 @@
     "role": "Network Inbound Lead",
     "org": "Northbay Freight Network",
     "initials": "LB",
-    "accent": "#6be3c0"
+    "accent": "#ffffff",
+    "artTone": "#d6d5d2"
   }
 ]

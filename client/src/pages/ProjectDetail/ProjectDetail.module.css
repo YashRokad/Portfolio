@@ -69,8 +69,6 @@
 .metrics {
   position: relative;
   padding-block: var(--section-y);
-  background: var(--bg-elevated);
-  border-block: 1px solid var(--border-subtle);
   overflow: hidden;
   isolation: isolate;
 }
@@ -94,7 +92,7 @@
   gap: var(--sp-7) var(--sp-6);
   margin-top: var(--sp-7);
 }
-.metricCell { border-top: 2px solid var(--p-accent, var(--accent)); }
+.metricCell { border-top: 1px solid var(--border-strong); }
 .metricCell > * { border-top: none; padding-top: var(--sp-5); }
 
 /* ---------- 04 Research ---------- */
@@ -116,22 +114,16 @@
 .methods {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: 1px;
+  gap: var(--sp-6) var(--sp-7);
   margin-top: var(--sp-8);
-  background: var(--border-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
 }
 .method {
   display: grid;
   gap: var(--sp-3);
   align-content: start;
-  padding: var(--sp-6);
-  background: var(--bg-base);
-  transition: background var(--dur-micro) linear;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-strong);
 }
-.method:hover { background: var(--bg-elevated); }
 .methodNum {
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-bold);
@@ -145,15 +137,14 @@
 .insight {
   margin-top: var(--sp-9);
   padding-block: clamp(3rem, 8vw, 7rem);
-  background: color-mix(in srgb, var(--p-accent, var(--accent)) 9%, var(--bg-base));
-  border-block: 1px solid color-mix(in srgb, var(--p-accent, var(--accent)) 30%, transparent);
+  border-block: 1px solid var(--border-strong);
 }
 .insightLabel {
   font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--p-accent, var(--accent));
+  color: var(--text-tertiary);
   margin-bottom: var(--sp-5);
 }
 .insightText {
@@ -213,11 +204,7 @@
 }
 
 /* ---------- 06 Competitive audit ---------- */
-.audit {
-  padding-block: var(--section-y);
-  background: var(--bg-elevated);
-  border-block: 1px solid var(--border-subtle);
-}
+.audit { padding-block: var(--section-y); }
 .audit .marker { margin-bottom: var(--sp-7); }
 
 /* ---------- 07 Personas ---------- */
@@ -237,20 +224,17 @@
   color: var(--text-secondary);
   max-width: 46ch;
 }
-.solutionList { display: grid; gap: var(--sp-6); margin-top: var(--sp-8); }
+.solutionList { display: grid; margin-top: var(--sp-8); }
 
 .solution {
   display: grid;
-  grid-template-columns: minmax(0, 0.75fr) 3rem minmax(0, 1.25fr);
-  gap: var(--sp-5);
-  align-items: center;
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--bg-elevated);
-  transition: border-color var(--dur-micro) linear, transform var(--dur-standard) var(--ease-editorial);
+  grid-template-columns: minmax(0, 0.7fr) 3rem minmax(0, 1.3fr);
+  gap: var(--sp-6);
+  align-items: start;
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--border-subtle);
 }
-.solution:hover { border-color: var(--p-accent, var(--accent)); transform: translateY(-3px); }
+.solutionList > .solution:first-child { border-top: 1px solid var(--border-strong); }
 @media (max-width: 860px) {
   .solution { grid-template-columns: 1fr; gap: var(--sp-4); }
   .solutionArrow { display: none; }
@@ -260,15 +244,16 @@
 .solutionProblem p { color: var(--text-secondary); font-size: var(--fs-caption); line-height: 1.5; }
 .solutionTag {
   font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--state-negative);
+  color: var(--text-tertiary);
 }
 
 .solutionArrow {
   position: relative;
   height: 1px;
+  margin-top: 0.85em;
   background: var(--border-strong);
 }
 .solutionArrow::after {
@@ -278,8 +263,8 @@
   top: 50%;
   width: 7px;
   height: 7px;
-  border-top: 1px solid var(--p-accent, var(--accent));
-  border-right: 1px solid var(--p-accent, var(--accent));
+  border-top: 1px solid var(--text-secondary);
+  border-right: 1px solid var(--text-secondary);
   transform: translateY(-50%) rotate(45deg);
 }
 
@@ -298,11 +283,7 @@
 .solutionDetail { color: var(--text-secondary); line-height: 1.55; max-width: 56ch; }
 
 /* ---------- 10 Visual design ---------- */
-.visual {
-  padding-block: var(--section-y);
-  background: var(--bg-elevated);
-  border-block: 1px solid var(--border-subtle);
-}
+.visual { padding-block: var(--section-y); }
 .visualGrid {
   display: grid;
   grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);

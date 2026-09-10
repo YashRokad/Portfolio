@@ -20,7 +20,7 @@
   border-bottom: 1px solid var(--border-subtle);
   transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
 }
-.allLink:hover { color: var(--accent); border-color: var(--accent); }
+.allLink:hover { color: var(--text-primary); border-color: var(--text-primary); }
 
 /* ---- Capabilities ---- */
 .caps { background: var(--bg-base); }
@@ -94,7 +94,7 @@
 }
 
 /* ---- Proof ---- */
-.proof { background: var(--bg-elevated); }
+.proof { border-top: 1px solid var(--border-subtle); }
 .statGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
@@ -115,10 +115,8 @@
 @media (max-width: 860px) { .teaserInner { grid-template-columns: 1fr; } }
 
 .portrait {
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-elevated);
 }
 .portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
 
@@ -134,4 +132,4 @@
   padding-bottom: var(--sp-1);
   will-change: transform;
 }
-.teaserLink:hover { color: var(--accent); border-color: var(--accent); }
+.teaserLink:hover { color: var(--text-primary); border-color: var(--text-primary); }

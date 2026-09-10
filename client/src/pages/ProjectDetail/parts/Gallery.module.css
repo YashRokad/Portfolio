@@ -27,11 +27,9 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
   user-select: none;
   -webkit-user-drag: none;
 }
 .caption { font-size: var(--fs-caption); color: var(--text-tertiary); }
-.hint { color: var(--p-accent, var(--accent)); opacity: 0.75; }
+.hint { color: var(--text-tertiary); }

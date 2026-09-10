@@ -90,7 +90,7 @@
   gap: var(--sp-7);
   padding: clamp(1.5rem, 4vw, 3.5rem);
   padding-top: calc(var(--sp-10) + var(--sp-2));
-  background: var(--bg-elevated);
+  background: var(--bg-base);
   border-left: 1px solid var(--border-subtle);
   /* The closed position is set by GSAP before first paint — declaring it here
      too would stack with xPercent and push the panel twice its own width. */
@@ -116,7 +116,7 @@
   opacity: 0;
   transition: color var(--dur-micro) linear;
 }
-.close:hover { color: var(--accent); }
+.close:hover { color: var(--text-primary); }
 .closeIcon { position: relative; display: block; width: 18px; height: 18px; }
 .closeIcon i {
   position: absolute;
@@ -147,7 +147,7 @@
   line-height: 1.06;
   transition: color var(--dur-micro) linear;
 }
-.menuLink:hover, .menuLink:focus-visible { color: var(--accent); }
+.menuLink:hover, .menuLink:focus-visible { opacity: 0.55; }
 .menuLink[data-active]::after {
   content: '';
   position: absolute;
@@ -183,5 +183,5 @@
   justify-self: start;
   transition: color var(--dur-micro) linear;
 }
-.footLink:hover { color: var(--accent); }
+.footLink:hover { color: var(--text-primary); }
 .footNote { font-size: var(--fs-caption); color: var(--text-tertiary); max-width: 26ch; }
