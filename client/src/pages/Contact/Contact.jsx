@@ -3,7 +3,6 @@ import { useOutletContext } from 'react-router-dom';
 import { gsap, DUR, EASE, STAGGER } from '../../animations/gsapConfig';
 import { splitText } from '../../animations/splitText';
 import { useMotion } from '../../hooks/useMotionPreference';
-import { useMagnetic } from '../../hooks/useMagnetic';
 import Magnetic from '../../components/Magnetic/Magnetic';
 import { useReveal } from '../../hooks/useReveal';
 import usePageTitle from '../../hooks/usePageTitle';
@@ -16,7 +15,6 @@ export default function Contact() {
 
   const heroRef = useRef(null);
   const emailRef = useRef(null);
-  const magneticRef = useMagnetic({ strength: 0.16 });
   const faqScope = useReveal({ stagger: 0.07, y: 30, deps: [about?.name] });
 
   const email = about?.contact?.email ?? '';
@@ -49,7 +47,7 @@ export default function Contact() {
         <div className="shell">
           <p className={s.eyebrow} data-hero-item>Contact</p>
 
-          <div ref={magneticRef} className={s.emailWrap}>
+          <div className={s.emailWrap}>
             <a
               ref={emailRef}
               className={s.email}

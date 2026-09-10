@@ -12,13 +12,13 @@
    A narrow sticky rail carries the number and name; the wide column carries
    everything else. Every section uses it, which is what gives the page a
    spine now that there are no boxes. */
-.section { padding-block: clamp(2.75rem, 5.5vw, 5.5rem); }
+.section { padding-block: clamp(4rem, 9vw, 9.5rem); }
 .section + .section { border-top: 1px solid var(--border-subtle); }
 
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 4.5rem);
+  gap: clamp(1.5rem, 5vw, 6rem);
   align-items: start;
 }
 .grid[data-wide] { grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); }
@@ -55,7 +55,7 @@
   }
 }
 
-.body { min-width: 0; display: grid; gap: var(--sp-7); }
+.body { min-width: 0; display: grid; gap: var(--stack-gap); }
 
 /* ---------- 02 About ---------- */
 .aboutFacts {
@@ -92,7 +92,7 @@
 .metricGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  gap: var(--sp-7) var(--sp-6);
+  gap: clamp(2.5rem, 5vw, 4rem) var(--sp-7);
 }
 .metricCell { border-top: 1px solid var(--border-strong); }
 .metricCell > * { border-top: none; padding-top: var(--sp-5); }
@@ -108,7 +108,7 @@
 .methods {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  gap: var(--sp-6) var(--sp-6);
+  gap: clamp(2rem, 4vw, 3.25rem) var(--sp-7);
 }
 .method {
   display: grid;
@@ -128,7 +128,7 @@
 
 /* The insight is the turning point of the story, so it gets the scale. */
 .insight {
-  padding-top: var(--sp-6);
+  padding-top: clamp(2rem, 4vw, 3rem);
   border-top: 1px solid var(--border-strong);
 }
 .insightLabel {
@@ -160,9 +160,8 @@
   grid-template-columns: 2.75rem minmax(11rem, 19rem) minmax(0, 1fr);
   gap: var(--sp-5);
   align-items: start;
-  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  padding-block: clamp(2rem, 4vw, 3.25rem);
   border-top: 1px solid var(--border-subtle);
-  transition: background var(--dur-micro) linear;
 }
 .painRow:last-child { border-bottom: 1px solid var(--border-subtle); }
 @media (max-width: 860px) {
@@ -192,7 +191,7 @@
 }
 
 /* ---------- 07 Personas ---------- */
-.personaGrid { display: grid; gap: clamp(2.5rem, 6vw, 5rem); }
+.personaGrid { display: grid; gap: clamp(3.5rem, 8vw, 7rem); }
 
 /* ---------- 09 Solutions ---------- */
 .solutionsLead {
@@ -205,9 +204,9 @@
 .solution {
   display: grid;
   grid-template-columns: minmax(0, 0.7fr) 3rem minmax(0, 1.3fr);
-  gap: var(--sp-6);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: start;
-  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  padding-block: clamp(2rem, 4.5vw, 3.5rem);
   border-top: 1px solid var(--border-subtle);
 }
 .solutionList > .solution:first-child { border-top: 1px solid var(--border-strong); }

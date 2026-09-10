@@ -12,15 +12,16 @@
 }
 
 /* The address is the headline. */
-.emailWrap { will-change: transform; margin-block: var(--sp-6) var(--sp-6); }
+.emailWrap { margin-block: var(--sp-7); }
 .email {
   visibility: hidden;
   display: inline-block;
-  font-size: clamp(1.75rem, 7.4vw, 7rem);
+  /* Capped so the address always sits on one line inside the content width,
+     however wide the window gets. */
+  font-size: clamp(1.6rem, 7.2vw, 6.2rem);
   font-weight: var(--fw-black);
   letter-spacing: -0.045em;
   line-height: 0.94;
-  word-break: break-word;
   transition: opacity var(--dur-micro) linear;
 }
 .email:hover { opacity: 0.62; }
@@ -92,7 +93,7 @@
   display: grid;
   grid-template-columns: minmax(10rem, 20rem) minmax(0, 1fr);
   gap: var(--sp-5);
-  padding-block: var(--sp-5);
+  padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
   border-bottom: 1px solid var(--border-subtle);
 }
 @media (max-width: 760px) { .faqRow { grid-template-columns: 1fr; gap: var(--sp-3); } }

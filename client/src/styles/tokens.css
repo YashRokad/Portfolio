@@ -84,9 +84,9 @@
   --fs-display: clamp(3.2rem, 1.4rem + 8vw, 9.5rem);
 
   --lh-tight: 0.94;
-  --lh-snug: 1.1;
-  --lh-heading: 1.16;
-  --lh-body: 1.62;
+  --lh-snug: 1.14;
+  --lh-heading: 1.22;
+  --lh-body: 1.75;
 
   --ls-display: -0.045em;
   --ls-heading: -0.028em;
@@ -106,7 +106,9 @@
   --sp-10: 8rem;
   --sp-11: 12rem;
 
-  --section-y: clamp(4rem, 9vw, 9rem);
+  /* Sections are given room deliberately — the page should feel unhurried. */
+  --section-y: clamp(5rem, 11vw, 12rem);
+  --stack-gap: clamp(2.5rem, 5vw, 4.5rem);
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --max-w: 84rem;
   --max-w-prose: 38rem;

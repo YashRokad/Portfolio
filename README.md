@@ -85,6 +85,15 @@ beside it. That rail is what gives the page a spine now that there are no
 card outlines. Sections marked `wide` narrow the rail so tables and galleries
 get more room.
 
+### Space and leading
+
+Sections are given room on purpose: `--section-y` is `clamp(5rem, 11vw, 12rem)`
+and case-study chapters run wider still. `--stack-gap` is the standard distance
+between blocks inside a section, so opening the page up is a two-token change
+rather than a sweep. Body leading is `1.75` and headings `1.22` — generous by
+default, because the pages carry a lot of content and the reading has to stay
+unhurried.
+
 ### Shape
 
 Corners are square. `--radius-sm/md/lg` are all `0`; the only rounding in the
@@ -125,7 +134,7 @@ outlines around content.
 | Detail | Personas fully open, goals set against frustrations in two columns | `parts/PersonaCard.jsx` |
 | Detail | Inertia-draggable visual-design gallery | `parts/Gallery.jsx` |
 | About | Timeline reveal with a scrubbed connecting line; two opposing marquees; pinned split-scroll | `pages/About/About.jsx` |
-| Contact | The address set as the page headline with a char-stagger reveal, magnetic pull, clipboard copy with an icon morph, pulsing availability dot | `pages/Contact/Contact.jsx` |
+| Contact | The address set as the page headline with a char-stagger reveal, clipboard copy with an icon morph, pulsing availability dot | `pages/Contact/Contact.jsx` |
 | Footer | Newsletter signup with a drawn focus rule, magnetic subscribe button, oversized sunken wordmark | `components/Footer/Footer.jsx` |
 
 Every animation is created inside a `gsap.context()` scoped to its component and reverted

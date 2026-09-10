@@ -1,5 +1,5 @@
-.root { display: grid; gap: var(--sp-4); max-width: 46rem; }
+.root { display: grid; gap: var(--sp-5); max-width: 46rem; }
 .root[data-align='center'] { justify-items: center; text-align: center; margin-inline: auto; }
 .title { visibility: hidden; max-width: 20ch; }
 .root[data-align='center'] .title { max-width: 24ch; }
-.lead { font-size: var(--fs-body-lg); line-height: 1.5; }
+.lead { font-size: var(--fs-body-lg); line-height: 1.6; }

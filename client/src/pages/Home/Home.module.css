@@ -75,13 +75,13 @@
 }
 
 /* ---- Process ---- */
-.processList { margin-top: var(--sp-7); border-top: 1px solid var(--border-subtle); }
+.processList { margin-top: var(--sp-8); border-top: 1px solid var(--border-subtle); }
 .processRow {
   display: grid;
   grid-template-columns: 4rem minmax(8rem, 14rem) minmax(0, 1fr);
   gap: var(--sp-5);
   align-items: baseline;
-  padding-block: var(--sp-5);
+  padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
   border-bottom: 1px solid var(--border-subtle);
 }
 .processStep { font-size: var(--fs-caption); font-weight: var(--fw-bold); color: var(--accent); }
@@ -98,12 +98,12 @@
 .statGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: var(--sp-6);
-  margin-top: var(--sp-6);
+  gap: clamp(2.5rem, 5vw, 4rem);
+  margin-top: var(--sp-8);
 }
 
 /* ---- Voices ---- */
-.voicesBody { margin-top: var(--sp-7); }
+.voicesBody { margin-top: var(--sp-8); }
 
 /* ---- Teaser ---- */
 .teaserInner {

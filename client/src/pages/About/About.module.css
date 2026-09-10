@@ -11,7 +11,7 @@
   .ledgerInner { grid-template-columns: 1fr; gap: var(--sp-7); }
 }
 
-.ledgerCopy { display: grid; gap: var(--sp-8); min-width: 0; }
+.ledgerCopy { display: grid; gap: clamp(3rem, 6vw, 5rem); min-width: 0; }
 
 .heading {
   visibility: hidden;
@@ -22,7 +22,7 @@
   text-transform: uppercase;
 }
 
-.rows { display: grid; gap: var(--sp-7); }
+.rows { display: grid; gap: clamp(2.5rem, 5vw, 4rem); }
 
 .row {
   display: grid;
@@ -88,7 +88,7 @@
   gap: var(--sp-3) var(--sp-6);
   justify-content: space-between;
   align-items: baseline;
-  padding-block: var(--sp-4);
+  padding-block: clamp(1.25rem, 2.5vw, 2rem);
   border-bottom: 1px solid var(--border-subtle);
   transition: padding-left var(--dur-micro) var(--ease-snap), color var(--dur-micro) linear;
 }
