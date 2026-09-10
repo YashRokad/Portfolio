@@ -45,7 +45,7 @@ client/
   src/
     animations/            gsapConfig.js · splitText.js · flipBridge.js
     components/            Header, Footer, Layout, Cursor, Transition, Hero,
-                           WorkList, Preview, Marquee, Magnetic, Stat,
+                           WorkList, DesignShots, Marquee, Magnetic, Stat,
                            SectionHeading, Testimonials, CtaBanner, Loader
     data-client/           api.js (only place that calls fetch) · useApi.js
     hooks/                 useMotionPreference · useSmoothScroll · useReveal
@@ -82,11 +82,11 @@ No component calls `fetch` directly — everything goes through `data-client/api
 | First load | One-time masked char reveal + counter, gated by `sessionStorage` | `components/Loader/Intro.jsx` |
 | Global | Dot + lagging ring cursor with contextual labels (`View`/`Read`/`Drag`/`Copy`), `mix-blend-mode: difference`, off on touch | `components/Cursor/Cursor.jsx` |
 | Global | Smooth scroll on GSAP's ticker | `hooks/useSmoothScroll.js` |
-| Global nav | Magnetic pill on desktop links; full-screen mobile takeover whose close is a true timeline reverse | `components/Header/Header.jsx` |
+| Global nav | Menu button at every width opening a right-hand panel: page blurs and dims, panel slides in, links unmask by word, footer columns rise. Closing reverses the same timeline, so it is the exact inverse | `components/Header/Header.jsx` |
 | Route change | Five-panel curtain wipe gating the actual navigation | `components/Transition/TransitionProvider.jsx` |
 | Home hero | Full-bleed image with scroll parallax, char-stagger wordmark, pill marquee, scroll cue | `components/Hero/Hero.jsx` |
 | Design shots | Pinned section where scroll drives a *fractional* index — the name column slides continuously and images cross-fade by distance from it, so there is no step or snap | `components/DesignShots/DesignShots.jsx` |
-| Selected work | Masked row reveal + cursor-following live preview panel | `components/WorkList` + `components/Preview` |
+| Selected work | Masked row reveal, per-row hover plate and arrow | `components/WorkList/WorkList.jsx` |
 | Work grid | `Flip` filter re-flow, staggered card reveal, Ken-Burns image scale | `pages/Work/Work.jsx` |
 | Grid → detail | `Flip` shared-element morph from card image to detail hero, with a cross-fade fallback | `animations/flipBridge.js` + `parts/ProjectHero.jsx` |
 | Detail hero | Date + oversized light-weight name, meta ledger, breathing accent glow, full-bleed image | `parts/ProjectHero.jsx` |
@@ -200,8 +200,9 @@ and delete the `generateMedia()` call from `seed.js`.
 - ScrollTrigger and tween counts are flat between 12 and 24 navigations — no leaks.
 - Body text passes WCAG AA (`--text-primary` 16.2:1, `--text-secondary` 7.4:1,
   `--text-tertiary` 4.8:1 on the lightest surface).
-- Every interactive element is keyboard-reachable with a visible focus ring; Escape closes
-  the mobile menu and returns focus to its toggle.
+- Every interactive element is keyboard-reachable with a visible focus ring. The menu
+  panel traps Tab, closes on Escape, and hands focus back to its toggle once the close
+  animation finishes.
 - The contact form appends to `server/data/messages.json`; copy-to-clipboard morphs its icon.
 
 ## 7. Known follow-ups
@@ -213,6 +214,14 @@ and delete the `generateMedia()` call from `seed.js`.
   run; `messages.json` is only created if missing.
 - Hospitality and SaaS filter tabs are present but currently empty — the empty state is
   built and handled.
+- Site navigation now lives entirely in the menu panel — there is no persistent desktop
+  nav row. The footer still carries page links as a secondary path.
+- The cursor-following work preview was removed at the client's direction (it could be
+  left stranded over a section when the pointer left without a move event). Grid cards
+  still morph into the detail hero via `Flip`; home list rows use the curtain transition.
+- The menu scrim's `backdrop-filter` blur is applied and computes correctly, but headless
+  Chromium does not composite it, so it is unverified in screenshots — check it in a real
+  browser.
 - The About page was simplified to a single ledger at the client's direction. The
   philosophy cards, the separate career timeline section and the pinned split-scroll
   were removed; `about.philosophy` is still in the data if any of it should come back.

@@ -4,7 +4,6 @@ import { gsap, Flip, DUR, EASE, STAGGER, revealTrigger } from '../../animations/
 import { useMotion } from '../../hooks/useMotionPreference';
 import { stashFlip } from '../../animations/flipBridge';
 import TransitionLink from '../../components/Transition/TransitionLink';
-import PreviewLayer from '../../components/Preview/PreviewLayer';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import CtaBanner from '../../components/CtaBanner/CtaBanner';
 import { api } from '../../data-client/api';
@@ -22,7 +21,6 @@ export default function Work() {
   const { data: projects, loading } = useResource('projects', api.getProjects);
   const [filter, setFilter] = useState(ALL);
   const gridRef = useRef(null);
-  const previewRef = useRef(null);
   const { reduced, touch } = useMotion();
   usePageTitle('Work');
 
@@ -130,9 +128,7 @@ export default function Work() {
             })}
           </div>
 
-          <div ref={gridRef} className={s.grid} onPointerLeave={() => previewRef.current?.hide()}>
-            <PreviewLayer ref={previewRef} scopeRef={gridRef} />
-
+          <div ref={gridRef} className={s.grid}>
             {visible.map((project) => (
               <article key={project.slug} className={s.cardWrap} data-flip-id={project.slug}>
                 <TransitionLink
@@ -141,9 +137,6 @@ export default function Work() {
                   data-cursor="view"
                   data-cursor-label="Open"
                   style={{ '--card-accent': project.accent }}
-                  onPointerEnter={() => previewRef.current?.show(project.cover, project.accent)}
-                  onFocus={() => previewRef.current?.show(project.cover, project.accent)}
-                  onBlur={() => previewRef.current?.hide()}
                   onClick={handleClick(project)}
                   skipCurtain={!reduced && !touch}
                 >

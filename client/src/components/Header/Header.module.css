@@ -4,11 +4,12 @@
   left: 0;
   right: 0;
   z-index: var(--z-header);
+  pointer-events: none;
 }
 
 .bar {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,6 +18,7 @@
   max-width: var(--max-w);
   margin-inline: auto;
   padding: var(--sp-4) var(--gutter);
+  pointer-events: auto;
   mix-blend-mode: difference;
 }
 
@@ -37,107 +39,149 @@
 .wordmark:hover .mark { transform: rotate(135deg) scale(1.25); }
 .wordmarkText { font-size: var(--fs-body); }
 
-.desktopNav { display: flex; gap: var(--sp-2); }
-@media (max-width: 860px) { .desktopNav { display: none; } }
-
-.navLink {
-  position: relative;
-  padding: var(--sp-2) var(--sp-4);
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.02em;
-  color: var(--text-secondary);
-  isolation: isolate;
-}
-.navLink:hover, .navLink[data-active] { color: var(--text-primary); }
-
-.navPill {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: var(--radius-pill);
-  border: 1px solid transparent;
-  transform: scale(0.7);
-  opacity: 0;
-  transition:
-    transform var(--dur-micro) var(--ease-snap),
-    opacity var(--dur-micro) var(--ease-snap),
-    border-color var(--dur-micro) linear;
-}
-.navLink:hover .navPill,
-.navLink:focus-visible .navPill {
-  transform: scale(1);
-  opacity: 1;
-  border-color: var(--border-strong);
-}
-.navLink[data-active] .navPill {
-  transform: scale(1);
-  opacity: 1;
-  border-color: var(--accent);
-}
-
+/* ---- Toggle ---- */
 .toggle {
-  display: none;
+  display: inline-flex;
   align-items: center;
   gap: var(--sp-3);
   font-size: var(--fs-caption);
   font-weight: var(--fw-semibold);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-@media (max-width: 860px) { .toggle { display: inline-flex; } }
-
-.toggleIcon { display: grid; gap: 5px; width: 22px; }
+.toggleIcon { display: grid; gap: 5px; width: 24px; }
 .toggleIcon i {
   display: block;
   height: 1.5px;
   background: currentColor;
-  transition: transform var(--dur-micro) var(--ease-snap);
+  transition: transform var(--dur-micro) var(--ease-snap), opacity var(--dur-micro) linear;
 }
-.header[data-open] .toggleIcon i:first-child { transform: translateY(3.25px) rotate(45deg); }
-.header[data-open] .toggleIcon i:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+.header[data-open] .toggleIcon i:first-child { transform: translateY(3.25px); opacity: 0; }
+.header[data-open] .toggleIcon i:last-child { transform: translateY(-3.25px); opacity: 0; }
 
-/* ---- Full-screen takeover ---- */
-.menu {
+/* ---- Scrim over the page ---- */
+.scrim {
   position: fixed;
   inset: 0;
   z-index: 1;
+  background: rgba(8, 9, 10, 0.55);
+  /* The blur strength is animated through this variable — GSAP interpolates
+     the custom property and the filter picks it up. */
+  --scrim-blur: 0px;
+  backdrop-filter: blur(var(--scrim-blur));
+  -webkit-backdrop-filter: blur(var(--scrim-blur));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* ---- Slide-in panel ---- */
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: min(100%, 46rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: var(--sp-6);
-  padding: calc(var(--sp-10) + var(--sp-4)) var(--gutter) var(--sp-7);
+  gap: var(--sp-7);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  padding-top: calc(var(--sp-10) + var(--sp-2));
   background: var(--bg-elevated);
-  clip-path: inset(0% 0% 100% 0%);
+  border-left: 1px solid var(--border-subtle);
+  /* The closed position is set by GSAP before first paint — declaring it here
+     too would stack with xPercent and push the panel twice its own width. */
+  visibility: hidden;
   pointer-events: none;
+  overflow-y: auto;
+  will-change: transform;
+}
+@media (max-width: 760px) { .panel { width: 100%; border-left: none; } }
+
+.close {
+  position: absolute;
+  top: var(--sp-4);
+  right: clamp(1.5rem, 4vw, 3.5rem);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: color var(--dur-micro) linear;
+}
+.close:hover { color: var(--accent); }
+.closeIcon { position: relative; display: block; width: 18px; height: 18px; }
+.closeIcon i {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+}
+.closeIcon i:first-child { transform: rotate(45deg); }
+.closeIcon i:last-child { transform: rotate(-45deg); }
+
+/* ---- Links ---- */
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.25rem, 1vw, 0.75rem);
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-.menuNav { display: flex; flex-direction: column; gap: var(--sp-2); }
-
 .menuLink {
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-4);
-  font-size: clamp(2.4rem, 12vw, 4rem);
+  position: relative;
+  font-size: clamp(2.4rem, 6.5vw, 4.75rem);
   font-weight: var(--fw-black);
   letter-spacing: var(--ls-display);
   line-height: 1.06;
-  will-change: transform;
+  transition: color var(--dur-micro) linear;
 }
-.menuIndex {
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-semibold);
-  color: var(--accent);
-  letter-spacing: var(--ls-eyebrow);
+.menuLink:hover, .menuLink:focus-visible { color: var(--accent); }
+.menuLink[data-active]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: calc(var(--sp-5) * -1);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-50%);
 }
-.menuLink:hover { color: var(--accent); }
 
-.menuMeta { display: grid; gap: var(--sp-3); }
-.menuEmail {
-  font-size: var(--fs-body-lg);
-  font-weight: var(--fw-semibold);
-  border-bottom: 1px solid var(--border-strong);
-  padding-bottom: var(--sp-1);
-  justify-self: start;
+/* ---- Footer columns ---- */
+.foot {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border-subtle);
 }
-.menuEmail:hover { color: var(--accent); border-color: var(--accent); }
+.footCol { display: grid; gap: var(--sp-2); align-content: start; }
+.footLabel {
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: var(--sp-1);
+}
+.footLink {
+  color: var(--text-secondary);
+  font-weight: var(--fw-medium);
+  justify-self: start;
+  transition: color var(--dur-micro) linear;
+}
+.footLink:hover { color: var(--accent); }
+.footNote { font-size: var(--fs-caption); color: var(--text-tertiary); max-width: 26ch; }

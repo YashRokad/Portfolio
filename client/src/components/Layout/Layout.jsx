@@ -21,7 +21,7 @@ export default function Layout() {
       <div className="grain" aria-hidden="true" />
       <Cursor />
       <Intro onDone={() => setIntroDone(true)} />
-      <Header name={about?.name} />
+      <Header name={about?.name} about={about} />
       <main id="main" className={s.main} tabIndex={-1}>
         <Outlet context={{ about, introDone }} />
       </main>
