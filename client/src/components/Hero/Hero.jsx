@@ -13,7 +13,7 @@ import s from './Hero.module.css';
  */
 export default function Hero({
   wordmark = '', statement, sub, location, email, image, tags = [],
-  play = true, scrollTargetId = 'selected-work',
+  play = true, scrollTargetId = 'design-shots',
 }) {
   const root = useRef(null);
   const markRef = useRef(null);

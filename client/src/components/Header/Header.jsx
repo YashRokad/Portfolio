@@ -28,6 +28,10 @@ export default function Header({ name = 'Yash Rokad', about }) {
   /* Set when a close should hand focus back; the toggle is hidden until the
      reverse finishes, so focusing it any earlier silently fails. */
   const returnFocus = useRef(false);
+  /* Set when a menu link starts a route change. The curtain already covers
+     the screen by the time the route lands, so the panel is snapped closed
+     under it rather than replaying its reverse on top of the transition. */
+  const snapClose = useRef(false);
 
   /* One timeline, built once. Opening plays it; closing reverses it, so the
      close is the exact inverse rather than a separate animation. */
@@ -94,8 +98,14 @@ export default function Header({ name = 'Yash Rokad', about }) {
   useEffect(() => {
     const tl = tlRef.current;
     if (!tl) return;
-    if (open) tl.play();
-    else tl.reverse();
+    if (open) {
+      tl.play();
+    } else if (snapClose.current) {
+      snapClose.current = false;
+      tl.pause(0);
+    } else {
+      tl.reverse();
+    }
     document.body.style.overflow = open ? 'hidden' : '';
   }, [open]);
 
@@ -181,6 +191,12 @@ export default function Header({ name = 'Yash Rokad', about }) {
               className={s.menuLink}
               data-active={isActive(pathname, item.to) || undefined}
               aria-current={isActive(pathname, item.to) ? 'page' : undefined}
+              onClick={() => {
+                // Same-route clicks never change pathname, so those still get
+                // the animated close.
+                if (item.to !== pathname) snapClose.current = true;
+                else close();
+              }}
             >
               {item.label}
             </TransitionLink>

@@ -9,6 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { projects } from './content/projects.js';
 import { shots } from './content/shots.js';
+import { about } from './content/about.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, '..', 'client', 'public', 'media');
@@ -206,6 +207,34 @@ function shotImage(slug, accent) {
   return svg(w, h, body);
 }
 
+/* Portrait-format art for the capability rows — deliberately abstract, so it
+   reads as texture behind the list rather than competing with the copy. */
+function capabilityImage(slug, accent) {
+  const r = rng(`cap${slug}`);
+  const w = 640; const h = 860;
+  let body = `
+  <defs>
+    <linearGradient id="cg" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.95"/>
+      <stop offset="0.6" stop-color="${accent}" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#08090a" stop-opacity="1"/>
+    </linearGradient>
+    <clipPath id="cc"><rect width="${w}" height="${h}"/></clipPath>
+  </defs>
+  <g clip-path="url(#cc)">
+    <rect width="${w}" height="${h}" fill="#08090a"/>
+    <rect width="${w}" height="${h}" fill="url(#cg)"/>`;
+  for (let i = 0; i < 30; i += 1) {
+    const y = r() * h;
+    const amp = 20 + r() * 90;
+    let d = `M -40 ${y}`;
+    for (let x = 0; x <= w + 80; x += 80) d += ` Q ${x + 40} ${y + (r() - 0.5) * amp} ${x + 80} ${y}`;
+    body += `<path d="${d}" fill="none" stroke="#08090a" stroke-opacity="${0.08 + r() * 0.22}" stroke-width="${1 + r() * 5}"/>`;
+  }
+  body += '</g>';
+  return svg(w, h, body);
+}
+
 function portrait() {
   const w = 900; const h = 1200;
   const body = `
@@ -229,6 +258,9 @@ const favicon = () => svg(64, 64,
 export function generateMedia() {
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'hero-backdrop.svg'), heroBackdrop());
+  about.capabilities.forEach((cap) => {
+    fs.writeFileSync(path.join(OUT, path.basename(cap.image)), capabilityImage(cap.slug, cap.accent));
+  });
   shots.forEach((shot) => {
     fs.writeFileSync(path.join(OUT, path.basename(shot.image)), shotImage(shot.slug, shot.accent));
   });

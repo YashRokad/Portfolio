@@ -45,7 +45,8 @@ client/
   src/
     animations/            gsapConfig.js · splitText.js · flipBridge.js
     components/            Header, Footer, Layout, Cursor, Transition, Hero,
-                           WorkList, DesignShots, Marquee, Magnetic, Stat,
+                           FeaturedWork, DesignShots, Capabilities, WorkList,
+                           Marquee, Magnetic, Stat,
                            SectionHeading, Testimonials, CtaBanner, Loader
     data-client/           api.js (only place that calls fetch) · useApi.js
     hooks/                 useMotionPreference · useSmoothScroll · useReveal
@@ -66,7 +67,7 @@ server/
 
 | Method | Route | Returns |
 |---|---|---|
-| `GET` | `/api/projects` | Card-level fields for every project |
+| `GET` | `/api/projects` | Card-level fields (plus `metrics`, for the featured showcase) |
 | `GET` | `/api/projects/:slug` | One full case study, plus a `next` pointer |
 | `GET` | `/api/shots` | Design-shot list for the scroll-driven section |
 | `GET` | `/api/testimonials` | Testimonial list |
@@ -86,7 +87,8 @@ No component calls `fetch` directly — everything goes through `data-client/api
 | Route change | Five-panel curtain wipe gating the actual navigation | `components/Transition/TransitionProvider.jsx` |
 | Home hero | Full-bleed image with scroll parallax, char-stagger wordmark, pill marquee, scroll cue | `components/Hero/Hero.jsx` |
 | Design shots | Pinned section where scroll drives a *fractional* index — the name column slides continuously and images cross-fade by distance from it, so there is no step or snap | `components/DesignShots/DesignShots.jsx` |
-| Selected work | Masked row reveal, per-row hover plate and arrow | `components/WorkList/WorkList.jsx` |
+| Selected work | One case study: the frame unmasks, the image scales in and parallaxes, the title unmasks across its lower edge, headline numbers scramble-count | `components/FeaturedWork/FeaturedWork.jsx` |
+| What I do | Ruled rows whose rules wipe in on scroll; hovering a row lifts the name, colours its rule, expands its tags and slides a still into the column gutter | `components/Capabilities/Capabilities.jsx` |
 | Work grid | `Flip` filter re-flow, staggered card reveal, Ken-Burns image scale | `pages/Work/Work.jsx` |
 | Grid → detail | `Flip` shared-element morph from card image to detail hero, with a cross-fade fallback | `animations/flipBridge.js` + `parts/ProjectHero.jsx` |
 | Detail hero | Date + oversized light-weight name, meta ledger, breathing accent glow, full-bleed image | `parts/ProjectHero.jsx` |
@@ -157,7 +159,7 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 | `timeline[] {period, role, org, note}` | About — career timeline |
 | `skills[]` | Home skills strip and the two About marquees |
 | `tools[] {name, use}` | About — stack list |
-| `capabilities[] {title, body, deliverables[]}` | Home capabilities grid; first four also feed the About split-scroll |
+| `capabilities[] {slug, title, body, deliverables[], accent, image}` | The What-I-do rows — `body` is one line, `deliverables` become the tags revealed on hover, `image` is the still that slides into the gutter |
 | `process[] {step, title, body}` | Home process list |
 | `stats[] {value, suffix, label, note}` | Home proof strip counters |
 | `personalNote` | Home about-teaser and About page |
@@ -212,6 +214,9 @@ and delete the `generateMedia()` call from `seed.js`.
 - Case-study content is invented. Company names are fictional.
 - The seed script overwrites `projects.json`, `about.json` and `testimonials.json` on every
   run; `messages.json` is only created if missing.
+- The home page runs hero → design shots → one featured case study → what I do →
+  process → proof → testimonials → about teaser → CTA. Only the first project is
+  featured; the full grid lives on `/work`.
 - Hospitality and SaaS filter tabs are present but currently empty — the empty state is
   built and handled.
 - Site navigation now lives entirely in the menu panel — there is no persistent desktop

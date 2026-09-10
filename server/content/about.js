@@ -73,12 +73,12 @@ export const about = {
     { name: 'GSAP', use: 'Motion prototyping and production interaction' },
   ],
   capabilities: [
-    { title: 'Discovery & Field Research', body: 'Contextual inquiry, diary studies, support-ticket forensics. Scheduled around the moment the work is actually hard.', deliverables: ['Research plan', 'Synthesis & insight set', 'Opportunity map'] },
-    { title: 'Service & Journey Design', body: 'Mapping the whole path, including the parts your product does not own yet — which is usually where the churn lives.', deliverables: ['Journey maps', 'Service blueprints', 'Moment-of-truth analysis'] },
-    { title: 'Product & Interaction Design', body: 'End-to-end flows for dense, high-consequence software. Keyboard-first where it matters, gloves-first where that matters more.', deliverables: ['Flows & wireframes', 'High-fidelity UI', 'Interactive prototypes'] },
-    { title: 'Design Systems', body: 'Token architecture and component libraries built so a team of eight can move without asking permission.', deliverables: ['Token set', 'Component library', 'Contribution model'] },
-    { title: 'Design Ops & Enablement', body: 'Standing up research practice, critique rituals and handoff conventions that outlast whoever set them up.', deliverables: ['Research ops', 'Critique cadence', 'Handoff standards'] },
-    { title: 'Pre-sales & Vision Work', body: 'Concept work that helps an enterprise buyer picture the thing — without writing cheques the delivery team cannot cash.', deliverables: ['Vision concepts', 'Pitch narrative', 'Feasibility framing'] },
+    { slug: 'discovery', title: 'Discovery & Field Research', body: 'I schedule fieldwork for the bad day, not the convenient one.', deliverables: ['Research plan', 'Insight set', 'Opportunity map'], accent: '#d8f24e', image: '/media/cap-discovery.svg' },
+    { slug: 'service', title: 'Service & Journey Design', body: 'Mapping the whole path, including the parts your product does not own yet.', deliverables: ['Journey maps', 'Service blueprints', 'Moments of truth'], accent: '#7cc4ff', image: '/media/cap-service.svg' },
+    { slug: 'product', title: 'Product & Interaction Design', body: 'End-to-end flows for dense, high-consequence software.', deliverables: ['Flows', 'High-fidelity UI', 'Prototypes'], accent: '#c9a6ff', image: '/media/cap-product.svg' },
+    { slug: 'systems', title: 'Design Systems', body: 'Tokens and components built so eight people can move without asking permission.', deliverables: ['Token set', 'Component library', 'Contribution model'], accent: '#6be3c0', image: '/media/cap-systems.svg' },
+    { slug: 'ops', title: 'Design Ops & Enablement', body: 'Research practice and critique rituals that outlast whoever set them up.', deliverables: ['Research ops', 'Critique cadence', 'Handoff standards'], accent: '#ffb26b', image: '/media/cap-ops.svg' },
+    { slug: 'vision', title: 'Pre-sales & Vision Work', body: 'Concept work that helps a buyer picture it, without writing cheques delivery cannot cash.', deliverables: ['Vision concepts', 'Pitch narrative', 'Feasibility framing'], accent: '#ff8fa8', image: '/media/cap-vision.svg' },
   ],
   process: [
     { step: '01', title: 'Go and look', body: 'Fieldwork on the real day, in the real room. Everything after this is downstream of what I see here.' },

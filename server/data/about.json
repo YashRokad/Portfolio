@@ -121,58 +121,76 @@
   ],
   "capabilities": [
     {
+      "slug": "discovery",
       "title": "Discovery & Field Research",
-      "body": "Contextual inquiry, diary studies, support-ticket forensics. Scheduled around the moment the work is actually hard.",
+      "body": "I schedule fieldwork for the bad day, not the convenient one.",
       "deliverables": [
         "Research plan",
-        "Synthesis & insight set",
+        "Insight set",
         "Opportunity map"
-      ]
+      ],
+      "accent": "#d8f24e",
+      "image": "/media/cap-discovery.svg"
     },
     {
+      "slug": "service",
       "title": "Service & Journey Design",
-      "body": "Mapping the whole path, including the parts your product does not own yet — which is usually where the churn lives.",
+      "body": "Mapping the whole path, including the parts your product does not own yet.",
       "deliverables": [
         "Journey maps",
         "Service blueprints",
-        "Moment-of-truth analysis"
-      ]
+        "Moments of truth"
+      ],
+      "accent": "#7cc4ff",
+      "image": "/media/cap-service.svg"
     },
     {
+      "slug": "product",
       "title": "Product & Interaction Design",
-      "body": "End-to-end flows for dense, high-consequence software. Keyboard-first where it matters, gloves-first where that matters more.",
+      "body": "End-to-end flows for dense, high-consequence software.",
       "deliverables": [
-        "Flows & wireframes",
+        "Flows",
         "High-fidelity UI",
-        "Interactive prototypes"
-      ]
+        "Prototypes"
+      ],
+      "accent": "#c9a6ff",
+      "image": "/media/cap-product.svg"
     },
     {
+      "slug": "systems",
       "title": "Design Systems",
-      "body": "Token architecture and component libraries built so a team of eight can move without asking permission.",
+      "body": "Tokens and components built so eight people can move without asking permission.",
       "deliverables": [
         "Token set",
         "Component library",
         "Contribution model"
-      ]
+      ],
+      "accent": "#6be3c0",
+      "image": "/media/cap-systems.svg"
     },
     {
+      "slug": "ops",
       "title": "Design Ops & Enablement",
-      "body": "Standing up research practice, critique rituals and handoff conventions that outlast whoever set them up.",
+      "body": "Research practice and critique rituals that outlast whoever set them up.",
       "deliverables": [
         "Research ops",
         "Critique cadence",
         "Handoff standards"
-      ]
+      ],
+      "accent": "#ffb26b",
+      "image": "/media/cap-ops.svg"
     },
     {
+      "slug": "vision",
       "title": "Pre-sales & Vision Work",
-      "body": "Concept work that helps an enterprise buyer picture the thing — without writing cheques the delivery team cannot cash.",
+      "body": "Concept work that helps a buyer picture it, without writing cheques delivery cannot cash.",
       "deliverables": [
         "Vision concepts",
         "Pitch narrative",
         "Feasibility framing"
-      ]
+      ],
+      "accent": "#ff8fa8",
+      "image": "/media/cap-vision.svg"
     }
   ],
   "process": [

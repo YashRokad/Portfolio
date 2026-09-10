@@ -8,8 +8,8 @@ router.get('/projects', (_req, res) => {
   // The grid only needs card-level fields; case-study bodies stay on the
   // detail endpoint so the list response stays small.
   res.json(projects.map(({
-    slug, title, tagline, industry, year, role, cover, accent, summary,
-  }) => ({ slug, title, tagline, industry, year, role, cover, accent, summary })));
+    slug, title, tagline, industry, year, role, cover, accent, summary, metrics,
+  }) => ({ slug, title, tagline, industry, year, role, cover, accent, summary, metrics })));
 });
 
 router.get('/projects/:slug', (req, res) => {

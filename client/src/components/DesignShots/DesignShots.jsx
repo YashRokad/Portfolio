@@ -111,7 +111,7 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
   if (!shots.length) return null;
 
   return (
-    <section ref={root} className={s.root} aria-label="Design shots">
+    <section ref={root} id="design-shots" className={s.root} aria-label="Design shots">
       <div ref={pinRef} className={s.pin}>
         <div className={`shell ${s.inner}`}>
           <header className={s.head}>

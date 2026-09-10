@@ -1,7 +1,8 @@
 import { useOutletContext } from 'react-router-dom';
 import Hero from '../../components/Hero/Hero';
-import WorkList from '../../components/WorkList/WorkList';
+import FeaturedWork from '../../components/FeaturedWork/FeaturedWork';
 import DesignShots from '../../components/DesignShots/DesignShots';
+import Capabilities from '../../components/Capabilities/Capabilities';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import Stat from '../../components/Stat/Stat';
 import Testimonials from '../../components/Testimonials/Testimonials';
@@ -22,12 +23,11 @@ export default function Home() {
   const { data: shots } = useResource('shots', api.getShots);
   usePageTitle(about ? `${about.name} — ${about.role}` : 'Product Designer');
 
-  const capabilitiesScope = useReveal({ stagger: 0.07, y: 44 });
   const processScope = useReveal({ stagger: 0.06, y: 36 });
   const statsScope = useReveal({ stagger: 0.08, y: 28 });
   const teaserScope = useReveal({ stagger: 0.06, y: 36 });
 
-  const featured = (projects ?? []).slice(0, 4);
+  const featured = (projects ?? [])[0] ?? null;
 
   return (
     <>
@@ -42,24 +42,6 @@ export default function Home() {
         play={Boolean(about)}
       />
 
-      {/* ---- Selected work ---- */}
-      <section id="selected-work" className={`section ${s.work}`}>
-        <div className="shell">
-          <div className={s.workHead}>
-            <SectionHeading
-              eyebrow="Selected work"
-              title="Four systems people could not walk away from."
-              lead="Each one shipped, measured, and still running. Hover a row to see it."
-            />
-            <TransitionLink to="/work" className={s.allLink}>
-              All projects
-              <span aria-hidden="true">→</span>
-            </TransitionLink>
-          </div>
-          <WorkList projects={featured} />
-        </div>
-      </section>
-
       {/* ---- Design shots ---- */}
       <DesignShots
         shots={shots ?? []}
@@ -67,27 +49,15 @@ export default function Home() {
         title="Brand, systems and environmental work — pieces rather than case studies."
       />
 
+      {/* ---- Selected work ---- */}
+      <FeaturedWork project={featured} totalCount={(projects ?? []).length} />
+
       {/* ---- Capabilities ---- */}
-      <section ref={capabilitiesScope} className={`section ${s.caps}`}>
-        <div className="shell">
-          <SectionHeading
-            eyebrow="What I do"
-            title="Six things, and the deliverables that come with them."
-          />
-          <ul className={s.capGrid}>
-            {(about?.capabilities ?? []).map((cap, i) => (
-              <li key={cap.title} className={s.capCard} data-reveal>
-                <span className={s.capIndex}>{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="h4">{cap.title}</h3>
-                <p className={s.capBody}>{cap.body}</p>
-                <ul className={s.capList}>
-                  {cap.deliverables.map((d) => <li key={d}>{d}</li>)}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <Capabilities
+        items={about?.capabilities ?? []}
+        eyebrow="What I do"
+        title="Six things, and what you get from each."
+      />
 
       {/* ---- Skills marquee ---- */}
       <div className={s.skillsStrip} aria-hidden="true">
