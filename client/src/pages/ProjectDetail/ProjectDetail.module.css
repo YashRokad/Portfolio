@@ -6,43 +6,66 @@
   justify-items: start;
   padding-block: calc(var(--sp-11) + var(--sp-4)) var(--sp-10);
 }
-.stateLink { color: var(--accent); font-weight: var(--fw-semibold); border-bottom: 1px solid currentColor; }
+.stateLink { color: var(--text-primary); font-weight: var(--fw-semibold); border-bottom: 1px solid var(--border-strong); }
 
-/* ---------- Shared section marker ---------- */
-.marker {
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--sp-3);
-  font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-}
-.markerNum {
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-bold);
-  color: var(--p-accent, var(--accent));
-  font-variant-numeric: tabular-nums;
-}
+/* ---------- The shared chapter frame ----------
+   A narrow sticky rail carries the number and name; the wide column carries
+   everything else. Every section uses it, which is what gives the page a
+   spine now that there are no boxes. */
+.section { padding-block: clamp(2.75rem, 5.5vw, 5.5rem); }
+.section + .section { border-top: 1px solid var(--border-subtle); }
 
-/* ---------- 02 About ---------- */
-.about { padding-block: var(--section-y); }
-.aboutGrid {
+.grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 6rem);
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4.5rem);
   align-items: start;
 }
-@media (max-width: 900px) { .aboutGrid { grid-template-columns: 1fr; gap: var(--sp-6); } }
+.grid[data-wide] { grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); }
+@media (max-width: 900px) {
+  .grid, .grid[data-wide] { grid-template-columns: 1fr; gap: var(--sp-5); }
+}
 
-.aboutSide { display: grid; gap: var(--sp-6); position: sticky; top: calc(var(--sp-10) + var(--sp-2)); }
-@media (max-width: 900px) { .aboutSide { position: static; } }
+.aside { position: sticky; top: calc(var(--sp-10) + var(--sp-2)); }
+@media (max-width: 900px) { .aside { position: static; } }
 
-.aboutFacts { display: grid; gap: var(--sp-4); }
+.marker { display: grid; gap: var(--sp-2); }
+.markerNum {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+/* The section name is a heading, not a caption. */
+.markerLabel {
+  font-size: clamp(1.15rem, 1.75vw, 1.65rem);
+  font-weight: var(--fw-semibold);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+@media (max-width: 900px) {
+  .marker {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    padding-bottom: var(--sp-2);
+  }
+}
+
+.body { min-width: 0; display: grid; gap: var(--sp-7); }
+
+/* ---------- 02 About ---------- */
+.aboutFacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: var(--sp-5);
+}
 .aboutFacts > div {
   display: grid;
-  gap: var(--sp-1);
+  gap: var(--sp-2);
   padding-top: var(--sp-3);
   border-top: 1px solid var(--border-subtle);
 }
@@ -56,66 +79,36 @@
 
 /* The lead is set large — this is the one paragraph that has to land. */
 .aboutLead {
-  font-size: clamp(1.15rem, 1.9vw, 1.85rem);
+  font-size: clamp(1.15rem, 1.75vw, 1.7rem);
   font-weight: var(--fw-light);
   line-height: 1.45;
   letter-spacing: -0.015em;
   color: var(--text-primary);
-  max-width: 40ch;
+  max-width: 52ch;
   text-wrap: pretty;
 }
 
 /* ---------- 03 Impact metrics ---------- */
-.metrics {
-  position: relative;
-  padding-block: var(--section-y);
-  overflow: hidden;
-  isolation: isolate;
-}
-.metricsGlow {
-  position: absolute;
-  top: -40%;
-  left: 50%;
-  width: 90vw;
-  height: 90vw;
-  max-height: 900px;
-  z-index: -1;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, var(--p-accent, var(--accent)), transparent 60%);
-  opacity: 0.1;
-  filter: blur(80px);
-}
 .metricGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   gap: var(--sp-7) var(--sp-6);
-  margin-top: var(--sp-7);
 }
 .metricCell { border-top: 1px solid var(--border-strong); }
 .metricCell > * { border-top: none; padding-top: var(--sp-5); }
 
 /* ---------- 04 Research ---------- */
-.research { padding-top: var(--section-y); }
-.researchTop {
-  display: grid;
-  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 6rem);
-  align-items: start;
-}
-@media (max-width: 900px) { .researchTop { grid-template-columns: 1fr; gap: var(--sp-5); } }
 .researchIntro {
   font-size: var(--fs-body-lg);
   color: var(--text-secondary);
   line-height: 1.5;
-  max-width: 52ch;
+  max-width: 58ch;
 }
 
 .methods {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: var(--sp-6) var(--sp-7);
-  margin-top: var(--sp-8);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--sp-6) var(--sp-6);
 }
 .method {
   display: grid;
@@ -133,11 +126,10 @@
 .methodName { font-size: var(--fs-h4); font-weight: var(--fw-semibold); letter-spacing: var(--ls-heading); }
 .methodDetail { font-size: var(--fs-caption); color: var(--text-secondary); line-height: 1.55; }
 
-/* The insight goes full-bleed — it is the turning point of the story. */
+/* The insight is the turning point of the story, so it gets the scale. */
 .insight {
-  margin-top: var(--sp-9);
-  padding-block: clamp(3rem, 8vw, 7rem);
-  border-block: 1px solid var(--border-strong);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border-strong);
 }
 .insightLabel {
   font-size: var(--fs-eyebrow);
@@ -148,11 +140,11 @@
   margin-bottom: var(--sp-5);
 }
 .insightText {
-  font-size: clamp(1.5rem, 3.6vw, 3.2rem);
-  font-weight: var(--fw-medium);
-  line-height: 1.22;
-  letter-spacing: var(--ls-heading);
-  max-width: 24ch;
+  font-size: clamp(1.35rem, 2.9vw, 2.6rem);
+  font-weight: var(--fw-light);
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+  max-width: 30ch;
   text-wrap: pretty;
 }
 .insightFoot {
@@ -162,11 +154,10 @@
 }
 
 /* ---------- 05 Pain points ---------- */
-.pain { padding-block: var(--section-y); }
-.painList { margin-top: var(--sp-7); }
+.painList { display: grid; }
 .painRow {
   display: grid;
-  grid-template-columns: 4rem minmax(9rem, 18rem) minmax(0, 1fr);
+  grid-template-columns: 2.75rem minmax(11rem, 19rem) minmax(0, 1fr);
   gap: var(--sp-5);
   align-items: start;
   padding-block: clamp(1.5rem, 3vw, 2.5rem);
@@ -175,9 +166,8 @@
 }
 .painRow:last-child { border-bottom: 1px solid var(--border-subtle); }
 @media (max-width: 860px) {
-  .painRow { grid-template-columns: 3rem minmax(0, 1fr); }
-  .painDetail, .painEvidence { grid-column: 2; }
-  .painEvidence { margin-top: var(--sp-2); }
+  .painRow { grid-template-columns: 2.5rem minmax(0, 1fr); }
+  .painBody { grid-column: 2; }
 }
 .painIndex {
   font-size: var(--fs-caption);
@@ -191,11 +181,9 @@
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
-.painDetail { color: var(--text-secondary); line-height: 1.55; max-width: 52ch; }
+.painDetail { color: var(--text-secondary); line-height: 1.55; max-width: 56ch; }
+.painBody { display: grid; gap: var(--sp-4); align-content: start; }
 .painEvidence {
-  /* Sits under the detail it sources, not in the narrow label column. */
-  grid-column: 3;
-  margin-top: var(--sp-3);
   font-size: var(--fs-caption);
   color: var(--text-tertiary);
   padding-left: var(--sp-4);
@@ -203,28 +191,16 @@
   max-width: 52ch;
 }
 
-/* ---------- 06 Competitive audit ---------- */
-.audit { padding-block: var(--section-y); }
-.audit .marker { margin-bottom: var(--sp-7); }
-
 /* ---------- 07 Personas ---------- */
-.personas { padding-block: var(--section-y); }
-.personaGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-  gap: var(--grid-gap);
-  margin-top: var(--sp-7);
-}
+.personaGrid { display: grid; gap: clamp(2.5rem, 6vw, 5rem); }
 
 /* ---------- 09 Solutions ---------- */
-.solutions { padding-block: var(--section-y); }
 .solutionsLead {
-  margin-top: var(--sp-4);
   font-size: var(--fs-body-lg);
   color: var(--text-secondary);
-  max-width: 46ch;
+  max-width: 52ch;
 }
-.solutionList { display: grid; margin-top: var(--sp-8); }
+.solutionList { display: grid; }
 
 .solution {
   display: grid;
@@ -283,26 +259,18 @@
 .solutionDetail { color: var(--text-secondary); line-height: 1.55; max-width: 56ch; }
 
 /* ---------- 10 Visual design ---------- */
-.visual { padding-block: var(--section-y); }
-.visualGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 6rem);
-  align-items: start;
-}
-@media (max-width: 900px) { .visualGrid { grid-template-columns: 1fr; gap: var(--sp-5); } }
 .visualStatement {
-  font-size: clamp(1.05rem, 1.6vw, 1.5rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.4rem);
   font-weight: var(--fw-light);
   line-height: 1.5;
-  max-width: 52ch;
+  max-width: 58ch;
   text-wrap: pretty;
 }
-.galleryWrap { margin-top: var(--sp-8); }
+.galleryWrap { min-width: 0; }
 
 /* ---------- 11 Next project ---------- */
 .next { border-top: 1px solid var(--border-subtle); }
-.nextLink { display: block; padding-block: var(--section-y); }
+.nextLink { display: block; padding-block: clamp(3rem, 7vw, 7rem); }
 .nextInner {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);

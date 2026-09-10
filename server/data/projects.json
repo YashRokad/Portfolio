@@ -118,6 +118,7 @@
       {
         "name": "Dana Okwuosa",
         "role": "Reconciliation Analyst, 6 years in seat",
+        "photo": "/media/ledgerline-persona-1.svg",
         "goal": "Clear her queue by Thursday without leaving anything she cannot defend.",
         "frustration": "Redoes work the system already did, because the system will not show its reasoning.",
         "quote": "I trust it right up until someone asks me why. Then I start again from the bank file."
@@ -125,6 +126,7 @@
       {
         "name": "Marcus Hale",
         "role": "Corporate Controller",
+        "photo": "/media/ledgerline-persona-2.svg",
         "goal": "Sign the close on time and survive the audit in April with no restatements.",
         "frustration": "Cannot see whose queue is stuck until the day it makes him late.",
         "quote": "I do not need it faster. I need to know at 4pm on day two whether we are going to be late."
@@ -437,6 +439,7 @@
       {
         "name": "The Fulfillment Decision-Maker",
         "role": "Operations / Fulfillment Lead",
+        "photo": "/media/apten-persona-1.svg",
         "company": "Growing DTC / B2B brand",
         "region": "UK / US",
         "tech": "Moderate–high",
@@ -456,6 +459,7 @@
       {
         "name": "The Business Development Lead",
         "role": "Business Development / Sales Lead",
+        "photo": "/media/apten-persona-2.svg",
         "company": "Mid-size 3PL provider",
         "region": "UK / US",
         "tech": "Moderate",
@@ -705,6 +709,7 @@
       {
         "name": "Rosa Villalobos",
         "role": "Homeowner, first claim in 14 years",
+        "photo": "/media/fair-weather-persona-1.svg",
         "goal": "Get the roof tarped and understand whether she is covered before the next storm.",
         "frustration": "Cannot tell which questions are required and which will be held against her.",
         "quote": "I kept re-reading it. I did not want to write the wrong thing and have that be the reason they said no."
@@ -712,6 +717,7 @@
       {
         "name": "Terrence Boyd",
         "role": "Field Adjuster, 200+ claims a season",
+        "photo": "/media/fair-weather-persona-2.svg",
         "goal": "Arrive at a property already knowing what he is looking at.",
         "frustration": "Half his assignments arrive with a photo of a wet ceiling and no address detail worth using.",
         "quote": "Give me four good photos and the date it started. I can do the rest from the truck."
@@ -931,6 +937,7 @@
       {
         "name": "Ivan Prokopenko",
         "role": "Line Supervisor, Line 3, night shift",
+        "photo": "/media/shopfloor-signal-persona-1.svg",
         "goal": "Get the line running and hand over a shift that does not create work for the next one.",
         "frustration": "Logging a stop properly costs him the same ninety seconds he needs to fix it.",
         "quote": "I will tell you exactly what happened. Just not while it is still happening."
@@ -938,6 +945,7 @@
       {
         "name": "Priya Raghunathan",
         "role": "Plant Operations Manager",
+        "photo": "/media/shopfloor-signal-persona-2.svg",
         "goal": "Find the two recurring stops costing her the most, and prove it to corporate.",
         "frustration": "A third of her downtime data says \"Other\", which is the same as no data.",
         "quote": "I can defend a number. I cannot defend a bucket labelled Other."
@@ -1159,6 +1167,7 @@
       {
         "name": "Curtis Nwosu",
         "role": "Owner-operator, regional dry van",
+        "photo": "/media/dwell-persona-1.svg",
         "goal": "Two more stops today, which means knowing now whether he is waiting an hour.",
         "frustration": "No way to tell a late slot from a moving one until he is already parked.",
         "quote": "Tell me it is going to be ninety minutes and I will go eat. Do not tell me twenty and mean ninety."
@@ -1166,6 +1175,7 @@
       {
         "name": "Lorena Batiste",
         "role": "DC Inbound Manager",
+        "photo": "/media/dwell-persona-2.svg",
         "goal": "Keep doors flowing without a queue that spills onto the county road.",
         "frustration": "Half her arrivals are unannounced early, and the system rewards her for looking punctual, not being punctual.",
         "quote": "I can absorb a late truck. What I cannot absorb is six early ones nobody warned me about."

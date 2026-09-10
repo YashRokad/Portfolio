@@ -16,13 +16,24 @@ import { useResource } from '../../data-client/useApi';
 import usePageTitle from '../../hooks/usePageTitle';
 import s from './ProjectDetail.module.css';
 
-/** Section eyebrow: the number and the name, used identically everywhere. */
-function Marker({ n, children }) {
+/**
+ * Every chapter shares one structure: a sticky numbered marker in a narrow
+ * left rail, the content in the wide column beside it. That rail is what
+ * holds the page together now that the boxes are gone.
+ */
+function Section({ id, n, label, children, wide = false, scopeRef }) {
   return (
-    <p className={s.marker}>
-      <span className={s.markerNum}>{n}</span>
-      {children}
-    </p>
+    <section id={id} ref={scopeRef} className={s.section}>
+      <div className={`shell ${s.grid}`} data-wide={wide || undefined}>
+        <div className={s.aside}>
+          <p className={s.marker}>
+            <span className={s.markerNum}>{n}</span>
+            <span className={s.markerLabel}>{label}</span>
+          </p>
+        </div>
+        <div className={s.body}>{children}</div>
+      </div>
+    </section>
   );
 }
 
@@ -66,113 +77,89 @@ export default function ProjectDetail() {
       <ScrollProgress targetRef={articleRef} accent={accent} />
 
       {/* ---------------------------------------------- 02 About project */}
-      <section ref={aboutScope} id="about" className={s.about}>
-        <div className={`shell ${s.aboutGrid}`}>
-          <div className={s.aboutSide} data-reveal>
-            <Marker n="02">About the project</Marker>
-            <dl className={s.aboutFacts}>
-              <div><dt>Client</dt><dd>{project.client}</dd></div>
-              <div><dt>Year</dt><dd>{project.year}</dd></div>
-              <div><dt>Sector</dt><dd>{project.industry}</dd></div>
-            </dl>
-          </div>
-          <p className={s.aboutLead} data-reveal>{project.about}</p>
-        </div>
-      </section>
+      <Section id="about" n="02" label="About the project" scopeRef={aboutScope}>
+        <p className={s.aboutLead} data-reveal>{project.about}</p>
+        <dl className={s.aboutFacts} data-reveal>
+          <div><dt>Client</dt><dd>{project.client}</dd></div>
+          <div><dt>Year</dt><dd>{project.year}</dd></div>
+          <div><dt>Sector</dt><dd>{project.industry}</dd></div>
+          <div><dt>Role</dt><dd>{project.role}</dd></div>
+        </dl>
+      </Section>
 
       <ImageBand src={bands.about} caption={bands.aboutCaption} accent={accent} />
 
       {/* -------------------------------------------- 03 Impact metrics */}
-      <section ref={metricsScope} id="metrics" className={s.metrics}>
-        <span className={s.metricsGlow} aria-hidden="true" />
-        <div className="shell">
-          <Marker n="03">Impact</Marker>
-          <div className={s.metricGrid}>
-            {project.metrics.map((metric) => (
-              <div key={metric.label} className={s.metricCell} data-reveal>
-                <Stat {...metric} />
-              </div>
-            ))}
-          </div>
+      <Section id="metrics" n="03" label="Impact" scopeRef={metricsScope}>
+        <div className={s.metricGrid}>
+          {project.metrics.map((metric) => (
+            <div key={metric.label} className={s.metricCell} data-reveal>
+              <Stat {...metric} />
+            </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* ------------------------------------ 04 User problem & research */}
-      <section ref={researchScope} id="research" className={s.research}>
-        <div className="shell">
-          <div className={s.researchTop}>
-            <Marker n="04">User problem &amp; research</Marker>
-            <p className={s.researchIntro} data-reveal>{project.research.intro}</p>
-          </div>
+      <Section id="research" n="04" label="User problem &amp; research" scopeRef={researchScope}>
+        <p className={s.researchIntro} data-reveal>{project.research.intro}</p>
 
-          <ul className={s.methods}>
-            {project.research.methods.map((m, i) => (
-              <li key={m.name} className={s.method} data-reveal>
-                <span className={s.methodNum}>{String(i + 1).padStart(2, '0')}</span>
-                <h3 className={s.methodName}>{m.name}</h3>
-                <p className={s.methodDetail}>{m.detail}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className={s.methods}>
+          {project.research.methods.map((m, i) => (
+            <li key={m.name} className={s.method} data-reveal>
+              <span className={s.methodNum}>{String(i + 1).padStart(2, '0')}</span>
+              <h3 className={s.methodName}>{m.name}</h3>
+              <p className={s.methodDetail}>{m.detail}</p>
+            </li>
+          ))}
+        </ul>
 
         <blockquote className={s.insight} data-reveal>
-          <div className="shell">
-            <p className={s.insightLabel}>The finding everything turned on</p>
-            <p className={s.insightText}>{project.research.insight}</p>
-            <footer className={s.insightFoot}>{project.research.insightAttribution}</footer>
-          </div>
+          <p className={s.insightLabel}>The finding everything turned on</p>
+          <p className={s.insightText}>{project.research.insight}</p>
+          <footer className={s.insightFoot}>{project.research.insightAttribution}</footer>
         </blockquote>
-      </section>
+      </Section>
 
       {/* ------------------------------------------------ 05 Pain points */}
-      <section ref={painScope} id="pain-points" className={s.pain}>
-        <div className="shell">
-          <Marker n="05">Pain points</Marker>
+      <Section id="pain-points" n="05" label="Pain points" scopeRef={painScope}>
           <ul className={s.painList}>
             {project.painPoints.map((point, i) => (
               <li key={point.label} className={s.painRow} data-reveal>
                 <span className={s.painIndex}>{String(i + 1).padStart(2, '0')}</span>
                 <h3 className={s.painLabel}>{point.label}</h3>
-                <p className={s.painDetail}>{point.detail}</p>
-                {point.evidence && <p className={s.painEvidence}>{point.evidence}</p>}
+                <div className={s.painBody}>
+                  <p className={s.painDetail}>{point.detail}</p>
+                  {point.evidence && <p className={s.painEvidence}>{point.evidence}</p>}
+                </div>
               </li>
             ))}
           </ul>
-        </div>
-      </section>
+      </Section>
 
       <ImageBand src={bands.problem} caption={bands.problemCaption} height="short" accent={accent} />
 
       {/* ------------------------------------------ 06 Competitive audit */}
-      <section ref={auditScope} id="audit" className={s.audit}>
-        <div className="shell">
-          <Marker n="06">Competitive audit</Marker>
-          <AuditTable audit={project.competitiveAudit} accent={accent} />
-        </div>
-      </section>
+      <Section id="audit" n="06" label="Competitive audit" wide scopeRef={auditScope}>
+        <AuditTable audit={project.competitiveAudit} accent={accent} />
+      </Section>
 
       {/* ---------------------------------------------- 07 User personas */}
-      <section ref={personaScope} id="personas" className={s.personas}>
-        <div className="shell">
-          <Marker n="07">Who this is for</Marker>
-          <div className={s.personaGrid}>
-            {project.personas.map((persona) => (
-              <div key={persona.name} data-reveal>
-                <PersonaCard persona={persona} />
-              </div>
-            ))}
-          </div>
+      <Section id="personas" n="07" label="Who this is for" wide scopeRef={personaScope}>
+        <div className={s.personaGrid}>
+          {project.personas.map((persona) => (
+            <div key={persona.name} data-reveal>
+              <PersonaCard persona={persona} />
+            </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* ------------------------------------------- 08 User journey map */}
       <JourneyMap journey={project.journey} accent={accent} />
 
       {/* -------------------------------------------------- 09 Solutions */}
-      <section ref={solutionScope} id="solutions" className={s.solutions}>
-        <div className="shell">
-          <Marker n="09">Solutions</Marker>
+      <Section id="solutions" n="09" label="Solutions" wide scopeRef={solutionScope}>
           <p className={s.solutionsLead} data-reveal>
             Each one answers a problem named above — nothing here was added because it was interesting.
           </p>
@@ -193,23 +180,17 @@ export default function ProjectDetail() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
+      </Section>
 
       <ImageBand src={bands.solution} caption={bands.solutionCaption} accent={accent} />
 
       {/* ---------------------------------------------- 10 Visual design */}
-      <section ref={visualScope} id="visual" className={s.visual}>
-        <div className={`shell ${s.visualGrid}`}>
-          <Marker n="10">Visual design</Marker>
-          <p className={s.visualStatement} data-reveal>{project.visualDesign.statement}</p>
-        </div>
+      <Section id="visual" n="10" label="Visual design" wide scopeRef={visualScope}>
+        <p className={s.visualStatement} data-reveal>{project.visualDesign.statement}</p>
         <div className={s.galleryWrap}>
-          <div className="shell">
-            <Gallery gallery={project.visualDesign.gallery} title={project.title} accent={accent} />
-          </div>
+          <Gallery gallery={project.visualDesign.gallery} title={project.title} accent={accent} />
         </div>
-      </section>
+      </Section>
 
       {/* ---------------------------------------------- 11 Next project */}
       <section ref={nextScope} id="next" className={s.next}>
@@ -222,7 +203,10 @@ export default function ProjectDetail() {
           <div className="shell">
             <div className={s.nextInner}>
               <div className={s.nextCopy}>
-                <Marker n="11">Next project</Marker>
+                <p className={s.marker}>
+                  <span className={s.markerNum}>11</span>
+                  <span className={s.markerLabel}>Next project</span>
+                </p>
                 <h2 className={s.nextTitle} data-reveal>{project.next.title}</h2>
                 <p className={s.nextTagline} data-reveal>{project.next.tagline}</p>
                 <div data-reveal>

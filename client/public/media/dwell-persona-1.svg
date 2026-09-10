@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="900" height="1200" role="img">
+  <defs>
+    <radialGradient id="pl" cx="0.6614103085175157" cy="0.3" r="0.75">
+      <stop offset="0" stop-color="#3c3c3c"/>
+      <stop offset="0.55" stop-color="#181818"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0.45" y1="0.1" x2="1" y2="0.55">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.86" stop-color="#ffffff" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.25"/>
+      <stop offset="0.45" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1200" fill="url(#pl)"/>
+  <g>
+    <ellipse cx="499.9840659722686" cy="528" rx="224.8350773472339" ry="278.79549591057" fill="#080808"/>
+    <ellipse cx="499.9840659722686" cy="528" rx="224.8350773472339" ry="278.79549591057" fill="none" stroke="url(#rim)" stroke-width="9"/>
+    <path d="M 117.76443448197097 1200 C 162.73144995141774 955.1866469597444, 297.6324963597581 831.5273544187658, 499.9840659722686 820.2856005514041
+             C 702.3356355847791 831.5273544187658, 837.2366819931194 955.1866469597444, 882.2036974625662 1200 Z"
+          fill="#0a0a0a"/>
+    <path d="M 117.76443448197097 1200 C 162.73144995141774 955.1866469597444, 297.6324963597581 831.5273544187658, 499.9840659722686 820.2856005514041
+             C 702.3356355847791 831.5273544187658, 837.2366819931194 955.1866469597444, 882.2036974625662 1200"
+          fill="none" stroke="url(#rim)" stroke-width="8"/>
+  </g>
+  <rect width="900" height="1200" fill="url(#vig)"/></svg>

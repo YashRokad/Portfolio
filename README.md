@@ -76,6 +76,14 @@ server/
 
 No component calls `fetch` directly — everything goes through `data-client/api.js`.
 
+### Chapter structure
+
+Every case-study section shares one frame: a sticky rail on the left carrying
+the section number and its name set as a heading, and a wide content column
+beside it. That rail is what gives the page a spine now that there are no
+card outlines. Sections marked `wide` narrow the rail so tables and galleries
+get more room.
+
 ### Colour
 
 The interface is monochrome by design. `--accent` is white; hierarchy comes
@@ -150,7 +158,7 @@ Real case studies go into `server/content/*.js`, then `npm run seed`. Nothing in
 | `competitiveAudit.matrix {caption, dimensionLabel, columns[{name, ours}], rows[{label, values[]}]}` | §6 comparison table when present — mark your own column `ours: true`. Cells reading yes/no/none are toned automatically |
 | `competitiveAudit.competitors[] {name, verdict}` | §6 ruled fallback when there is no `matrix` |
 | `competitiveAudit.whitespace` | §6 whitespace-opportunity panel |
-| `personas[] {name, role, quote, company?, region?, tech?, goals[]?, frustrations[]?, note?}` | §7 quote-led cards. `goals`/`frustrations` take arrays; the older singular `goal`/`frustration` still work. `note` is the closing context line |
+| `personas[] {name, role, quote, photo?, company?, region?, tech?, goals[]?, frustrations[]?, note?}` | §7 portrait-led rows: the photo carries an identity plate, the quote is set at size beside it, and `goals`/`frustrations` are laid out against each other line by line. The older singular `goal`/`frustration` still work. `photo` defaults to a generated silhouette placeholder — drop a real portrait at the same path |
 | `journey.label`, `journey.stages[] {name, goal, actions, touchpoints, pain, opportunity, emotion, tone}` | §8 journey map table — one column per stage, one row per dimension. Any dimension absent from every stage drops its row entirely; a stage carrying only the older `detail` field falls back into the Actions row. `tone` (`low`/`mid`/`neutral`/`high`) drives the four-bar emotional register |
 | `solutions[] {name, resolves, detail}` | §9 — `resolves` should quote the matching `painPoints[].label` |
 | `visualDesign.statement` | §10 curatorial statement |

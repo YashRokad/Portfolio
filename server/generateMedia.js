@@ -277,6 +277,47 @@ function bandImage(slug, index, accent) {
   return svg(w, h, body);
 }
 
+/* Persona portrait placeholder — a rim-lit silhouette, deliberately abstract
+   so it reads as "photo goes here" rather than as a fake person. */
+function personaPortrait(slug, index) {
+  const r = rng(`persona${slug}${index}`);
+  const w = 900; const h = 1200;
+  const cx = w * (0.42 + r() * 0.16);
+  const cy = h * 0.44;
+  const head = 200 + r() * 40;
+  return svg(w, h, `
+  <defs>
+    <radialGradient id="pl" cx="${0.62 + r() * 0.1}" cy="0.3" r="0.75">
+      <stop offset="0" stop-color="#3c3c3c"/>
+      <stop offset="0.55" stop-color="#181818"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0.45" y1="0.1" x2="1" y2="0.55">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.86" stop-color="#ffffff" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.25"/>
+      <stop offset="0.45" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="url(#pl)"/>
+  <g>
+    <ellipse cx="${cx}" cy="${cy}" rx="${head}" ry="${head * 1.24}" fill="#080808"/>
+    <ellipse cx="${cx}" cy="${cy}" rx="${head}" ry="${head * 1.24}" fill="none" stroke="url(#rim)" stroke-width="9"/>
+    <path d="M ${cx - head * 1.7} ${h} C ${cx - head * 1.5} ${cy + head * 1.9}, ${cx - head * 0.9} ${cy + head * 1.35}, ${cx} ${cy + head * 1.3}
+             C ${cx + head * 0.9} ${cy + head * 1.35}, ${cx + head * 1.5} ${cy + head * 1.9}, ${cx + head * 1.7} ${h} Z"
+          fill="#0a0a0a"/>
+    <path d="M ${cx - head * 1.7} ${h} C ${cx - head * 1.5} ${cy + head * 1.9}, ${cx - head * 0.9} ${cy + head * 1.35}, ${cx} ${cy + head * 1.3}
+             C ${cx + head * 0.9} ${cy + head * 1.35}, ${cx + head * 1.5} ${cy + head * 1.9}, ${cx + head * 1.7} ${h}"
+          fill="none" stroke="url(#rim)" stroke-width="8"/>
+  </g>
+  <rect width="${w}" height="${h}" fill="url(#vig)"/>`);
+}
+
 function portrait() {
   const w = 900; const h = 1200;
   const body = `
@@ -308,6 +349,9 @@ export function generateMedia() {
   });
   projects.forEach((p) => {
     fs.writeFileSync(path.join(OUT, `${p.slug}-cover.svg`), cover(p.slug, p.title, art(p)));
+    (p.personas || []).forEach((_, i) => {
+      fs.writeFileSync(path.join(OUT, `${p.slug}-persona-${i + 1}.svg`), personaPortrait(p.slug, i));
+    });
     ['about', 'problem', 'solution'].forEach((band, i) => {
       fs.writeFileSync(path.join(OUT, `${p.slug}-band-${band}.svg`), bandImage(p.slug, i, art(p)));
     });
