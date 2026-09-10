@@ -14,6 +14,8 @@
   min-height: 1em;
 }
 .root[data-size='sm'] .value { font-size: var(--fs-h2); }
+.root[data-size='xs'] .value { font-size: var(--fs-h3); }
+.root[data-size='xs'] .label { font-size: var(--fs-caption); font-weight: var(--fw-medium); }
 .label {
   font-size: var(--fs-body);
   font-weight: var(--fw-semibold);

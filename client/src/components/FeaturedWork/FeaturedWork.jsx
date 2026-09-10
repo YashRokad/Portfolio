@@ -138,7 +138,7 @@ export default function FeaturedWork({ project, totalCount = 0 }) {
           <ul className={s.stats}>
             {highlights.map((metric) => (
               <li key={metric.label} data-fw-foot>
-                <Stat {...metric} note={undefined} size="sm" />
+                <Stat {...metric} note={undefined} size="xs" />
               </li>
             ))}
           </ul>
