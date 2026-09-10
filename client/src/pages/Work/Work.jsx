@@ -143,13 +143,10 @@ export default function Work() {
                   <span className={s.frame}>
                     <img className={s.image} src={project.cover} alt="" loading="lazy" />
                   </span>
-                  <span className={s.cardMeta}>
-                    <span className={s.badge}>{project.industry}</span>
-                    <span className="meta">{project.year}</span>
+                  <span className={s.caption}>
+                    <h2 className={s.cardTitle}>{project.title}</h2>
+                    <p className={s.cardTagline}>{project.tagline}</p>
                   </span>
-                  <h2 className={`h3 ${s.cardTitle}`}>{project.title}</h2>
-                  <p className={s.cardTagline}>{project.tagline}</p>
-                  <span className={s.cardRole}>{project.role}</span>
                 </TransitionLink>
               </article>
             ))}

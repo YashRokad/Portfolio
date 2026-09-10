@@ -114,7 +114,7 @@ outlines around content.
 | Design shots | Pinned section where scroll drives a *fractional* index — the name column slides continuously and images cross-fade by distance from it, so there is no step or snap | `components/DesignShots/DesignShots.jsx` |
 | Selected work | One case study: the frame unmasks, the image scales in and parallaxes, the title unmasks across its lower edge, headline numbers scramble-count | `components/FeaturedWork/FeaturedWork.jsx` |
 | What I do | Ruled rows whose rules wipe in on scroll; hovering a row lifts the name, colours its rule, expands its tags and slides a still into the column gutter | `components/Capabilities/Capabilities.jsx` |
-| Work grid | `Flip` filter re-flow, staggered card reveal, Ken-Burns image scale | `pages/Work/Work.jsx` |
+| Work grid | Aligned two-column image listing — square covers with a slow zoom on hover, name and outcome line beneath. `Flip` filter re-flow and staggered reveal on top | `pages/Work/Work.jsx` |
 | Grid → detail | `Flip` shared-element morph from card image to detail hero, with a cross-fade fallback | `animations/flipBridge.js` + `parts/ProjectHero.jsx` |
 | Detail hero | Date + oversized light-weight name, meta ledger, breathing accent glow, full-bleed image | `parts/ProjectHero.jsx` |
 | Detail | Full-width read-progress bar flush to the bottom edge, driven from a ScrollTrigger on the article | `components/ScrollProgress/ScrollProgress.jsx` |

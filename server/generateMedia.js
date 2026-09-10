@@ -36,16 +36,16 @@ const svg = (w, h, body) =>
 
 function cover(slug, title, accent) {
   const r = rng(slug);
-  const w = 1200; const h = 900;
+  const w = 1200; const h = 1200;
   let body = `
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="${accent}" stop-opacity="0.30"/>
-      <stop offset="0.55" stop-color="${accent}" stop-opacity="0.05"/>
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.42"/>
+      <stop offset="0.55" stop-color="${accent}" stop-opacity="0.1"/>
       <stop offset="1" stop-color="${BG}" stop-opacity="0"/>
     </linearGradient>
     <radialGradient id="r" cx="0.72" cy="0.22" r="0.7">
-      <stop offset="0" stop-color="${accent}" stop-opacity="0.34"/>
+      <stop offset="0" stop-color="${accent}" stop-opacity="0.4"/>
       <stop offset="1" stop-color="${accent}" stop-opacity="0"/>
     </radialGradient>
     <clipPath id="c"><rect width="${w}" height="${h}"/></clipPath>
@@ -60,7 +60,7 @@ function cover(slug, title, accent) {
     body += `<line x1="${(w / 12) * i}" y1="0" x2="${(w / 12) * i}" y2="${h}" stroke="${LINE}" stroke-width="1"/>`;
   }
   // Concentric arcs — a "system" motif
-  const cx = 250 + r() * 200; const cy = 620;
+  const cx = 250 + r() * 200; const cy = h * 0.62;
   for (let i = 0; i < 7; i += 1) {
     const rad = 90 + i * 62;
     body += `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="${accent}" stroke-opacity="${0.26 - i * 0.03}" stroke-width="${i === 2 ? 2 : 1}"/>`;
@@ -68,10 +68,9 @@ function cover(slug, title, accent) {
   // Data bars
   for (let i = 0; i < 9; i += 1) {
     const bh = 40 + r() * 260;
-    body += `<rect x="${740 + i * 44}" y="${560 - bh}" width="18" height="${bh}" rx="3" fill="${accent}" fill-opacity="${i === 5 ? 0.9 : 0.16}"/>`;
+    body += `<rect x="${740 + i * 44}" y="${h * 0.62 - bh}" width="18" height="${bh}" fill="${accent}" fill-opacity="${i === 5 ? 0.85 : 0.2}"/>`;
   }
   body += `<rect x="0" y="0" width="${w}" height="${h}" fill="none" stroke="${LINE}"/>`;
-  body += `<text x="72" y="120" fill="${TEXT}" font-family="Manrope, sans-serif" font-size="22" font-weight="600" letter-spacing="4">${title.toUpperCase()}</text>`;
   body += '</g>';
   return svg(w, h, body);
 }
