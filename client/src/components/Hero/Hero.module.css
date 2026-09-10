@@ -27,29 +27,10 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   width: 100%;
   padding-block: calc(var(--sp-10) + var(--sp-2)) var(--sp-5);
 }
-
-/* ---- Top meta ---- */
-.top {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-3) var(--sp-7);
-  align-items: center;
-  font-size: var(--fs-caption);
-  color: var(--text-secondary);
-}
-.locus { display: inline-flex; align-items: center; gap: var(--sp-3); }
-.pulse {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
-}
-.email { transition: color var(--dur-micro) linear; }
-.email:hover { color: var(--accent); }
 
 /* ---- Standing statement ---- */
 .middle { display: flex; align-items: center; padding-block: var(--sp-7); }

@@ -12,7 +12,7 @@ import s from './Hero.module.css';
  * marquee along the bottom. The image parallaxes as the page leaves it.
  */
 export default function Hero({
-  wordmark = '', statement, sub, location, email, image, tags = [],
+  wordmark = '', statement, sub, image, tags = [],
   play = true, scrollTargetId = 'design-shots',
 }) {
   const root = useRef(null);
@@ -25,13 +25,12 @@ export default function Hero({
     let split;
 
     const ctx = gsap.context((self) => {
-      const meta = self.selector('[data-hero-meta]');
       const statementEl = self.selector(`.${s.statement}`);
       const footer = self.selector('[data-hero-footer]');
 
       if (reduced) {
         gsap.set(markRef.current, { visibility: 'visible' });
-        gsap.fromTo([imageRef.current, markRef.current, ...statementEl, ...meta, ...footer],
+        gsap.fromTo([imageRef.current, markRef.current, ...statementEl, ...footer],
           { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, stagger: 0.05 });
         return;
       }
@@ -43,9 +42,6 @@ export default function Hero({
         .fromTo(imageRef.current,
           { scale: 1.18, autoAlpha: 0 },
           { scale: 1, autoAlpha: 1, duration: 1.8, ease: EASE.editorial }, 0)
-        .fromTo(meta,
-          { y: -18, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: DUR.standard, stagger: 0.08 }, 0.25)
         .fromTo(statementEl,
           { y: 30, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, duration: DUR.slow }, 0.4)
@@ -85,14 +81,6 @@ export default function Hero({
       </div>
 
       <div className={s.inner}>
-        <div className={`shell ${s.top}`}>
-          <p className={s.locus} data-hero-meta>
-            <span className={s.pulse} aria-hidden="true" />
-            {location}
-          </p>
-          <a className={s.email} href={`mailto:${email}`} data-hero-meta>{email}</a>
-        </div>
-
         <div className={`shell ${s.middle}`}>
           <p className={s.statement}>
             <span className={s.glyph} aria-hidden="true" />
