@@ -97,7 +97,7 @@ export default function FeaturedWork({ project, totalCount = 0 }) {
       className={`section ${s.root}`}
       style={{ '--fw-accent': project.accent }}
     >
-      <div className="shell">
+      <div className={`shell ${s.plate}`}>
         <header className={s.head}>
           <p className="eyebrow" data-fw-meta>Selected work</p>
           <TransitionLink to="/work" className={s.all} data-fw-meta>

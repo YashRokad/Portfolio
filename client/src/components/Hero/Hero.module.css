@@ -168,7 +168,7 @@
    lowercase, and fits to a smaller size for the same width. */
 .wordmark {
   visibility: hidden;
-  padding-inline: clamp(0.75rem, 1.6vw, 1.5rem);
+  padding-inline: var(--gutter);
   font-size: clamp(2.6rem, 16.2vw, 17.5rem);
   font-weight: var(--fw-black);
   line-height: 0.78;

@@ -1,5 +1,10 @@
 .root { border-top: 1px solid var(--border-subtle); }
 
+/* Deliberately narrower than the page measure and centred. The hero and the
+   design-shot stage run to the viewport edge; this one is framed, so the page
+   alternates between bleed and plate instead of being uniformly full width. */
+.plate { max-width: 76rem; }
+
 .head {
   display: flex;
   flex-wrap: wrap;

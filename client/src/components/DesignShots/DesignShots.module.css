@@ -15,7 +15,7 @@
 
 .inner {
   display: grid;
-  gap: clamp(1.75rem, 3.5vw, 3rem);
+  gap: clamp(2.5rem, 5.5vw, 5rem);
   width: 100%;
 }
 
@@ -36,8 +36,10 @@
   display: grid;
   /* The shot carries the section, so it takes the larger share and as much
      height as the pinned viewport can give it. */
-  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
+  /* The names sit hard left and the shot hard right, with a deliberate void
+     between them. The gap is the point of the layout, not leftover space. */
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 0.88fr);
+  column-gap: clamp(2rem, 10vw, 10rem);
   align-items: center;
 }
 

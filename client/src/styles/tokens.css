@@ -117,7 +117,7 @@
   --section-y: clamp(5rem, 11vw, 12rem);
   --stack-gap: clamp(2.5rem, 5vw, 4.5rem);
   --gutter: clamp(1rem, 2vw, 1.75rem);
-  --max-w: 112rem;
+  --max-w: 96rem;
   --max-w-prose: 38rem;
   --grid-cols: 12;
   --grid-gap: clamp(1rem, 2vw, 1.75rem);

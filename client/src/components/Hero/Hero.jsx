@@ -173,7 +173,7 @@ export default function Hero({
       </div>
 
       <div className={s.inner}>
-        <div className={`shell ${s.top}`}>
+        <div className={`bleed ${s.top}`}>
           <p className={s.statement}>
             <span className={s.glyph} aria-hidden="true" />
             {statement}
@@ -182,7 +182,7 @@ export default function Hero({
         </div>
 
         <div className={s.bottom}>
-          <div className={`shell ${s.meta}`} data-hero-intro>
+          <div className={`bleed ${s.meta}`} data-hero-intro>
             <Marquee
               className={s.tags}
               items={tags}

@@ -9,6 +9,16 @@
   padding-inline: var(--gutter);
 }
 
+/* Full-bleed sibling of .shell: same gutter, no measure cap. For sections that
+   are meant to run to the viewport edge — the hero wordmark, the design-shot
+   stage — so they do not stop short while a neighbour keeps going. Mixing the
+   two inside one section is what leaves a hard vertical seam on wide screens,
+   so a section should pick one and use it throughout. */
+.bleed {
+  width: 100%;
+  padding-inline: var(--gutter);
+}
+
 .grid12 {
   display: grid;
   grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));

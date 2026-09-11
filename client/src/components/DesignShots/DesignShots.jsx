@@ -113,7 +113,7 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
   return (
     <section ref={root} id="design-shots" className={s.root} aria-label="Design shots">
       <div ref={pinRef} className={s.pin}>
-        <div className={`shell ${s.inner}`}>
+        <div className={`bleed ${s.inner}`}>
           <header className={s.head}>
             <p className="eyebrow">{eyebrow}</p>
             {title && <h2 className={`h3 ${s.title}`}>{title}</h2>}
