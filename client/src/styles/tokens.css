@@ -45,10 +45,19 @@
   --shadow-lifted: 0 30px 80px rgba(0, 0, 0, 0.6);
   --cursor-ring: rgba(247, 246, 244, 0.5);
 
-  /* Ambient hero mesh — light on dark, no hue */
-  --mesh-1: rgba(255, 255, 255, 0.16);
-  --mesh-2: rgba(255, 255, 255, 0.09);
-  --mesh-3: rgba(255, 255, 255, 0.06);
+  /* Hero mesh gradient. The only place in the system that carries hue, and it
+     is deliberately deep and desaturated so it reads as atmosphere behind the
+     wordmark rather than as brand colour. Dial --mesh-strength to taste. */
+  --mesh-strength: 0.9;
+  --mesh-green: #0f4438;
+  --mesh-magenta: #8d1f52;
+  --mesh-ember: #b04520;
+  --mesh-amber: #c9962f;
+  --mesh-haze: rgba(247, 246, 244, 0.5);
+
+  /* Faint ruled pattern sitting over the mesh. */
+  --line-faint: rgba(247, 246, 244, 0.045);
+  --line-arc: rgba(247, 246, 244, 0.1);
 
   /* Semantic state. Kept monochrome except where a form error genuinely has
      to shout — colour is the exception here, not the system. */

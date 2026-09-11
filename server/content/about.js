@@ -3,9 +3,6 @@ export const about = {
   role: 'UI/UX Designer',
   location: 'Mumbai, working with teams across GMT−8 to GMT+5:30',
   portrait: '/media/portrait.svg',
-  /* Full-bleed hero image. Drop a real photograph in at this path — nothing
-     else needs to change. */
-  heroImage: '/media/hero-backdrop.svg',
   wordmark: 'Yash Rokad',
   heroHeadline: 'I design the software that decides how somebody\u2019s Tuesday goes.',
   heroSub:

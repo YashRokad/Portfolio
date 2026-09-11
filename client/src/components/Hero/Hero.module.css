@@ -4,52 +4,138 @@
   display: flex;
   overflow: hidden;
   isolation: isolate;
+  background: var(--bg-base);
 }
 
-/* ---- Full-bleed backdrop ---- */
-.backdrop { position: absolute; inset: 0; z-index: 0; }
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  will-change: transform;
-  transform-origin: 60% 40%;
+/* ---------------------------------------------------------------- backdrop
+   Three stacked layers: a mesh of soft colour blooms, a faint ruled pattern
+   over it, and a scrim that pulls the bottom back to solid --bg-base so the
+   wordmark always sits on near-black. */
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
+
+.mesh {
+  position: absolute;
+  /* Overscan, so a drifting bloom never exposes a hard edge. */
+  inset: -25%;
+  opacity: var(--mesh-strength);
+  will-change: transform;
+}
+
+/* Each bloom is a single soft radial stop. Falloff does the blurring, which
+   is far cheaper than a filter on an element this large.
+
+   screen is what keeps this reading as light rather than paint: overlapping
+   stops add up toward white instead of averaging into brown, which is the
+   difference between a mesh gradient and a muddy smear. */
+.bloom {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.bloom[data-bloom='green'] {
+  top: -6%; left: 18%;
+  width: 58vw; height: 58vw;
+  background: radial-gradient(circle at 50% 50%, var(--mesh-green) 0%, rgba(15, 68, 56, 0.5) 34%, transparent 66%);
+}
+.bloom[data-bloom='magenta'] {
+  top: 14%; right: -10%;
+  width: 64vw; height: 64vw;
+  background: radial-gradient(circle at 50% 50%, var(--mesh-magenta) 0%, rgba(141, 31, 82, 0.5) 34%, transparent 66%);
+}
+.bloom[data-bloom='ember'] {
+  top: 30%; left: -12%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle at 50% 50%, var(--mesh-ember) 0%, rgba(176, 69, 32, 0.42) 34%, transparent 66%);
+}
+.bloom[data-bloom='amber'] {
+  top: 40%; left: 26%;
+  width: 64vw; height: 20vw;
+  background: radial-gradient(ellipse at 50% 50%, var(--mesh-amber) 0%, rgba(201, 150, 47, 0.3) 34%, transparent 68%);
+  opacity: 0.85;
+}
+.bloom[data-bloom='haze'] {
+  top: 2%; right: 6%;
+  width: 38vw; height: 38vw;
+  background: radial-gradient(circle at 50% 50%, var(--mesh-haze) 0%, rgba(247, 246, 244, 0.14) 32%, transparent 62%);
+  opacity: 0.62;
+}
+
+/* ---- Minor line pattern: a fine grid, one long arc, one vertical rule ---- */
+.lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--line-faint) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line-faint) 1px, transparent 1px);
+  background-size: 84px 84px;
+  /* Fades out before the wordmark so the grid never crosses the letterforms. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 82%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 82%);
+}
+
+.arc {
+  position: absolute;
+  top: -34vw;
+  left: 50%;
+  width: 132vw;
+  height: 132vw;
+  transform: translateX(-50%);
+  color: var(--line-arc);
+}
+.arcRule {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 62%;
+  background: linear-gradient(to bottom, var(--line-arc), transparent);
+}
+
+/* Bottom scrim. Without this the wordmark would sit on mid-tone colour and
+   lose its contrast against the page below. */
 .scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, var(--bg-base) 2%, rgba(13, 14, 16, 0.15) 52%, rgba(13, 14, 16, 0.6) 100%),
-    linear-gradient(to right, rgba(13, 14, 16, 0.55), transparent 60%);
+    linear-gradient(to top, var(--bg-base) 4%, rgba(13, 13, 13, 0.82) 22%, rgba(13, 13, 13, 0.1) 52%, transparent 100%),
+    radial-gradient(ellipse 58% 42% at 14% 26%, rgba(13, 13, 13, 0.62), transparent 72%);
 }
 
+/* ------------------------------------------------------------------ layout */
 .inner {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-rows: 1fr auto;
   width: 100%;
-  padding-block: calc(var(--sp-10) + var(--sp-2)) var(--sp-5);
+  padding-top: calc(var(--sp-10) + var(--sp-4));
+  padding-bottom: clamp(1rem, 2.2vw, 2.25rem);
 }
 
-/* ---- Standing statement ---- */
-.middle { display: flex; align-items: center; padding-block: var(--sp-7); }
+/* ---- Standing statement, upper left ---- */
+.top { align-self: start; display: grid; gap: var(--sp-5); }
+
 .statement {
   position: relative;
-  max-width: 26ch;
-  margin-left: clamp(0rem, 12vw, 11rem);
+  max-width: 22ch;
   padding-left: var(--sp-6);
-  font-size: var(--fs-body-lg);
+  font-size: clamp(1.35rem, 1rem + 1.5vw, 2.35rem);
   font-weight: var(--fw-medium);
-  line-height: 1.45;
+  line-height: 1.32;
   letter-spacing: var(--ls-heading);
   color: var(--text-primary);
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 .glyph {
   position: absolute;
   left: 0;
-  top: 0.45em;
+  top: 0.5em;
   width: 12px;
   height: 12px;
   background:
@@ -58,46 +144,41 @@
     linear-gradient(var(--accent) 0 0) 7px 0 / 5px 5px no-repeat;
   opacity: 0.9;
 }
-@media (max-width: 760px) { .statement { margin-left: 0; } }
-
-/* ---- Oversized wordmark ---- */
-.bottom { display: grid; gap: var(--sp-5); }
-.wordmark {
-  visibility: hidden;
-  /* Sized to run edge to edge; the clamp floor keeps it sane on phones. */
-  font-size: clamp(2.75rem, 14.6vw, 16rem);
-  font-weight: var(--fw-black);
-  line-height: 0.86;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* ---- Footer row ---- */
-.footer {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: var(--sp-5) var(--sp-6);
-  align-items: end;
-  padding-top: var(--sp-4);
-  border-top: 1px solid var(--border-subtle);
-}
-@media (max-width: 860px) { .footer { grid-template-columns: 1fr; } }
 
 .sub {
-  max-width: 42ch;
+  max-width: 46ch;
+  margin-left: var(--sp-6);
   font-size: var(--fs-body);
+  line-height: var(--lh-body);
   color: var(--text-secondary);
-  line-height: 1.5;
+  text-wrap: pretty;
 }
 
-.tagRow {
+/* ---- Bottom: meta row above an edge-to-edge wordmark ---- */
+/* minmax(0, 1fr) matters: the wordmark is white-space: nowrap, so an auto
+   track would size the column to the text instead of the viewport, and the
+   fit measurement below would read a width that does not exist. */
+.bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.meta {
   display: flex;
   align-items: center;
   gap: var(--sp-6);
   min-width: 0;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-subtle);
 }
-.tags { flex: 1; min-width: 0; -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent); mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent); }
+
+.tags {
+  flex: 1;
+  min-width: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent);
+}
 
 .cue {
   display: inline-flex;
@@ -125,4 +206,32 @@
   width: 4px; height: 4px;
   border-radius: 50%;
   background: var(--accent);
+}
+
+/* The wordmark sits outside .shell so it can run nearly edge to edge, with
+   only a hairline gutter, and its descender-free baseline hugs the viewport
+   floor. */
+.wordmark {
+  visibility: hidden;
+  padding-inline: clamp(0.75rem, 1.6vw, 1.5rem);
+  font-size: clamp(2.6rem, 16.2vw, 17.5rem);
+  font-weight: var(--fw-black);
+  line-height: 0.78;
+  letter-spacing: -0.055em;
+  text-transform: lowercase;
+  /* Room for a descender. The split-line mask pulls itself back with a
+     negative margin, so without this the tail of a 'y' falls off-screen. */
+  padding-bottom: 0.1em;
+  color: var(--text-primary);
+  white-space: nowrap;
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  /* An 84px cell is a third of a phone screen — far too loud to stay "minor". */
+  .lines { background-size: 48px 48px; }
+  .statement { max-width: none; }
+  .sub { margin-left: var(--sp-6); }
+  .meta { flex-wrap: wrap; gap: var(--sp-4); }
+  .tags { flex-basis: 100%; }
 }

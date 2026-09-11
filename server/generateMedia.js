@@ -137,46 +137,6 @@ function uiShot(slug, index, accent, caption) {
   return svg(w, h, body);
 }
 
-/* Full-bleed hero backdrop. A stand-in for the photograph that will replace
-   it — same filename, drop a .jpg in and update the path in about.js. */
-function heroBackdrop() {
-  const r = rng('hero');
-  const w = 2400; const h = 1400;
-  let body = `
-  <defs>
-    <radialGradient id="hg" cx="0.62" cy="0.34" r="0.78">
-      <stop offset="0" stop-color="#3a3a3a" stop-opacity="1"/>
-      <stop offset="0.45" stop-color="#1c1c1c" stop-opacity="1"/>
-      <stop offset="1" stop-color="${BG}" stop-opacity="1"/>
-    </radialGradient>
-    <radialGradient id="hg2" cx="0.24" cy="0.78" r="0.6">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.12"/>
-      <stop offset="1" stop-color="#d8f24e" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="hv" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="${BG}" stop-opacity="0.4"/>
-      <stop offset="0.45" stop-color="${BG}" stop-opacity="0"/>
-      <stop offset="1" stop-color="${BG}" stop-opacity="0.92"/>
-    </linearGradient>
-  </defs>
-  <rect width="${w}" height="${h}" fill="url(#hg)"/>
-  <rect width="${w}" height="${h}" fill="url(#hg2)"/>`;
-
-  /* A soft interference field — reads as depth behind the wordmark without
-     competing with it. */
-  for (let i = 0; i < 42; i += 1) {
-    const cy = 120 + r() * (h - 240);
-    const amp = 30 + r() * 150;
-    let d = `M -50 ${cy}`;
-    for (let x = 0; x <= w + 100; x += 120) {
-      d += ` Q ${x + 60} ${cy + (r() - 0.5) * amp} ${x + 120} ${cy}`;
-    }
-    body += `<path d="${d}" fill="none" stroke="#ffffff" stroke-opacity="${0.04 + r() * 0.07}" stroke-width="${0.6 + r() * 1.4}"/>`;
-  }
-  body += `<rect width="${w}" height="${h}" fill="url(#hv)"/>`;
-  return svg(w, h, body);
-}
-
 /* Design-shot imagery — bolder and more graphic than the case-study covers,
    because this section is about visual craft rather than product screens. */
 function shotImage(slug, accent) {
@@ -339,7 +299,6 @@ const favicon = () => svg(64, 64,
 
 export function generateMedia() {
   fs.mkdirSync(OUT, { recursive: true });
-  fs.writeFileSync(path.join(OUT, 'hero-backdrop.svg'), heroBackdrop());
   /* Capability stills live in media/service and are real artwork now, so only
      draw a placeholder for any row still referencing a generated .svg. */
   about.capabilities.forEach((cap) => {

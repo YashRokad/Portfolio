@@ -35,7 +35,6 @@ export default function Home() {
         wordmark={about?.wordmark ?? about?.name ?? ''}
         statement={about?.heroHeadline ?? ''}
         sub={about?.heroSub ?? ''}
-        image={about?.heroImage ?? ''}
         tags={(about?.capabilities ?? []).map((c) => c.title)}
         play={Boolean(about)}
       />
