@@ -100,8 +100,18 @@
   padding-bottom: clamp(1rem, 2.2vw, 2.25rem);
 }
 
-/* ---- Standing statement, upper left ---- */
-.top { align-self: start; display: grid; gap: var(--sp-5); }
+/* ---- Standing statement, upper left ----
+   Indented 80px past the page gutter, so the statement sits inboard of the
+   wordmark rather than sharing its edge. Written as a calc against --gutter
+   because .top also carries .bleed, whose padding-inline this replaces on the
+   left only. Dropped on phones, where 80px on top of the gutter would take a
+   quarter of the screen. */
+.top {
+  align-self: start;
+  display: grid;
+  gap: var(--sp-5);
+  padding-left: calc(var(--gutter) + 5rem);
+}
 
 .statement {
   position: relative;
@@ -182,6 +192,7 @@
 }
 
 @media (max-width: 760px) {
+  .top { padding-left: var(--gutter); }
   .statement { max-width: none; }
   .sub { margin-left: var(--sp-6); }
 }
