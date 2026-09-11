@@ -53,7 +53,7 @@ export default function Home() {
       <Capabilities
         items={about?.capabilities ?? []}
         eyebrow="What I do"
-        title="Six things, and what you get from each."
+        title="Five things, and what you get from each."
       />
 
       {/* ---- Skills marquee ---- */}
@@ -80,7 +80,7 @@ export default function Home() {
       {/* ---- Proof strip ---- */}
       <section ref={statsScope} className={`section ${s.proof}`}>
         <div className="shell">
-          <p className="eyebrow" data-reveal>By the numbers</p>
+          <SectionHeading eyebrow="By the numbers" title="Outcomes I can point at." tight />
           <div className={s.statGrid}>
             {(about?.stats ?? []).map((stat) => (
               <div key={stat.label} data-reveal>
@@ -109,7 +109,7 @@ export default function Home() {
               <img src={about?.portrait ?? ''} alt={`${about?.name ?? 'Designer'}, portrait`} loading="lazy" />
             </figure>
             <div className={s.teaserCopy}>
-              <p className="eyebrow" data-reveal>About</p>
+              <SectionHeading eyebrow="About" title={about?.aboutHeadline ?? ''} tight />
               <p className={`bodyLg ${s.teaserLead}`} data-reveal>{about?.introStatement}</p>
               <p className={s.teaserNote} data-reveal>{about?.personalNote}</p>
               <div data-reveal>

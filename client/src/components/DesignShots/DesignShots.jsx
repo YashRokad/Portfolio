@@ -116,7 +116,7 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
         <div className={`shell ${s.inner}`}>
           <header className={s.head}>
             <p className="eyebrow">{eyebrow}</p>
-            {title && <p className={s.title}>{title}</p>}
+            {title && <h2 className={`h3 ${s.title}`}>{title}</h2>}
           </header>
 
           <div className={s.columns}>

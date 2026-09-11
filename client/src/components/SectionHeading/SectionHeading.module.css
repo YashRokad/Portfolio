@@ -1,5 +1,32 @@
-.root { display: grid; gap: var(--sp-5); max-width: 46rem; }
+/* One heading treatment for every section on the site: a ruled eyebrow, a
+   large white headline, and optional supporting copy. The headline is the
+   thing that has to carry — a section whose only label is a grey eyebrow
+   reads as a caption, not as a chapter. */
+.root {
+  display: grid;
+  gap: var(--sp-4);
+  max-width: 52rem;
+  margin-bottom: var(--stack-gap);
+}
 .root[data-align='center'] { justify-items: center; text-align: center; margin-inline: auto; }
-.title { visibility: hidden; max-width: 20ch; }
+
+.title {
+  visibility: hidden;
+  max-width: 18ch;
+  color: var(--text-primary);
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
+}
 .root[data-align='center'] .title { max-width: 24ch; }
-.lead { font-size: var(--fs-body-lg); line-height: 1.6; }
+
+.lead {
+  max-width: 52ch;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+/* A section that only needs a label and a headline should not also inherit
+   the bottom margin meant to clear a lead paragraph. */
+.root[data-tight] { margin-bottom: clamp(2rem, 4vw, 3.25rem); }

@@ -8,17 +8,29 @@
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding-block: var(--sp-6);
+  /* Top padding clears the fixed header — the head sits at the top of a
+     centred block, so without it the eyebrow lands under the wordmark. */
+  padding-block: clamp(4.5rem, 9vh, 6.5rem) var(--sp-7);
 }
 
 .inner {
   display: grid;
-  gap: var(--sp-6);
+  gap: clamp(1.75rem, 3.5vw, 3rem);
   width: 100%;
 }
 
-.head { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); align-items: baseline; }
-.title { color: var(--text-secondary); font-size: var(--fs-caption); max-width: 46ch; }
+/* Stacked, not baseline-inline: the headline has to lead the section, and it
+   cannot do that sitting next to its own eyebrow at caption size. Sized to h3
+   rather than h2, and held to two lines, because this head shares a pinned
+   viewport with the shot. The drop to the shot is the .inner grid gap. */
+.head { display: grid; gap: var(--sp-4); }
+.title {
+  max-width: 40ch;
+  color: var(--text-primary);
+  letter-spacing: var(--ls-heading);
+  line-height: var(--lh-heading);
+  text-wrap: balance;
+}
 
 .columns {
   display: grid;

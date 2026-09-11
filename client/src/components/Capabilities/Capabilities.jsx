@@ -82,7 +82,7 @@ export default function Capabilities({ items = [], eyebrow = 'What I do', title 
       <div className="shell">
         <header className={s.head}>
           <p className="eyebrow">{eyebrow}</p>
-          {title && <p className={s.title}>{title}</p>}
+          {title && <h2 className={`h2 ${s.title}`}>{title}</h2>}
         </header>
 
         <div className={s.body}>

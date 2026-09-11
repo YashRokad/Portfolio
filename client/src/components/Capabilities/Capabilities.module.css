@@ -1,25 +1,29 @@
 .root { border-top: 1px solid var(--border-subtle); }
 
-.head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-3) var(--sp-6);
-  align-items: baseline;
-  margin-bottom: clamp(3rem, 7vw, 6rem);
+/* Stacked heading, and a far shorter drop to the first row: the old 6rem gap
+   left the list floating away from the thing that named it. */
+.head { display: grid; gap: var(--sp-4); margin-bottom: clamp(2rem, 4vw, 3.25rem); }
+.title {
+  max-width: 20ch;
+  color: var(--text-primary);
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
 }
-.title { color: var(--text-secondary); font-size: var(--fs-caption); max-width: 40ch; }
 
 .body { position: relative; }
 
 .list { display: grid; }
 
+/* A 16rem column gap pushed the blurb to the far edge and left a canyon in
+   the middle of every row; the name also needs the larger share, since it is
+   the longer line. */
 .row {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  column-gap: clamp(2rem, 16vw, 16rem);
-  align-items: start;
-  padding-block: clamp(2rem, 4.2vw, 3.4rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  column-gap: clamp(2rem, 6vw, 5rem);
+  align-items: baseline;
+  padding-block: clamp(1.75rem, 3.2vw, 2.6rem);
 }
 
 .rule {
@@ -61,8 +65,8 @@
 .detail { display: grid; gap: var(--sp-3); }
 .blurb {
   color: var(--text-secondary);
-  max-width: 48ch;
-  line-height: 1.5;
+  max-width: 46ch;
+  line-height: var(--lh-body);
   transition: color var(--dur-micro) linear;
 }
 .row[data-active] .blurb { color: var(--text-primary); }
