@@ -4,6 +4,335 @@
  * See the content-swap guide in README.md.
  */
 export const projects = [
+  /* Reverie Moments — a UX research and design-intelligence engagement rather
+     than a build. Every line below traces to the client's Scope of Work or to
+     a Phase 2 finding; the engagement ran a zero-assumptions policy, so
+     anything the SOW does not answer is marked as unanswered rather than
+     filled in. */
+  {
+    slug: 'reverie-moments',
+    title: 'Reverie Moments',
+    tagline: 'Twelve contradictions found in a scope of work, before a line of it was built.',
+    summary:
+      'A discovery audit of the scope of work for a group-and-crew travel operations platform, and the role research the document was missing.',
+    industry: 'Travel operations',
+    year: '2025',
+    role: 'UX research and design intelligence',
+    timeline: 'PLACEHOLDER — engagement dates pending. Ran as phases 2 to 5 of a structured discovery session.',
+    team: 'PLACEHOLDER — team pending',
+    tools: ['FigJam'],
+    client: 'Reverie Moments',
+    accent: '#ffffff',
+    artTone: '#cfcecb',
+    cover: '/media/reverie-moments-cover.svg',
+    bands: {
+      about: '/media/reverie-moments-band-about.svg',
+      aboutCaption: 'PLACEHOLDER — replace with the OPSKED concept or a photograph of the paper process it replaces',
+      problem: '/media/reverie-moments-band-problem.svg',
+      problemCaption: 'PLACEHOLDER — replace with the permission-matrix audit artefact',
+      solution: '/media/reverie-moments-band-solution.svg',
+      solutionCaption: 'PLACEHOLDER — replace with the OPS user flow export',
+    },
+    about:
+      'Reverie Moments runs group and crew travel services — programs made of individual services, each assigned to vendors, drivers and Guest Ambassadors, and executed to the minute on the day. Today that entire operation runs on paper and Excel; there is no digital system at all, which the scope of work names directly as the inefficiency the platform exists to remove. I was brought in against the SOW itself, at version 0.1, to audit what it specified before it was built, and to write the role research it was missing. The finding that shaped the engagement: Operations — the role that owns the platform’s two most time-critical dashboards — had no documented journey. Section 1.22, the section reserved for it, was marked work-in-progress, and its only sentence described the Sales team.',
+    metrics: [
+      {
+        value: 12, suffix: '',
+        label: 'Contradictions and gaps documented',
+        note: 'Each one traced to a specific SOW section or Phase 2 finding, with a severity and a proposed resolution.',
+      },
+      {
+        value: 4, suffix: '',
+        label: 'High-severity, all on the Operations path',
+        note: 'They shared a root cause: the OPS-facing sections were left incomplete relative to the equivalent GCSM ones.',
+      },
+      {
+        value: 13, suffix: '',
+        label: 'Findings traced to a clause',
+        note: 'Gap and friction analysis findings A1 through F1, each cited to the section it contradicts.',
+      },
+      {
+        value: 0, suffix: '',
+        label: 'Requirements invented',
+        note: 'Zero-assumptions policy: anything the SOW did not answer was flagged as an open question, never filled in.',
+      },
+    ],
+    research: {
+      intro:
+        'No interviews were available and no external research was permitted, so the method had to work entirely from the document and from what the client confirmed about current state. That constraint turned out to be the useful one: reading a specification against itself, clause by clause, surfaces the contradictions that only appear when two sections are asked the same question.',
+      methods: [
+        {
+          name: 'Clause-by-clause read',
+          detail: 'Sections 1.9, 1.13, 1.19, 1.22, 1.26, 1.27, 1.30 and 1.32, read for what each one claims a role can do.',
+        },
+        {
+          name: 'Permission-matrix reconciliation',
+          detail: 'Every narrative statement about who does what, checked against the CRUD permission matrix in §1.9.',
+        },
+        {
+          name: 'Cross-section contradiction tracing',
+          detail: 'Where two sections disagreed, both were cited and the disagreement logged as a finding rather than resolved by guess.',
+        },
+        {
+          name: 'Current-state confirmation',
+          detail: 'Client context on the existing process: paper and spreadsheets, no digital system, every handoff manual.',
+        },
+      ],
+      insight:
+        'The role with the most operationally critical, real-time responsibilities was the one the document described least. §1.22, reserved for the Operations user flow, was marked WIP and its only text described Sales — while §1.13 and §1.27 gave OPS exclusive ownership of the Daily OPSKED and the live execution dashboard.',
+      insightAttribution: 'Reverie Moments SOW V.0.1, §1.22 against §1.13 and §1.27',
+    },
+    painPoints: [
+      {
+        label: 'The critical role has no documented journey',
+        detail:
+          'OPS owns publishing the Daily OPSKED and tracking live execution, yet the section meant to document how it works was a placeholder describing a different team. Every OPS stage in this engagement had to be reconstructed from adjacent sections.',
+        evidence: 'SOW §1.22 against §1.13 and §1.27 — Finding A1, high severity',
+      },
+      {
+        label: 'Billing responsibility contradicts billing access',
+        detail:
+          'The Billing Journey narrative states that OPS enters charges, units and client billing details. The §1.9 permission matrix grants OPS no billing access whatsoever — not create, read, update or delete.',
+        evidence: 'SOW §1.9 against the Billing Journey — Finding B1, high severity',
+      },
+      {
+        label: 'A reassignment can silently double-book a vendor',
+        detail:
+          'Vendor availability checking is described in the SOW but explicitly excluded from MVP scope. The moment OPS reassigns a vendor mid-disruption — exactly when it matters — nothing flags the overlap.',
+        evidence: 'Vendor Assignment to Service Cards — Finding C3, high severity',
+      },
+      {
+        label: 'Offline support with no conflict rule',
+        detail:
+          'Offline and local sync is named as a requirement, but no conflict-resolution behaviour is defined. OPS is the role most likely to be working in the field on poor connectivity, which puts the risk on the platform’s own real-time tracking objective.',
+        evidence: 'SOW §1.32 — Finding E1, high severity',
+      },
+    ],
+    competitiveAudit: {
+      matrix: {
+        caption: 'What the narrative promises, against what the §1.9 permission matrix actually grants',
+        dimensionLabel: 'Module',
+        columns: [
+          { name: 'The narrative says' },
+          { name: 'The §1.9 matrix says' },
+          { name: 'Proposed resolution', ours: true },
+        ],
+        rows: [
+          {
+            label: 'Billing — OPS',
+            values: [
+              'OPS enters charges, units and client billing details',
+              'No access at all',
+              'Grant matrix access to match the narrative, or restrict OPS and correct every downstream doc',
+            ],
+          },
+          {
+            label: 'Trouble tickets — Vendor',
+            values: [
+              'Vendors transition ticket status directly',
+              'Vendor has no row in the matrix',
+              'Add Vendor as a first-class role, or document that OPS enters transitions on their behalf',
+            ],
+          },
+          {
+            label: 'Vendor availability',
+            values: [
+              'Availability checking is described',
+              'Excluded from MVP',
+              'Non-blocking overlap warning on date and time collisions',
+            ],
+          },
+          {
+            label: 'Notification triggers',
+            values: [
+              'Ticket status and driver-unavailable alerts described',
+              'Absent from the §1.30 table',
+              'Add explicit rows with sender, receiver and content',
+            ],
+          },
+          {
+            label: 'Manifest templates',
+            values: [
+              'Header marks the module descoped',
+              'Full per-role CRUD still defined beneath it',
+              'Remove the rows, or mark them reserved for a later phase',
+            ],
+          },
+          {
+            label: 'Vendor performance',
+            values: [
+              'Vendor profile shows performance metrics and feedback',
+              'Monitoring and rating are both descoped',
+              'Cut the reference, or scope one minimal performance field',
+            ],
+          },
+          {
+            label: 'Daily Service Dashboard',
+            values: [
+              'OPS publishes, everyone else reads',
+              'OPS full CRUD, GCSM read-only',
+              'Consistent — no change needed',
+            ],
+          },
+        ],
+      },
+      competitors: [],
+      whitespace:
+        'Nobody had written down how Operations actually spends its day. The Sales and Tour Desk journeys were templated from GCSM rather than authored, and the OPS section was empty — so the platform was about to be built around the one role whose workflow nobody had described. That is the gap: not a missing feature, a missing document, and everything downstream inherited it.',
+    },
+    personas: [
+      {
+        name: 'Group & Crew Services Manager',
+        role: 'Program owner and primary client contact',
+        photo: '/media/reverie-moments-persona-1.svg',
+        company: 'Reverie Moments',
+        region: 'Not specified in SOW',
+        tech: 'Not specified in SOW',
+        quote:
+          'My job is to keep every program on schedule and ready to bill — but I only see what’s been published to me, and today none of this is even digital yet.',
+        goals: [
+          'Carry every program from Active through InProgress to Operated, complete enough for Accounting to bill against.',
+          'Hold one accurate source of truth, so client-facing reports match what the team sees internally.',
+          'Coordinate vendors and internal assignments across Sales, Tour Desk and Guest Ambassadors without conflicts.',
+          'Resolve service and program issues before they reach the client relationship.',
+        ],
+        frustrations: [
+          'Day-of visibility is read-only and second-hand: only as good as what OPS publishes, and how promptly.',
+          'None of it is digital yet — the coordination this platform is meant to replace happens on paper and in spreadsheets.',
+          'No safeguard against double-booking a vendor across overlapping services; availability checking is out of MVP scope.',
+          'Vendor has no row in the permission matrix, so there is no rule for what a vendor may do with a ticket assigned to them.',
+        ],
+        note:
+          'A role persona, not a person. The SOW documents responsibilities and permissions, not demographics, so age, education and location are recorded as not specified rather than invented. The quote is synthesised from documented responsibilities.',
+      },
+      {
+        name: 'Operations',
+        role: 'Real-time execution owner — Daily and Live OPSKED',
+        photo: '/media/reverie-moments-persona-2.svg',
+        company: 'Reverie Moments',
+        region: 'Not specified in SOW',
+        tech: 'Not specified in SOW',
+        quote:
+          'I’m the one who has to catch problems while they’re still happening in the field — but my own journey through this platform isn’t written down anywhere yet.',
+        goals: [
+          'Publish a Daily OPSKED accurate enough that every other role can plan their day against it.',
+          'Track live execution and catch delays, flight issues and tickets while they are still happening.',
+          'Reassign vendors, drivers and Guest Ambassadors quickly when a service breaks, without losing the audit trail.',
+          'Resolve or escalate trouble tickets before they reach a guest.',
+        ],
+        frustrations: [
+          'The section meant to document this role’s journey is work-in-progress, and describes the Sales team instead.',
+          'Ticket status-change and driver-unavailable alerts are described in the functional sections but missing from the notification table.',
+          'No availability check exists, so a mid-disruption reassignment can silently collide with an existing commitment.',
+          'Offline support is required but undefined: no conflict rule, on the role most likely to be working without signal.',
+        ],
+        note:
+          'Built entirely from the role definition in §1.13, the permission matrix in §1.9 and the OPSKED and trouble-ticket sections, because the dedicated OPS journey section contains no OPS content. Where this persona bridges two sections, it says so.',
+      },
+    ],
+    journey: {
+      label: 'Operations, from morning review to day-end rollover',
+      stages: [
+        {
+          name: 'Daily review and prep',
+          goal: 'Get oriented on what is scheduled today, before any plan is published.',
+          actions: 'Logs in and reviews the Daily Dashboard for all published past and current-day services.',
+          touchpoints: 'Daily Dashboard',
+          pain: 'Open question: the SOW describes no OPS-specific review step distinct from the dashboard shared with GCSM.',
+          opportunity: 'Give Operations a dedicated day view, separate from the shared dashboard.',
+          emotion: 'Alert, orienting',
+          tone: 'neutral',
+        },
+        {
+          name: 'Draft and publish the OPSKED',
+          goal: 'Produce a schedule the rest of the company can trust once it is published.',
+          actions: 'In draft: assigns vendors, Guest Ambassadors and service times, moves status from scheduled to in progress, then publishes.',
+          touchpoints: 'Daily OPSKED, draft and publish views',
+          pain: 'Billing fields OPS is expected to enter conflict with §1.9, which grants OPS no billing access at all.',
+          opportunity: 'Resolve the billing-permission contradiction before build, and add a lightweight vendor-conflict warning.',
+          emotion: 'Focused, mildly anxious — publishing locks the schedule',
+          tone: 'mid',
+        },
+        {
+          name: 'Live execution monitoring',
+          goal: 'Catch delays, flight issues and status changes as they happen.',
+          actions: 'Monitors Live OPSKED service cards, works status filters and reminder timers, expands cards for detail.',
+          touchpoints: 'Live OPSKED dashboard, service cards, timers',
+          pain: 'No vendor availability check in MVP scope — a reassignment can silently double-book.',
+          opportunity: 'Add a real-time availability check as a flag, not a hard block.',
+          emotion: 'Vigilant, reactive',
+          tone: 'mid',
+        },
+        {
+          name: 'Issue and exception handling',
+          goal: 'Resolve disruptions before they reach the guest or the client.',
+          actions: 'Creates and progresses trouble tickets, tracks flight delays, combines and uncombines linked services, reassigns vendors and drivers.',
+          touchpoints: 'Trouble ticket module, reassignment UI, flight delay indicators',
+          pain: 'Auto-assignment rules are unresolved by the client, and ticket status-change notifications are missing from the consolidated table.',
+          opportunity: 'Finalise the auto-assignment rules, and add ticket-status alerts to the notification spec.',
+          emotion: 'Under pressure, problem-solving',
+          tone: 'low',
+        },
+        {
+          name: 'Guest and vendor coordination',
+          goal: 'Keep vendor, driver and Guest Ambassador assignments conflict-free through the day.',
+          actions: 'Oversees check-in and checkout activity on service cards, confirms vendor task status.',
+          touchpoints: 'Live OPSKED guest check-in data, vendor assignments panel',
+          pain: 'Vendor has no defined permissions row, despite being granted ticket-transition rights in the narrative.',
+          opportunity: 'Define Vendor as a first-class role, or document OPS acting on a vendor’s behalf.',
+          emotion: 'Coordinating, slightly uncertain',
+          tone: 'mid',
+        },
+        {
+          name: 'Day-end closeout and rollover',
+          goal: 'Close the day with nothing silently dropped.',
+          actions: 'Reviews the automatic 23:59 export and confirms which services roll forward to tomorrow.',
+          touchpoints: 'Live OPSKED end-of-day export, next-day carryover',
+          pain: 'Offline and local sync has no documented conflict handling — the risk lands on low-connectivity field work.',
+          opportunity: 'Document offline conflict resolution before mobile access ships.',
+          emotion: 'Relieved but incomplete — unresolved items roll forward',
+          tone: 'neutral',
+        },
+      ],
+    },
+    solutions: [
+      {
+        name: 'Author the Operations journey to the depth the GCSM section already had',
+        resolves: 'The critical role has no documented journey',
+        detail:
+          'A dedicated OPS user flow, mapped from login through day-end rollover, with a node and edge reference table so it could be imported and worked on directly. It also forces the open question into the open: is OPS exactly GCSM permissions plus OPSKED ownership, or broader? That is the client’s answer to give, and it is now a question with a place to be answered rather than an absence.',
+      },
+      {
+        name: 'Reconcile billing responsibility with billing access',
+        resolves: 'Billing responsibility contradicts billing access',
+        detail:
+          'Two sections cannot both be right. Either the matrix grants OPS billing access to match the narrative, or OPS is restricted and the narrative and every downstream document are corrected. Presented as a decision with both costs stated, not a recommendation to accept.',
+      },
+      {
+        name: 'A non-blocking overlap warning instead of a full availability calendar',
+        resolves: 'A reassignment can silently double-book a vendor',
+        detail:
+          'A full availability system was out of scope and would have stayed out. Flagging the same vendor on date- or time-overlapping services is a fraction of the cost, degrades safely, and puts the warning exactly where the mistake happens — at the moment of reassignment, with the person who can still undo it.',
+      },
+      {
+        name: 'Define the conflict policy before offline ships',
+        resolves: 'Offline support with no conflict rule',
+        detail:
+          'Pick a rule — last write wins with an audit flag, or field-level merge — and specify it ahead of implementation. If neither can be settled in time, scope version one to read-only offline, which is honest about what it guarantees rather than silently losing a field edit.',
+      },
+    ],
+    visualDesign: {
+      statement:
+        'PLACEHOLDER — the deliverables here were documents and diagrams rather than screens: a role-persona set, an Operations journey map, a two-figure user flow with an importable node reference, and a severity-ranked problem and solution matrix. Replace this with the argument for how those artefacts were designed to be read and argued with, and swap the gallery below for the real exports.',
+      gallery: [
+        { src: '/media/reverie-moments-ui-1.svg', caption: 'PLACEHOLDER — Operations journey map, six stages' },
+        { src: '/media/reverie-moments-ui-2.svg', caption: 'PLACEHOLDER — main daily cycle, login through day-end' },
+        { src: '/media/reverie-moments-ui-3.svg', caption: 'PLACEHOLDER — issue-handling sub-flow, three branches' },
+        { src: '/media/reverie-moments-ui-4.svg', caption: 'PLACEHOLDER — narrative against the permission matrix' },
+        { src: '/media/reverie-moments-ui-5.svg', caption: 'PLACEHOLDER — problem and solution summary, ranked by severity' },
+      ],
+    },
+  },
   {
     slug: 'ledgerline',
     title: 'Ledgerline',
