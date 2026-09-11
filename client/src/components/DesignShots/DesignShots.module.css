@@ -86,15 +86,6 @@
 }
 .img { width: 100%; height: 100%; object-fit: cover; }
 
-.progressTrack { height: 2px; background: var(--border-subtle); overflow: hidden; }
-.progressBar {
-  display: block;
-  height: 100%;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
 /* ---- Stacked fallback ---- */
 .stack { display: none; }
 

@@ -1,48 +1,94 @@
-.root { display: grid; gap: var(--sp-7); }
+/* Quote on the left, a ruled index of who said it on the right. The index
+   replaces the old circular initial buttons: those read as a widget, and their
+   borders were the one card-like shape left on the page. */
+.root {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: start;
+}
+@media (max-width: 900px) { .root { grid-template-columns: 1fr; } }
 
-.quoteWrap { position: relative; display: grid; gap: var(--sp-5); max-width: 52rem; }
+/* The measure is in rem, not ch: a ch cap here resolves against this
+   wrapper's inherited body size rather than the quote's display size, which
+   squeezed a 40px pull quote into a 270px ribbon. */
+.quoteWrap {
+  position: relative;
+  display: grid;
+  gap: var(--sp-6);
+  max-width: 44rem;
+}
+
+/* Sits in flow above the quote rather than hanging off the page gutter, where
+   it was clipped and invisible. */
 .mark {
-  position: absolute;
-  top: -0.45em;
-  left: -0.55em;
-  font-size: clamp(5rem, 12vw, 9rem);
-  line-height: 1;
+  display: block;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  line-height: 0.6;
+  height: 0.42em;
   font-weight: var(--fw-black);
   color: var(--text-primary);
-  opacity: 0.08;
-  pointer-events: none;
+  opacity: 0.16;
+  user-select: none;
 }
+
 .quote {
-  position: relative;
-  font-size: var(--fs-h3);
+  font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.5rem);
   font-weight: var(--fw-medium);
-  line-height: 1.32;
+  line-height: 1.28;
   letter-spacing: var(--ls-heading);
+  color: var(--text-primary);
   text-wrap: pretty;
 }
-.attr { display: grid; gap: var(--sp-1); }
-.name { font-style: normal; font-weight: var(--fw-semibold); color: var(--text-primary); }
 
-.dots { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
-.dot {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-subtle);
-  display: grid;
-  place-items: center;
-  font-size: var(--fs-caption);
+.attr { display: grid; gap: var(--sp-1); }
+.name {
+  font-style: normal;
+  font-size: var(--fs-body);
   font-weight: var(--fw-semibold);
-  letter-spacing: 0.04em;
-  color: var(--text-tertiary);
-  transition:
-    transform var(--dur-micro) var(--ease-snap),
-    color var(--dur-micro) linear,
-    border-color var(--dur-micro) linear;
-}
-.dot:hover { transform: translateY(-4px) scale(1.06); color: var(--text-primary); }
-.dot[data-active] {
   color: var(--text-primary);
-  border-color: var(--text-primary);
-  transform: scale(1.06);
 }
+.role { font-size: var(--fs-caption); color: var(--text-tertiary); }
+
+/* ---- The index ---- */
+.index {
+  display: grid;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.indexRow {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0 var(--sp-4);
+  align-items: baseline;
+  width: 100%;
+  padding-block: clamp(1rem, 1.8vw, 1.4rem);
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+  color: var(--text-tertiary);
+  transition: color var(--dur-micro) linear;
+}
+
+.indexNum {
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-eyebrow);
+  color: inherit;
+}
+
+.indexName {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-heading);
+  color: inherit;
+}
+
+.indexOrg {
+  grid-column: 2;
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+}
+
+.indexRow:hover { color: var(--text-secondary); }
+.indexRow[data-active] { color: var(--text-primary); }
+.indexRow[data-active] .indexOrg { color: var(--text-secondary); }

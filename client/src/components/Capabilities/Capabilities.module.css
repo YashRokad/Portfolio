@@ -35,7 +35,9 @@
   background: var(--border-subtle);
   transform-origin: left center;
 }
-.row[data-active] .rule { background: var(--cap-accent, var(--accent)); }
+/* A border weight rather than the full accent: the row should register as
+   active, not light up. */
+.row[data-active] .rule { background: var(--border-strong); }
 
 .name {
   display: flex;
@@ -46,11 +48,9 @@
   letter-spacing: -0.025em;
   line-height: 1.05;
   color: var(--text-secondary);
-  transition:
-    color var(--dur-micro) linear,
-    transform var(--dur-standard) var(--ease-editorial);
+  transition: color var(--dur-micro) linear;
 }
-.row[data-active] .name { color: var(--text-primary); transform: translateX(var(--sp-4)); }
+.row[data-active] .name { color: var(--text-primary); }
 
 .index {
   font-size: var(--fs-eyebrow);
@@ -60,7 +60,7 @@
   transform: translateY(-0.15em);
   transition: color var(--dur-micro) linear;
 }
-.row[data-active] .index { color: var(--cap-accent, var(--accent)); }
+.row[data-active] .index { color: var(--text-secondary); }
 
 .detail { display: grid; gap: var(--sp-3); }
 .blurb {

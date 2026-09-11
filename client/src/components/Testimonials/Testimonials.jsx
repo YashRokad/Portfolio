@@ -5,8 +5,9 @@ import { useMotion } from '../../hooks/useMotionPreference';
 import s from './Testimonials.module.css';
 
 /**
- * Avatar-dot driven testimonial swap. Selecting a dot wipes the outgoing
- * quote out by word and brings the incoming one in from below.
+ * Quote on the left, a ruled index of who said it on the right. Selecting a
+ * name wipes the outgoing quote out by word and brings the incoming one in
+ * from below.
  */
 export default function Testimonials({ items = [] }) {
   const [active, setActive] = useState(0);
@@ -44,30 +45,30 @@ export default function Testimonials({ items = [] }) {
   const current = items[active];
 
   return (
-    <div ref={root} className={s.root} style={{ '--t-accent': current.accent }}>
+    <div ref={root} className={s.root}>
       <blockquote className={s.quoteWrap}>
         <span className={s.mark} aria-hidden="true">&ldquo;</span>
         <p ref={quoteRef} className={s.quote} key={current.id}>{current.quote}</p>
         <footer ref={attrRef} className={s.attr}>
           <cite className={s.name}>{current.name}</cite>
-          <span className="meta">{current.role} · {current.org}</span>
+          <span className={s.role}>{current.role} · {current.org}</span>
         </footer>
       </blockquote>
 
-      <div className={s.dots} role="tablist" aria-label="Testimonials">
+      <div className={s.index} role="tablist" aria-label="Testimonials">
         {items.map((item, i) => (
           <button
             key={item.id}
             type="button"
             role="tab"
             aria-selected={i === active}
-            aria-label={`${item.name}, ${item.org}`}
-            className={s.dot}
+            className={s.indexRow}
             data-active={i === active || undefined}
-            style={{ '--dot-accent': item.accent }}
             onClick={() => setActive(i)}
           >
-            <span aria-hidden="true">{item.initials}</span>
+            <span className={s.indexNum} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <span className={s.indexName}>{item.name}</span>
+            <span className={s.indexOrg}>{item.org}</span>
           </button>
         ))}
       </div>

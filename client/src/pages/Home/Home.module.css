@@ -75,22 +75,48 @@
 }
 
 /* ---- Process ---- */
-.processList { margin-top: var(--sp-8); border-top: 1px solid var(--border-subtle); }
+.processList { border-top: 1px solid var(--border-subtle); }
+
+/* The step number carries the row. The title column is wide enough that a
+   five-word step does not break mid-phrase, and the body runs to the end of
+   the measure rather than stopping two thirds across. */
 .processRow {
   display: grid;
-  grid-template-columns: 4rem minmax(8rem, 14rem) minmax(0, 1fr);
-  gap: var(--sp-5);
+  grid-template-columns: clamp(4rem, 7vw, 7rem) minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 0 var(--sp-7);
   align-items: baseline;
-  padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
+  padding-block: clamp(2rem, 4vw, 3.25rem);
   border-bottom: 1px solid var(--border-subtle);
 }
-.processStep { font-size: var(--fs-caption); font-weight: var(--fw-bold); color: var(--accent); }
-.processTitle { letter-spacing: var(--ls-heading); }
-.processBody { color: var(--text-secondary); max-width: 46ch; }
-@media (max-width: 760px) {
-  .processRow { grid-template-columns: 3rem 1fr; }
+
+.processStep {
+  font-size: clamp(2.25rem, 3.6vw, 3.5rem);
+  font-weight: var(--fw-black);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  /* A ghosted numeral: present enough to count by, quiet enough that the step
+     title stays the thing being read. */
+  color: var(--text-primary);
+  opacity: 0.22;
+  font-variant-numeric: tabular-nums;
+}
+
+.processTitle {
+  letter-spacing: var(--ls-heading);
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+
+.processBody {
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+  max-width: 52ch;
+}
+
+@media (max-width: 860px) {
+  .processRow { grid-template-columns: clamp(3rem, 11vw, 4.5rem) minmax(0, 1fr); gap: 0 var(--sp-5); }
   .processTitle { grid-column: 2; }
-  .processBody { grid-column: 2; }
+  .processBody { grid-column: 2; margin-top: var(--sp-3); }
 }
 
 /* ---- Proof ---- */

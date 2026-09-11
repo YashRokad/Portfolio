@@ -30,7 +30,6 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
           const { desktop, reduce } = context.conditions;
           const names = self.selector(`.${s.name}`);
           const slides = self.selector(`.${s.slide}`);
-          const bar = self.selector(`.${s.progressBar}`);
 
           if (!desktop || reduce || reduced) {
             gsap.set(slides, { autoAlpha: 1, clipPath: 'none' });
@@ -93,7 +92,6 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
             onUpdate(selfT) {
               state.index = selfT.progress * last;
               apply();
-              gsap.set(bar, { scaleX: selfT.progress });
             },
             onRefresh() { apply(); },
           });
@@ -140,9 +138,6 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
             </div>
           </div>
 
-          <div className={s.progressTrack} aria-hidden="true">
-            <span className={s.progressBar} />
-          </div>
         </div>
       </div>
 
