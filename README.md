@@ -1,6 +1,6 @@
 # Portfolio — interactive UX case-study site
 
-A hand-built dark-theme portfolio for a senior product designer. React + Vite on the
+A hand-built dark-theme portfolio for a UI/UX Designer. React + Vite on the
 front, a small Express server reading and writing a local JSON file store on the back.
 All content — case studies, about, testimonials — comes from that store, so swapping in
 real projects is a content-only edit.

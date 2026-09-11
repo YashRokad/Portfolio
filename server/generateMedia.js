@@ -343,7 +343,10 @@ export function generateMedia() {
   about.capabilities.forEach((cap) => {
     fs.writeFileSync(path.join(OUT, path.basename(cap.image)), capabilityImage(cap.slug, art(cap)));
   });
+  /* Design shots point at real screenshots now, so only draw a placeholder
+     for any shot still referencing a generated .svg. */
   shots.forEach((shot) => {
+    if (!shot.image.endsWith('.svg')) return;
     fs.writeFileSync(path.join(OUT, path.basename(shot.image)), shotImage(shot.slug, art(shot)));
   });
   projects.forEach((p) => {

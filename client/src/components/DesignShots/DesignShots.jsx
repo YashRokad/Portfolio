@@ -135,13 +135,6 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
               {shots.map((shot) => (
                 <figure key={shot.slug} className={s.slide} style={{ '--shot-accent': shot.accent }}>
                   <img className={s.img} src={shot.image} alt={`${shot.name} — ${shot.subtitle}`} loading="lazy" />
-                  <figcaption className={s.slideMeta}>
-                    <span className={s.year}>{shot.year}</span>
-                    <span className={s.note}>{shot.note}</span>
-                  </figcaption>
-                  <ul className={s.tags}>
-                    {shot.tags.map((tag) => <li key={tag} className={s.tag}>{tag}</li>)}
-                  </ul>
                 </figure>
               ))}
             </div>
@@ -161,9 +154,6 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
             <div className={s.stackCopy}>
               <h3 className={s.nameText}>{shot.name}</h3>
               <p className={s.nameSub}>{shot.subtitle}</p>
-              <ul className={s.tags} data-inline="">
-                {shot.tags.map((tag) => <li key={tag} className={s.tag}>{tag}</li>)}
-              </ul>
             </div>
           </article>
         ))}

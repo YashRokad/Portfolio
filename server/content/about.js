@@ -1,6 +1,6 @@
 export const about = {
   name: 'Yash Rokad',
-  role: 'Senior Product Designer',
+  role: 'UI/UX Designer',
   location: 'Mumbai, working with teams across GMT−8 to GMT+5:30',
   portrait: '/media/portrait.svg',
   /* Full-bleed hero image. Drop a real photograph in at this path — nothing
@@ -77,12 +77,10 @@ export const about = {
     artTone: '#c9c8c5', image: '/media/cap-discovery.svg' },
     { slug: 'service', title: 'Service & Journey Design', body: 'Mapping the whole path, including the parts your product does not own yet.', deliverables: ['Journey maps', 'Service blueprints', 'Moments of truth'], accent: '#ffffff',
     artTone: '#b6b5b2', image: '/media/cap-service.svg' },
-    { slug: 'product', title: 'Product & Interaction Design', body: 'End-to-end flows for dense, high-consequence software.', deliverables: ['Flows', 'High-fidelity UI', 'Prototypes'], accent: '#ffffff',
+    { slug: 'product', title: 'Product Design', body: 'End-to-end flows for dense, high-consequence software.', deliverables: ['Flows', 'High-fidelity UI', 'Prototypes'], accent: '#ffffff',
     artTone: '#a3a29f', image: '/media/cap-product.svg' },
     { slug: 'systems', title: 'Design Systems', body: 'Tokens and components built so eight people can move without asking permission.', deliverables: ['Token set', 'Component library', 'Contribution model'], accent: '#ffffff',
     artTone: '#d6d5d2', image: '/media/cap-systems.svg' },
-    { slug: 'ops', title: 'Design Ops & Enablement', body: 'Research practice and critique rituals that outlast whoever set them up.', deliverables: ['Research ops', 'Critique cadence', 'Handoff standards'], accent: '#ffffff',
-    artTone: '#8f8e8b', image: '/media/cap-ops.svg' },
     { slug: 'vision', title: 'Pre-sales & Vision Work', body: 'Concept work that helps a buyer picture it, without writing cheques delivery cannot cash.', deliverables: ['Vision concepts', 'Pitch narrative', 'Feasibility framing'], accent: '#ffffff',
     artTone: '#bfbebb', image: '/media/cap-vision.svg' },
   ],

@@ -1,58 +1,44 @@
 [
   {
-    "slug": "halvard-grid",
-    "name": "HALVARD GRID",
-    "subtitle": "A design system that survived four teams",
-    "tags": [
-      "System",
-      "Tokens"
-    ],
-    "year": "2024",
-    "note": "240 components, one contribution model, and a token layer nobody has had to fork.",
+    "slug": "geosentinel",
+    "name": "GeoSentinel",
+    "subtitle": "Smart monitoring for connected spaces and real-time alerts.",
     "accent": "#ffffff",
-    "artTone": "#c9c8c5",
-    "image": "/media/shot-halvard-grid.svg"
+    "image": "/media/Design Shots/geosentinel.jpg"
   },
   {
-    "slug": "merrowfield-mark",
-    "name": "MERROWFIELD",
-    "subtitle": "Identity for an insurer that stopped shouting",
-    "tags": [
-      "Brand",
-      "Print"
-    ],
-    "year": "2023",
-    "note": "A claims-first identity built around plain language and a lot of white space.",
+    "slug": "smartjourno",
+    "name": "SmartJourno",
+    "subtitle": "A smarter way to plan, organize, and experience every trip.",
     "accent": "#ffffff",
-    "artTone": "#b6b5b2",
-    "image": "/media/shot-merrowfield-mark.svg"
+    "image": "/media/Design Shots/smartjourno.jpg"
   },
   {
-    "slug": "vantera-signal",
-    "name": "VANTERA SIGNAL",
-    "subtitle": "Wayfinding read at twenty metres",
-    "tags": [
-      "Environmental",
-      "Print"
-    ],
-    "year": "2023",
-    "note": "Floor markings, andon boards and shift cards drawn to one legibility rule.",
+    "slug": "everleaf",
+    "name": "Everleaf",
+    "subtitle": "A simple mobile experience for effortless plant care.",
     "accent": "#ffffff",
-    "artTone": "#a3a29f",
-    "image": "/media/shot-vantera-signal.svg"
+    "image": "/media/Design Shots/everleaf.jpg"
   },
   {
-    "slug": "northbay-atlas",
-    "name": "NORTHBAY ATLAS",
-    "subtitle": "A data language for eleven sites",
-    "tags": [
-      "Data",
-      "Motion"
-    ],
-    "year": "2025",
-    "note": "Chart grammar, colour rules and motion specs so every site reads the same numbers the same way.",
+    "slug": "stanford-housing",
+    "name": "Stanford Housing",
+    "subtitle": "A refined real-estate experience for discovering the right home.",
     "accent": "#ffffff",
-    "artTone": "#d6d5d2",
-    "image": "/media/shot-northbay-atlas.svg"
+    "image": "/media/Design Shots/stanford-housing.jpg"
+  },
+  {
+    "slug": "zooland",
+    "name": "Zooland",
+    "subtitle": "An immersive web experience built to bring wildlife closer.",
+    "accent": "#ffffff",
+    "image": "/media/Design Shots/zooland.jpg"
+  },
+  {
+    "slug": "doctor-ui",
+    "name": "Doctor UI App",
+    "subtitle": "A seamless healthcare experience for finding, booking, and connecting with doctors.",
+    "accent": "#ffffff",
+    "image": "/media/Design Shots/doctor-ui.jpg"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "name": "Yash Rokad",
-  "role": "Senior Product Designer",
+  "role": "UIUX Designer",
   "location": "Mumbai, working with teams across GMT−8 to GMT+5:30",
   "portrait": "/media/portrait.svg",
   "heroImage": "/media/hero-backdrop.svg",
@@ -148,7 +148,7 @@
     },
     {
       "slug": "product",
-      "title": "Product & Interaction Design",
+      "title": "Product Design",
       "body": "End-to-end flows for dense, high-consequence software.",
       "deliverables": [
         "Flows",
@@ -171,19 +171,6 @@
       "accent": "#ffffff",
       "artTone": "#d6d5d2",
       "image": "/media/cap-systems.svg"
-    },
-    {
-      "slug": "ops",
-      "title": "Design Ops & Enablement",
-      "body": "Research practice and critique rituals that outlast whoever set them up.",
-      "deliverables": [
-        "Research ops",
-        "Critique cadence",
-        "Handoff standards"
-      ],
-      "accent": "#ffffff",
-      "artTone": "#8f8e8b",
-      "image": "/media/cap-ops.svg"
     },
     {
       "slug": "vision",
