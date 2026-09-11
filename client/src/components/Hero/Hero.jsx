@@ -2,7 +2,6 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap, ScrollTrigger, DUR, EASE, STAGGER } from '../../animations/gsapConfig';
 import { splitText } from '../../animations/splitText';
 import { useMotion } from '../../hooks/useMotionPreference';
-import { scrollToEl } from '../../hooks/useSmoothScroll';
 import Marquee from '../Marquee/Marquee';
 import s from './Hero.module.css';
 
@@ -13,7 +12,6 @@ const BLOOMS = [
   { key: 'green', x: 5, y: -4, scale: 1.12, time: 19 },
   { key: 'magenta', x: -6, y: 5, scale: 1.08, time: 23 },
   { key: 'ember', x: 7, y: 6, scale: 1.15, time: 27 },
-  { key: 'amber', x: -8, y: -5, scale: 1.2, time: 31 },
   { key: 'haze', x: 4, y: 7, scale: 1.1, time: 37 },
 ];
 
@@ -33,8 +31,7 @@ const MEASURE_AT = 200;
  * it.
  */
 export default function Hero({
-  wordmark = '', statement, sub, tags = [],
-  play = true, scrollTargetId = 'design-shots',
+  wordmark = '', statement, sub, tags = [], play = true,
 }) {
   const root = useRef(null);
   const markRef = useRef(null);
@@ -168,7 +165,6 @@ export default function Hero({
           ))}
         </div>
 
-        <div className={s.lines} />
         <svg className={s.arc} viewBox="0 0 100 100" fill="none" preserveAspectRatio="xMidYMid meet">
           <circle cx="50" cy="50" r="49.6" stroke="currentColor" strokeWidth="0.08" />
         </svg>
@@ -187,14 +183,6 @@ export default function Hero({
 
         <div className={s.bottom}>
           <div className={`shell ${s.meta}`} data-hero-intro>
-            <button
-              type="button"
-              className={s.cue}
-              onClick={() => scrollToEl(document.getElementById(scrollTargetId))}
-            >
-              <span className={s.cueDot} aria-hidden="true" />
-              Scroll
-            </button>
             <Marquee
               className={s.tags}
               items={tags}

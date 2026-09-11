@@ -53,12 +53,6 @@
   width: 60vw; height: 60vw;
   background: radial-gradient(circle at 50% 50%, var(--mesh-ember) 0%, rgba(176, 69, 32, 0.42) 34%, transparent 66%);
 }
-.bloom[data-bloom='amber'] {
-  top: 40%; left: 26%;
-  width: 64vw; height: 20vw;
-  background: radial-gradient(ellipse at 50% 50%, var(--mesh-amber) 0%, rgba(201, 150, 47, 0.3) 34%, transparent 68%);
-  opacity: 0.85;
-}
 .bloom[data-bloom='haze'] {
   top: 2%; right: 6%;
   width: 38vw; height: 38vw;
@@ -66,19 +60,7 @@
   opacity: 0.62;
 }
 
-/* ---- Minor line pattern: a fine grid, one long arc, one vertical rule ---- */
-.lines {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, var(--line-faint) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--line-faint) 1px, transparent 1px);
-  background-size: 84px 84px;
-  /* Fades out before the wordmark so the grid never crosses the letterforms. */
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 82%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 82%);
-}
-
+/* ---- Minor line work: one long arc and a vertical rule ---- */
 .arc {
   position: absolute;
   top: -34vw;
@@ -180,37 +162,10 @@
   mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent);
 }
 
-.cue {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  flex: 0 0 auto;
-  font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-.cue:hover { color: var(--accent); }
-.cueDot {
-  width: 18px; height: 18px;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  position: relative;
-}
-.cueDot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
 /* The wordmark sits outside .shell so it can run nearly edge to edge, with
-   only a hairline gutter, and its descender-free baseline hugs the viewport
-   floor. */
+   only a hairline gutter, and its baseline hugs the viewport floor. Set in
+   caps, which have no descenders — so it sits lower than the same string in
+   lowercase, and fits to a smaller size for the same width. */
 .wordmark {
   visibility: hidden;
   padding-inline: clamp(0.75rem, 1.6vw, 1.5rem);
@@ -218,20 +173,14 @@
   font-weight: var(--fw-black);
   line-height: 0.78;
   letter-spacing: -0.055em;
-  text-transform: lowercase;
-  /* Room for a descender. The split-line mask pulls itself back with a
-     negative margin, so without this the tail of a 'y' falls off-screen. */
-  padding-bottom: 0.1em;
+  text-transform: uppercase;
+  padding-bottom: 0.04em;
   color: var(--text-primary);
   white-space: nowrap;
   min-width: 0;
 }
 
 @media (max-width: 760px) {
-  /* An 84px cell is a third of a phone screen — far too loud to stay "minor". */
-  .lines { background-size: 48px 48px; }
   .statement { max-width: none; }
   .sub { margin-left: var(--sp-6); }
-  .meta { flex-wrap: wrap; gap: var(--sp-4); }
-  .tags { flex-basis: 100%; }
 }

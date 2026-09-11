@@ -48,15 +48,13 @@
   /* Hero mesh gradient. The only place in the system that carries hue, and it
      is deliberately deep and desaturated so it reads as atmosphere behind the
      wordmark rather than as brand colour. Dial --mesh-strength to taste. */
-  --mesh-strength: 0.9;
+  --mesh-strength: 0.42;
   --mesh-green: #0f4438;
   --mesh-magenta: #8d1f52;
   --mesh-ember: #b04520;
-  --mesh-amber: #c9962f;
   --mesh-haze: rgba(247, 246, 244, 0.5);
 
-  /* Faint ruled pattern sitting over the mesh. */
-  --line-faint: rgba(247, 246, 244, 0.045);
+  /* The single hairline arc drawn over the mesh. */
   --line-arc: rgba(247, 246, 244, 0.1);
 
   /* Semantic state. Kept monochrome except where a form error genuinely has
