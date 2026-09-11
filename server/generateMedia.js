@@ -340,7 +340,10 @@ const favicon = () => svg(64, 64,
 export function generateMedia() {
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'hero-backdrop.svg'), heroBackdrop());
+  /* Capability stills live in media/service and are real artwork now, so only
+     draw a placeholder for any row still referencing a generated .svg. */
   about.capabilities.forEach((cap) => {
+    if (!cap.image.endsWith('.svg')) return;
     fs.writeFileSync(path.join(OUT, path.basename(cap.image)), capabilityImage(cap.slug, art(cap)));
   });
   /* Design shots point at real screenshots now, so only draw a placeholder

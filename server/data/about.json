@@ -1,6 +1,6 @@
 {
   "name": "Yash Rokad",
-  "role": "UIUX Designer",
+  "role": "UI/UX Designer",
   "location": "Mumbai, working with teams across GMT−8 to GMT+5:30",
   "portrait": "/media/portrait.svg",
   "heroImage": "/media/hero-backdrop.svg",
@@ -131,7 +131,7 @@
       ],
       "accent": "#ffffff",
       "artTone": "#c9c8c5",
-      "image": "/media/cap-discovery.svg"
+      "image": "/media/service/discovery.png"
     },
     {
       "slug": "service",
@@ -144,7 +144,7 @@
       ],
       "accent": "#ffffff",
       "artTone": "#b6b5b2",
-      "image": "/media/cap-service.svg"
+      "image": "/media/service/service.png"
     },
     {
       "slug": "product",
@@ -157,7 +157,7 @@
       ],
       "accent": "#ffffff",
       "artTone": "#a3a29f",
-      "image": "/media/cap-product.svg"
+      "image": "/media/service/product.png"
     },
     {
       "slug": "systems",
@@ -170,7 +170,7 @@
       ],
       "accent": "#ffffff",
       "artTone": "#d6d5d2",
-      "image": "/media/cap-systems.svg"
+      "image": "/media/service/systems.png"
     },
     {
       "slug": "vision",
@@ -183,7 +183,7 @@
       ],
       "accent": "#ffffff",
       "artTone": "#bfbebb",
-      "image": "/media/cap-vision.svg"
+      "image": "/media/service/vision.png"
     }
   ],
   "process": [
