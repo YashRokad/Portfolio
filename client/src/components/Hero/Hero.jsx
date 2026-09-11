@@ -20,10 +20,14 @@ const BLOOMS = [
    a resize only has to divide, never re-measure. */
 const MEASURE_AT = 200;
 
+/* Share of the line the wordmark occupies. Below 1 it sits centred with clear
+   space either side, rather than running to the edge. */
+const FIT = 0.8;
+
 /**
  * Home hero: a standing statement upper left over a drifting mesh gradient and
- * a faint ruled pattern, with an oversized wordmark running edge to edge along
- * the bottom of the viewport.
+ * a faint ruled pattern, with an oversized wordmark centred along the bottom of
+ * the viewport.
  *
  * The mesh is pure CSS — soft radial stops rather than blur filters, so a
  * layer this large stays cheap — and the whole backdrop parallaxes as the page
@@ -39,9 +43,10 @@ export default function Hero({
   const ratio = useRef(0);
   const { reduced } = useMotion();
 
-  /* Size the wordmark so it runs exactly edge to edge, the way the reference
-     does. A CSS clamp cannot do this: the right size depends on how wide this
-     particular string renders, not on the viewport alone. */
+  /* Size the wordmark to a fixed share of the line. A CSS clamp cannot do this:
+     the right size depends on how wide this particular string renders, not on
+     the viewport alone, so the clear space either side would drift with the
+     length of the name. */
   useLayoutEffect(() => {
     const el = markRef.current;
     if (!el || !wordmark.trim()) return undefined;
@@ -60,13 +65,21 @@ export default function Hero({
       range.selectNodeContents(el);
       const w = range.getBoundingClientRect().width;
       range.detach?.();
-      if (w > 0) ratio.current = w / MEASURE_AT;
+
+      /* Negative letter-spacing is subtracted from every character's advance,
+         the last one included — so the laid-out width is narrower than the ink
+         actually drawn, by one full step. Add it back, or the fitted size comes
+         out too large and the final glyph is clipped by the section's overflow.
+         The error scales with font size, so it only bites on wide viewports. */
+      const trailing = parseFloat(getComputedStyle(el).letterSpacing) || 0;
+      const ink = w - trailing;
+      if (ink > 0) ratio.current = ink / MEASURE_AT;
     };
 
     const fit = () => {
       if (!ratio.current) return;
       const avail = el.clientWidth - pad();
-      if (avail > 0) el.style.fontSize = `${avail / ratio.current}px`;
+      if (avail > 0) el.style.fontSize = `${(avail * FIT) / ratio.current}px`;
     };
 
     measure();

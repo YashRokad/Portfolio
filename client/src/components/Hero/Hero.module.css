@@ -162,13 +162,14 @@
   mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent);
 }
 
-/* The wordmark sits outside .shell so it can run nearly edge to edge, with
-   only a hairline gutter, and its baseline hugs the viewport floor. Set in
-   caps, which have no descenders — so it sits lower than the same string in
-   lowercase, and fits to a smaller size for the same width. */
+/* The wordmark is fitted to a share of the line and centred, so it carries the
+   bottom of the hero without touching either edge. No side padding: the clear
+   space comes from the fit, which keeps it symmetrical at every width. Set in
+   caps, which have no descenders, so its baseline hugs the viewport floor. */
 .wordmark {
   visibility: hidden;
-  padding-inline: var(--gutter);
+  padding-inline: 0;
+  text-align: center;
   font-size: clamp(2.6rem, 16.2vw, 17.5rem);
   font-weight: var(--fw-black);
   line-height: 0.78;
