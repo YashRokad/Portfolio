@@ -1,7 +1,6 @@
 {
   "name": "Yash Rokad",
   "role": "UI/UX Designer",
-  "location": "Mumbai, working with teams across GMT−8 to GMT+5:30",
   "portrait": "/media/portrait.svg",
   "wordmark": "Yash Rokad",
   "heroHeadline": "I design the software that decides how somebody’s Tuesday goes.",
@@ -251,22 +250,17 @@
       {
         "label": "LinkedIn",
         "handle": "/in/yashrokad",
-        "href": "https://www.linkedin.com/in/yashrokad"
-      },
-      {
-        "label": "Read.cv",
-        "handle": "/yashrokad",
-        "href": "https://read.cv/yashrokad"
+        "href": "https://www.linkedin.com/in/yashrokad/"
       },
       {
         "label": "Dribbble",
         "handle": "@yashrokad",
-        "href": "https://dribbble.com/yashrokad"
+        "href": "https://dribbble.com/Rk4D"
       },
       {
-        "label": "GitHub",
+        "label": "Behance",
         "handle": "@yashrokad",
-        "href": "https://github.com/yashrokad"
+        "href": "https://www.behance.net/yashrkd"
       }
     ]
   },
@@ -291,18 +285,10 @@
   "footer": {
     "newsletterLabel": "Newsletter",
     "newsletterLine": "Notes on designing operational software — sent only when there is something worth reading.",
-    "location": [
-      "Mumbai, Maharashtra",
-      "Working with teams across GMT−8 to GMT+5:30"
-    ],
     "contacts": [
       {
         "label": "For new projects",
-        "value": "hello@yashrokad.design"
-      },
-      {
-        "label": "For everything else",
-        "value": "studio@yashrokad.design"
+        "value": "yashrokad44@gmail.com"
       }
     ],
     "credit": "Built by hand — React, GSAP, Manrope."

@@ -146,7 +146,7 @@
   text-wrap: pretty;
 }
 
-/* ---- Bottom: meta row above an edge-to-edge wordmark ---- */
+/* ---- Bottom: edge-to-edge wordmark ---- */
 /* minmax(0, 1fr) matters: the wordmark is white-space: nowrap, so an auto
    track would size the column to the text instead of the viewport, and the
    fit measurement below would read a width that does not exist. */
@@ -154,22 +154,6 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.5rem, 3vw, 2.75rem);
-}
-
-.meta {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-6);
-  min-width: 0;
-  padding-top: var(--sp-4);
-  border-top: 1px solid var(--border-subtle);
-}
-
-.tags {
-  flex: 1;
-  min-width: 0;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 88%, transparent);
 }
 
 /* The wordmark is fitted to a share of the line and centred, so it carries the

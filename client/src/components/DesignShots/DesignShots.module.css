@@ -1,5 +1,6 @@
 .root {
   position: relative;
+  margin-top: clamp(3rem, 7vw, var(--sp-9));
   background: var(--bg-base);
   border-block: 1px solid var(--border-subtle);
 }

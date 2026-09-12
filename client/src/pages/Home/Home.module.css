@@ -119,15 +119,6 @@
   .processBody { grid-column: 2; margin-top: var(--sp-3); }
 }
 
-/* ---- Proof ---- */
-.proof { border-top: 1px solid var(--border-subtle); }
-.statGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: clamp(2.5rem, 5vw, 4rem);
-  margin-top: var(--sp-8);
-}
-
 /* ---- Voices ---- */
 .voicesBody { margin-top: var(--sp-8); }
 

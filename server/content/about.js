@@ -105,10 +105,10 @@ export const about = {
     email: 'hello@yashrokad.design',
     phoneNote: 'Happy to talk live — send a couple of windows and I will confirm one.',
     socials: [
-      { label: 'LinkedIn', handle: '/in/yashrokad', href: 'https://www.linkedin.com/in/yashrokad' },
-      { label: 'Read.cv', handle: '/yashrokad', href: 'https://read.cv/yashrokad' },
-      { label: 'Dribbble', handle: '@yashrokad', href: 'https://dribbble.com/yashrokad' },
-      { label: 'GitHub', handle: '@yashrokad', href: 'https://github.com/yashrokad' },
+      { label: 'LinkedIn', handle: '/in/yashrokad', href: 'https://www.linkedin.com/in/yashrokad/' },
+      // { label: 'Read.cv', handle: '/yashrokad', href: 'https://read.cv/yashrokad' },
+      { label: 'Dribbble', handle: '@yashrokad', href: 'https://dribbble.com/Rk4D' },
+      { label: 'Behance', handle: '@yashrokad', href: 'https://www.behance.net/yashrkd' },
     ],
   },
   faq: [
@@ -120,12 +120,9 @@ export const about = {
   footer: {
     newsletterLabel: 'Newsletter',
     newsletterLine: 'Notes on designing operational software — sent only when there is something worth reading.',
-    location: ['Mumbai, Maharashtra', 'Working with teams across GMT\u22128 to GMT+5:30'],
     contacts: [
-      { label: 'For new projects', value: 'hello@yashrokad.design' },
-      { label: 'For everything else', value: 'studio@yashrokad.design' },
+      { label: 'For new projects', value: 'yashrokad44@gmail.com' },
     ],
-    credit: 'Built by hand — React, GSAP, Manrope.',
   },
 
   closingCta: {

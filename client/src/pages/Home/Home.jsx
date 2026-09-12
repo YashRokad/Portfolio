@@ -4,7 +4,6 @@ import FeaturedWork from '../../components/FeaturedWork/FeaturedWork';
 import DesignShots from '../../components/DesignShots/DesignShots';
 import Capabilities from '../../components/Capabilities/Capabilities';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import Stat from '../../components/Stat/Stat';
 import Testimonials from '../../components/Testimonials/Testimonials';
 import CtaBanner from '../../components/CtaBanner/CtaBanner';
 import Marquee from '../../components/Marquee/Marquee';
@@ -16,6 +15,10 @@ import { useResource } from '../../data-client/useApi';
 import usePageTitle from '../../hooks/usePageTitle';
 import s from './Home.module.css';
 
+/* Flip to true once real client testimonials are in — the section, its
+   data fetch and styles all stay in place, just unrendered until then. */
+const SHOW_TESTIMONIALS = false;
+
 export default function Home() {
   const { about } = useOutletContext();
   const { data: projects } = useResource('projects', api.getProjects);
@@ -24,7 +27,6 @@ export default function Home() {
   usePageTitle(about ? `${about.name} — ${about.role}` : 'Product Designer');
 
   const processScope = useReveal({ stagger: 0.06, y: 36 });
-  const statsScope = useReveal({ stagger: 0.08, y: 28 });
   const teaserScope = useReveal({ stagger: 0.06, y: 36 });
 
   const featured = (projects ?? [])[0] ?? null;
@@ -35,7 +37,6 @@ export default function Home() {
         wordmark={about?.wordmark ?? about?.name ?? ''}
         statement={about?.heroHeadline ?? ''}
         sub={about?.heroSub ?? ''}
-        tags={(about?.capabilities ?? []).map((c) => c.title)}
         play={Boolean(about)}
       />
 
@@ -77,29 +78,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---- Proof strip ---- */}
-      <section ref={statsScope} className={`section ${s.proof}`}>
-        <div className="shell">
-          <SectionHeading eyebrow="By the numbers" title="Outcomes I can point at." tight />
-          <div className={s.statGrid}>
-            {(about?.stats ?? []).map((stat) => (
-              <div key={stat.label} data-reveal>
-                <Stat {...stat} size="sm" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ---- Testimonials ---- */}
-      <section className={`section ${s.voices}`}>
-        <div className="shell">
-          <SectionHeading eyebrow="In their words" title="What the people who hired me say." />
-          <div className={s.voicesBody}>
-            <Testimonials items={testimonials ?? []} />
+      {SHOW_TESTIMONIALS && (
+        <section className={`section ${s.voices}`}>
+          <div className="shell">
+            <SectionHeading eyebrow="In their words" title="What the people who hired me say." />
+            <div className={s.voicesBody}>
+              <Testimonials items={testimonials ?? []} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ---- About teaser ---- */}
       <section ref={teaserScope} className={`section ${s.teaser}`}>

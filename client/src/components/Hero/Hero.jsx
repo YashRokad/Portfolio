@@ -2,7 +2,6 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap, ScrollTrigger, DUR, EASE, STAGGER } from '../../animations/gsapConfig';
 import { splitText } from '../../animations/splitText';
 import { useMotion } from '../../hooks/useMotionPreference';
-import Marquee from '../Marquee/Marquee';
 import s from './Hero.module.css';
 
 /* Drift for each mesh bloom: how far it wanders and how long one pass takes.
@@ -35,7 +34,7 @@ const FIT = 0.8;
  * it.
  */
 export default function Hero({
-  wordmark = '', statement, sub, tags = [], play = true,
+  wordmark = '', statement, sub, play = true,
 }) {
   const root = useRef(null);
   const markRef = useRef(null);
@@ -195,17 +194,6 @@ export default function Hero({
         </div>
 
         <div className={s.bottom}>
-          <div className={`bleed ${s.meta}`} data-hero-intro>
-            <Marquee
-              className={s.tags}
-              items={tags}
-              speed={24}
-              separator=""
-              variant="pill"
-              ariaLabel="Areas of practice"
-            />
-          </div>
-
           <h1 ref={markRef} className={s.wordmark}>{wordmark}</h1>
         </div>
       </div>

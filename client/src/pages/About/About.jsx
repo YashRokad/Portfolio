@@ -3,9 +3,10 @@ import { useOutletContext } from 'react-router-dom';
 import { gsap, DUR, EASE, revealTrigger } from '../../animations/gsapConfig';
 import { splitText } from '../../animations/splitText';
 import { useMotion } from '../../hooks/useMotionPreference';
+import { useHeadlineReveal } from '../../hooks/useReveal';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import Marquee from '../../components/Marquee/Marquee';
-import CtaBanner from '../../components/CtaBanner/CtaBanner';
+import Capabilities from '../../components/Capabilities/Capabilities';
 import { useReveal } from '../../hooks/useReveal';
 import usePageTitle from '../../hooks/usePageTitle';
 import s from './About.module.css';
@@ -15,55 +16,51 @@ export default function About() {
   const { reduced } = useMotion();
   usePageTitle('About');
 
-  const ledgerRef = useRef(null);
-  const headingRef = useRef(null);
-  const toolsScope = useReveal({ stagger: 0.05, y: 30, deps: [about?.name] });
+  const headlineRef = useRef(null);
+  useHeadlineReveal(headlineRef, { chars: true, delay: 0.1, trigger: false });
 
-  /* The ledger is the whole page's first impression, so it reveals as one
-     considered sequence: heading, then rows, then the portrait unmasking. */
+  const heroRef = useRef(null);
+  const ledgerScope = useReveal({ stagger: 0.1, y: 34, deps: [about?.name] });
+  const philosophyScope = useReveal({ stagger: 0.08, y: 30, deps: [about?.name] });
+
+  /* Portrait unmasks and the lead statement rises in once the headline has
+     had a beat to itself — same grammar as the hero, scoped to this page. */
   useLayoutEffect(() => {
     if (!about) return undefined;
-    let split;
-
     const ctx = gsap.context((self) => {
-      const rows = self.selector(`.${s.row}`);
-      const portrait = self.selector(`.${s.portrait}`);
+      const portrait = self.selector(`.${s.portrait}`)[0];
+      const lead = self.selector(`.${s.lead}`)[0];
+      const tag = self.selector(`.${s.tag}`);
 
       if (reduced) {
-        gsap.set(headingRef.current, { visibility: 'visible' });
-        gsap.fromTo([headingRef.current, ...rows, ...portrait],
-          { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, stagger: 0.05 });
+        gsap.set([portrait, lead, ...tag], { clearProps: 'all' });
         return;
       }
 
-      split = splitText(headingRef.current, { chars: true });
-      gsap.set(headingRef.current, { visibility: 'visible' });
-
-      gsap.timeline({ delay: 0.1 })
-        .fromTo(split.chars,
-          { yPercent: 116, autoAlpha: 0 },
-          { yPercent: 0, autoAlpha: 1, duration: DUR.hero, ease: EASE.editorial, stagger: 0.02 })
+      gsap.timeline({ delay: 0.55 })
         .fromTo(portrait,
-          { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.12 },
-          { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.1, ease: EASE.curtain }, 0.3)
-        .fromTo(rows,
-          { y: 34, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: DUR.slow, ease: EASE.editorial, stagger: 0.1 }, 0.55);
-    }, ledgerRef);
-
-    return () => { ctx.revert(); split?.revert?.(); };
+          { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.1 },
+          { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.15, ease: EASE.curtain })
+        .fromTo(lead,
+          { y: 30, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: DUR.slow, ease: EASE.editorial }, 0.2)
+        .fromTo(tag,
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: DUR.standard, stagger: 0.06 }, 0.4);
+    }, heroRef);
+    return () => ctx.revert();
   }, [about, reduced]);
 
-  /* The career rows share the ledger's grammar but arrive on scroll. */
+  /* Career rail arrives on scroll, numbered like a masthead index. */
   const careerRef = useRef(null);
   useLayoutEffect(() => {
     if (!about?.timeline?.length) return undefined;
     const ctx = gsap.context((self) => {
-      const lines = self.selector(`.${s.careerLine}`);
-      gsap.fromTo(lines,
-        reduced ? { autoAlpha: 0 } : { x: -24, autoAlpha: 0 },
+      const rows = self.selector(`.${s.careerRow}`);
+      gsap.fromTo(rows,
+        reduced ? { autoAlpha: 0 } : { y: 28, autoAlpha: 0 },
         {
-          x: 0, autoAlpha: 1,
+          y: 0, autoAlpha: 1,
           duration: reduced ? 0.4 : DUR.standard,
           ease: EASE.editorial,
           stagger: 0.08,
@@ -78,39 +75,39 @@ export default function About() {
 
   return (
     <>
-      {/* ---- The ledger ---- */}
-      <section ref={ledgerRef} className={s.ledger}>
-        <div className={`shell ${s.ledgerInner}`}>
-          <div className={s.ledgerCopy}>
-            <h1 ref={headingRef} className={s.heading}>About me</h1>
+      {/* ---- Masthead hero: oversized headline, portrait breaking the grid ---- */}
+      <section ref={heroRef} className={s.hero}>
+        <div className={`shell ${s.heroShell}`}>
+          <p className={`eyebrow ${s.eyebrow}`}>About</p>
+          <h1 ref={headlineRef} className={s.headline}>
+            {about?.aboutHeadline ?? 'About me'}
+          </h1>
 
-            <dl className={s.rows}>
-              {(about?.ledger ?? []).map((entry) => (
-                <div key={entry.label} className={s.row}>
-                  <dt className={s.label}>{entry.label}</dt>
-                  <dd className={s.value}>{entry.body}</dd>
-                </div>
+          <div className={s.heroRow}>
+            <p className={s.lead}>{about?.introStatement}</p>
+            <ul className={s.tags} aria-hidden="true">
+              {(about?.capabilities ?? []).slice(0, 4).map((c) => (
+                <li key={c.slug} className={s.tag}>{c.title}</li>
               ))}
-
-              <div ref={careerRef} className={s.row}>
-                <dt className={s.label}>Career</dt>
-                <dd className={s.value}>
-                  <ul className={s.career}>
-                    {(about?.timeline ?? []).map((entry) => (
-                      <li key={entry.period} className={s.careerLine}>
-                        <span className={s.period}>({entry.period})</span>
-                        {entry.role} at {entry.org}
-                      </li>
-                    ))}
-                  </ul>
-                </dd>
-              </div>
-            </dl>
+            </ul>
           </div>
+        </div>
 
-          <figure className={s.portrait}>
-            <img src={about?.portrait ?? ''} alt={`${about?.name ?? 'Designer'}, portrait`} />
-          </figure>
+        <figure className={s.portrait}>
+          <img src={about?.portrait ?? ''} alt={`${about?.name ?? 'Designer'}, portrait`} />
+        </figure>
+      </section>
+
+      {/* ---- Ledger, run as offset magazine columns rather than a data table ---- */}
+      <section ref={ledgerScope} className={s.ledger}>
+        <div className={`shell ${s.ledgerShell}`}>
+          {(about?.ledger ?? []).map((entry, i) => (
+            <article key={entry.label} className={s.entry} data-reveal>
+              <span className={s.entryIndex}>{String(i + 1).padStart(2, '0')}</span>
+              <h2 className={s.entryLabel}>{entry.label}</h2>
+              <p className={s.entryBody}>{entry.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -120,28 +117,48 @@ export default function About() {
         <Marquee items={skills.slice(half)} speed={40} direction={-1} className={`${s.marqueeRow} ${s.marqueeAlt}`} />
       </section>
 
-      {/* ---- Tools ---- */}
-      <section ref={toolsScope} className={`section ${s.tools}`}>
+      {/* ---- Career rail ---- */}
+      <section ref={careerRef} className={`section ${s.career}`}>
         <div className="shell">
-          <SectionHeading eyebrow="Stack" title="What I actually open every day." />
-          <ul className={s.toolList}>
-            {(about?.tools ?? []).map((tool) => (
-              <li key={tool.name} className={s.toolRow} data-reveal>
-                <span className={s.toolName}>{tool.name}</span>
-                <span className={s.toolUse}>{tool.use}</span>
+          <SectionHeading eyebrow="Career" title="Ten years, four rooms." tight />
+          <ol className={s.careerList}>
+            {(about?.timeline ?? []).map((entry) => (
+              <li key={entry.period} className={s.careerRow}>
+                <span className={s.careerPeriod}>{entry.period}</span>
+                <span className={s.careerRole}>
+                  {entry.role} <span className={s.careerOrg}>— {entry.org}</span>
+                </span>
+                <p className={s.careerNote}>{entry.note}</p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
-      <CtaBanner
-        eyebrow="Work"
-        title="The four case studies are where this all shows up."
-        body="Each one has the research, the numbers, and the parts that did not work."
-        to="/work"
-        action="See the work"
+      {/* ---- Services ---- */}
+      <Capabilities
+        items={about?.capabilities ?? []}
+        eyebrow="What I do"
+        title="Five things, and what you get from each."
       />
+
+      {/* ---- Philosophy, as a pull-quote grid ---- */}
+      {about?.philosophy?.length > 0 && (
+        <section ref={philosophyScope} className={`section ${s.philosophy}`}>
+          <div className="shell">
+            <SectionHeading eyebrow="How I think about it" title="Four things I keep coming back to." tight />
+            <ul className={s.philosophyGrid}>
+              {about.philosophy.map((p, i) => (
+                <li key={p.title} className={s.philosophyCard} data-reveal>
+                  <span className={s.philosophyIndex}>{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className={s.philosophyTitle}>{p.title}</h3>
+                  <p className={s.philosophyBody}>{p.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
     </>
   );
 }

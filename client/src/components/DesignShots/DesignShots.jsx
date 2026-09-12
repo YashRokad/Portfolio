@@ -6,11 +6,12 @@ import s from './DesignShots.module.css';
 /**
  * Design shots — visual craft, not case studies.
  *
- * The section pins and scroll drives a *fractional* index rather than a
- * discrete one: the name column slides continuously and each image cross-fades
- * against its neighbour by distance from that index, so there is no step, no
- * snap and no moment where two images fight. Below 860px and under
- * reduced-motion the pin is dropped for a plain stacked list.
+ * The section pins and scroll drives a *fractional* index: the name column
+ * slides continuously for a smooth feel, while the image swaps to whichever
+ * slide that index rounds to. The swap animates as a real crossfade, but it
+ * only fires once per index change (not on every scroll tick), so a slow
+ * scroll can't park the view mid-blend with two images half-visible. Below
+ * 860px and under reduced-motion the pin is dropped for a plain stacked list.
  */
 export default function DesignShots({ shots = [], eyebrow = 'Design shots', title }) {
   const root = useRef(null);
@@ -44,14 +45,35 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
           }
 
           const last = shots.length - 1;
-          const state = { index: 0 };
+          const state = { index: 0, active: -1 };
 
           /* Centre of each row within the list, so the active name can be
              parked on the viewport's centre line no matter how tall the rows
              turn out to be. */
           const rowCentre = (i) => names[i].offsetTop + names[i].offsetHeight / 2;
 
-          const apply = () => {
+          /* Only one slide is ever the active one — no scroll-linked
+             cross-fade blending two images together. The swap itself still
+             animates (a real tween, not a hard cut) but it's triggered once
+             per index change rather than smeared across every scroll tick,
+             so a slow scroll can't park the view mid-blend. */
+          const setActiveSlide = (next, animate) => {
+            if (state.active === next) return;
+            state.active = next;
+            slides.forEach((el, i) => {
+              const isActive = i === next;
+              gsap.killTweensOf(el);
+              gsap.set(el, { zIndex: isActive ? 10 : 0 });
+              const vars = { autoAlpha: isActive ? 1 : 0, scale: isActive ? 1 : 1.06 };
+              if (animate) {
+                gsap.to(el, { ...vars, duration: 0.5, ease: EASE.editorial });
+              } else {
+                gsap.set(el, vars);
+              }
+            });
+          };
+
+          const apply = (animateSlide = true) => {
             const { index } = state;
             const lo = Math.floor(index);
             const hi = Math.min(lo + 1, last);
@@ -69,17 +91,10 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
               });
             });
 
-            slides.forEach((el, i) => {
-              const d = Math.min(Math.abs(i - index), 1);
-              gsap.set(el, {
-                autoAlpha: 1 - d,
-                scale: 1 + d * 0.06,
-                zIndex: Math.round((1 - d) * 10),
-              });
-            });
+            setActiveSlide(Math.round(index), animateSlide);
           };
 
-          apply();
+          apply(false);
 
           const trigger = ScrollTrigger.create({
             trigger: root.current,
@@ -93,7 +108,7 @@ export default function DesignShots({ shots = [], eyebrow = 'Design shots', titl
               state.index = selfT.progress * last;
               apply();
             },
-            onRefresh() { apply(); },
+            onRefresh() { apply(false); },
           });
 
           return () => trigger.kill();

@@ -63,15 +63,6 @@ export default function Footer({ about }) {
             </ul>
           </div>
 
-          <div className={s.col} data-reveal>
-            <p className={s.colLabel}>Location</p>
-            <address className={s.address}>
-              {(footer.location ?? [about?.location]).filter(Boolean).map((line) => (
-                <span key={line}>{line}</span>
-              ))}
-            </address>
-          </div>
-
           <ul className={s.contacts}>
             {(footer.contacts ?? []).map((c) => (
               <li key={c.label} data-reveal>
