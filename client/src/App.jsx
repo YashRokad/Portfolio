@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from './components/Layout/Layout';
 import { TransitionProvider } from './components/Transition/TransitionProvider';
 import Home from './pages/Home/Home';
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      <Analytics />
     </TransitionProvider>
   );
 }
