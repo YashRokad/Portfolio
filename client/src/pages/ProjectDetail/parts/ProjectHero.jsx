@@ -81,11 +81,10 @@ export default function ProjectHero({ project }) {
   if (!project) return null;
 
   const meta = [
+    ['Client', project.client],
     ['Industry', project.industry],
-    ['Scope of work', project.role],
     ['Timeline', project.timeline],
-    ['Team', project.team],
-    ['Tools', project.tools.join(', ')],
+    ['Role', project.role],
   ];
 
   return (

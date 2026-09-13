@@ -1,26 +1,27 @@
 /* ---- Masthead hero ---- */
 .hero {
   position: relative;
-  padding-block: calc(var(--sp-11) + var(--sp-2)) 0;
+  isolation: isolate;
+  padding-block: calc(var(--sp-11) + var(--sp-2)) clamp(3rem, 7vw, 5.5rem);
   overflow: hidden;
 }
 
 .heroShell {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: clamp(2rem, 5vw, 3.5rem);
-  padding-right: clamp(0px, 22vw, 22rem);
 }
-@media (max-width: 900px) { .heroShell { padding-right: 0; } }
 
 .eyebrow { color: var(--text-tertiary); }
 
 .headline {
   visibility: hidden;
-  max-width: 22ch;
-  font-size: clamp(2.8rem, 7.4vw, 6.4rem);
+  max-width: 18ch;
+  font-size: clamp(2.8rem, 8vw, 7rem);
   font-weight: var(--fw-black);
   letter-spacing: var(--ls-display);
-  line-height: 0.96;
+  line-height: 0.94;
   text-transform: uppercase;
 }
 
@@ -51,22 +52,6 @@
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   color: var(--text-tertiary);
-}
-
-/* Portrait breaks out of the shell's max-width and hangs off the right
-   edge — the thing that makes this read as a spread rather than a form. */
-.portrait {
-  width: min(46vw, 34rem);
-  margin-left: auto;
-  margin-top: clamp(-6rem, -9vw, -3rem);
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background: var(--bg-elevated);
-  will-change: clip-path, transform;
-}
-.portrait img { width: 100%; height: 100%; object-fit: cover; }
-@media (max-width: 900px) {
-  .portrait { width: 100%; margin-top: var(--sp-7); }
 }
 
 /* ---- Ledger: staggered magazine columns, not a label/value table ---- */

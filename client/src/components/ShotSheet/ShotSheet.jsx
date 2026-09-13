@@ -56,6 +56,7 @@ export default function ShotSheet({ shot, onClose }) {
     if (!tl) return;
     if (open) {
       returnFocus.current = document.activeElement;
+      panelRef.current.scrollTop = 0;
       tl.play();
     } else {
       tl.reverse();
@@ -90,6 +91,7 @@ export default function ShotSheet({ shot, onClose }) {
       <div
         ref={panelRef}
         className={s.panel}
+        data-lenis-prevent
         role="dialog"
         aria-modal={open ? 'true' : undefined}
         aria-label={shot?.name}
@@ -101,12 +103,12 @@ export default function ShotSheet({ shot, onClose }) {
 
         {shot && (
           <div className={s.body}>
-            <div className={s.frame}>
-              <img className={s.image} src={shot.image} alt="" />
-            </div>
             <div className={s.copy}>
               <h2 className={s.title}>{shot.name}</h2>
               <p className={s.sub}>{shot.subtitle}</p>
+            </div>
+            <div className={s.frame}>
+              <img className={s.image} src={shot.image} alt="" />
             </div>
           </div>
         )}

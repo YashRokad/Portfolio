@@ -7,6 +7,7 @@ import { useHeadlineReveal } from '../../hooks/useReveal';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import Marquee from '../../components/Marquee/Marquee';
 import Capabilities from '../../components/Capabilities/Capabilities';
+import PageAtmosphere from '../../components/PageAtmosphere/PageAtmosphere';
 import { useReveal } from '../../hooks/useReveal';
 import usePageTitle from '../../hooks/usePageTitle';
 import s from './About.module.css';
@@ -23,30 +24,25 @@ export default function About() {
   const ledgerScope = useReveal({ stagger: 0.1, y: 34, deps: [about?.name] });
   const philosophyScope = useReveal({ stagger: 0.08, y: 30, deps: [about?.name] });
 
-  /* Portrait unmasks and the lead statement rises in once the headline has
-     had a beat to itself — same grammar as the hero, scoped to this page. */
+  /* The lead statement rises in once the headline has had a beat to itself. */
   useLayoutEffect(() => {
     if (!about) return undefined;
     const ctx = gsap.context((self) => {
-      const portrait = self.selector(`.${s.portrait}`)[0];
       const lead = self.selector(`.${s.lead}`)[0];
       const tag = self.selector(`.${s.tag}`);
 
       if (reduced) {
-        gsap.set([portrait, lead, ...tag], { clearProps: 'all' });
+        gsap.set([lead, ...tag], { clearProps: 'all' });
         return;
       }
 
       gsap.timeline({ delay: 0.55 })
-        .fromTo(portrait,
-          { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.1 },
-          { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.15, ease: EASE.curtain })
         .fromTo(lead,
           { y: 30, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: DUR.slow, ease: EASE.editorial }, 0.2)
+          { y: 0, autoAlpha: 1, duration: DUR.slow, ease: EASE.editorial })
         .fromTo(tag,
           { autoAlpha: 0 },
-          { autoAlpha: 1, duration: DUR.standard, stagger: 0.06 }, 0.4);
+          { autoAlpha: 1, duration: DUR.standard, stagger: 0.06 }, 0.2);
     }, heroRef);
     return () => ctx.revert();
   }, [about, reduced]);
@@ -75,8 +71,9 @@ export default function About() {
 
   return (
     <>
-      {/* ---- Masthead hero: oversized headline, portrait breaking the grid ---- */}
+      {/* ---- Masthead hero: oversized headline over an ambient colour wash ---- */}
       <section ref={heroRef} className={s.hero}>
+        <PageAtmosphere />
         <div className={`shell ${s.heroShell}`}>
           <p className={`eyebrow ${s.eyebrow}`}>About</p>
           <h1 ref={headlineRef} className={s.headline}>
@@ -92,10 +89,6 @@ export default function About() {
             </ul>
           </div>
         </div>
-
-        <figure className={s.portrait}>
-          <img src={about?.portrait ?? ''} alt={`${about?.name ?? 'Designer'}, portrait`} />
-        </figure>
       </section>
 
       {/* ---- Ledger, run as offset magazine columns rather than a data table ---- */}

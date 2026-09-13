@@ -4,18 +4,15 @@ import { gsap, Flip, DUR, EASE, STAGGER, revealTrigger } from '../../animations/
 import { useMotion } from '../../hooks/useMotionPreference';
 import { stashFlip } from '../../animations/flipBridge';
 import TransitionLink from '../../components/Transition/TransitionLink';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import CtaBanner from '../../components/CtaBanner/CtaBanner';
+import PageAtmosphere from '../../components/PageAtmosphere/PageAtmosphere';
 import ShotSheet from '../../components/ShotSheet/ShotSheet';
 import { api } from '../../data-client/api';
 import { useResource } from '../../data-client/useApi';
 import usePageTitle from '../../hooks/usePageTitle';
+import { useHeadlineReveal } from '../../hooks/useReveal';
 import s from './Work.module.css';
 
-const ALL = 'All';
-/* The full vertical list is fixed so the filter bar reads as a statement of
-   range, not as a summary of whatever happens to be in the JSON today. */
-const INDUSTRIES = [ALL, 'Fintech', 'Insurance', 'Manufacturing', 'Logistics', 'Hospitality', 'SaaS'];
 
 const MODES = [
   { id: 'cases', index: '01', label: 'Case Studies', note: 'Research, decisions, numbers.' },
@@ -26,25 +23,16 @@ export default function Work() {
   const { about } = useOutletContext();
   const { data: projects, loading } = useResource('projects', api.getProjects);
   const { data: shots } = useResource('shots', api.getShots);
-  const [filter, setFilter] = useState(ALL);
   const [mode, setMode] = useState('cases');
   const [activeShot, setActiveShot] = useState(null);
   const gridRef = useRef(null);
   const paneRef = useRef(null);
+  const headlineRef = useRef(null);
   const { reduced, touch } = useMotion();
   usePageTitle('Work');
+  useHeadlineReveal(headlineRef, { chars: false, trigger: false });
 
   const all = useMemo(() => projects ?? [], [projects]);
-  const visible = useMemo(
-    () => (filter === ALL ? all : all.filter((p) => p.industry === filter)),
-    [all, filter]
-  );
-
-  const counts = useMemo(() => {
-    const map = { [ALL]: all.length };
-    all.forEach((p) => { map[p.industry] = (map[p.industry] ?? 0) + 1; });
-    return map;
-  }, [all]);
 
   /* Cards reveal on first paint of a data set. */
   useLayoutEffect(() => {
@@ -89,33 +77,6 @@ export default function Work() {
     return () => ctx.revert();
   }, [shots, mode, reduced]);
 
-  /* Filter changes re-flow the grid with Flip rather than re-rendering into
-     a new position with a jump. */
-  const changeFilter = (next) => {
-    if (next === filter) return;
-    if (reduced || !gridRef.current) { setFilter(next); return; }
-
-    const state = Flip.getState(gridRef.current.querySelectorAll(`.${s.cardWrap}`), {
-      props: 'opacity',
-      simple: true,
-    });
-    setFilter(next);
-    requestAnimationFrame(() => {
-      Flip.from(state, {
-        duration: 0.72,
-        ease: EASE.editorial,
-        scale: true,
-        stagger: 0.045,
-        absolute: true,
-        onEnter: (els) => gsap.fromTo(els,
-          { autoAlpha: 0, scale: 0.86, y: 32 },
-          { autoAlpha: 1, scale: 1, y: 0, duration: DUR.standard, ease: EASE.editorial, stagger: 0.045 }),
-        onLeave: (els) => gsap.to(els,
-          { autoAlpha: 0, scale: 0.9, y: -24, duration: DUR.quick, ease: EASE.snap }),
-      });
-    });
-  };
-
   /* Switching modes is a chapter turn, not a tab click: the outgoing pane
      clips away and the incoming one unmasks from the same edge. */
   const changeMode = (next) => {
@@ -145,14 +106,27 @@ export default function Work() {
 
   return (
     <>
-      <section className={`section ${s.intro}`}>
-        <div className="shell">
-          <SectionHeading
-            as="h1"
-            eyebrow={`Work · ${all.length} case studies, ${(shots ?? []).length} design shots`}
-            title="Operational software for people who cannot log off."
-            lead={about?.introStatement}
-          />
+      <section className={s.intro}>
+        <PageAtmosphere />
+        <div className={`shell ${s.introShell}`}>
+          <p className={`eyebrow ${s.introEyebrow}`}>Work</p>
+          <h1 ref={headlineRef} className={s.introHeadline}>
+            Operational software for people who cannot log off.
+          </h1>
+
+          <div className={s.introRow}>
+            <p className={s.introLead}>{about?.introStatement}</p>
+            <dl className={s.tally}>
+              <div className={s.tallyItem}>
+                <dt className={s.tallyLabel}>Case studies</dt>
+                <dd className={s.tallyValue}>{String(all.length).padStart(2, '0')}</dd>
+              </div>
+              <div className={s.tallyItem}>
+                <dt className={s.tallyLabel}>Design shots</dt>
+                <dd className={s.tallyValue}>{String((shots ?? []).length).padStart(2, '0')}</dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </section>
 
@@ -170,7 +144,6 @@ export default function Work() {
                 data-active={mode === m.id || undefined}
                 onClick={() => changeMode(m.id)}
               >
-                <span className={s.modeIndex}>{m.index}</span>
                 <span className={s.modeLabel}>{m.label}</span>
                 <span className={s.modeNote}>{m.note}</span>
               </button>
@@ -183,28 +156,8 @@ export default function Work() {
         {mode === 'cases' ? (
           <section className={s.gridSection}>
             <div className="shell">
-              <div className={s.filters} role="tablist" aria-label="Filter projects by industry">
-                {INDUSTRIES.map((industry) => {
-                  const count = counts[industry] ?? 0;
-                  return (
-                    <button
-                      key={industry}
-                      type="button"
-                      role="tab"
-                      aria-selected={filter === industry}
-                      className={s.filter}
-                      data-active={filter === industry || undefined}
-                      data-empty={count === 0 || undefined}
-                      onClick={() => changeFilter(industry)}
-                    >
-                      {industry}
-                    </button>
-                  );
-                })}
-              </div>
-
               <div ref={gridRef} className={s.grid}>
-                {visible.map((project) => (
+                {all.map((project) => (
                   <article key={project.slug} className={s.cardWrap} data-flip-id={project.slug}>
                     <TransitionLink
                       to={`/work/${project.slug}`}
@@ -226,12 +179,9 @@ export default function Work() {
                   </article>
                 ))}
 
-                {!loading && visible.length === 0 && (
+                {!loading && all.length === 0 && (
                   <p className={s.empty}>
-                    Nothing in {filter} yet — the case studies from that vertical are still under NDA.
-                    <button type="button" className={s.emptyAction} onClick={() => changeFilter(ALL)}>
-                      Show everything
-                    </button>
+                    No case studies yet.
                   </p>
                 )}
               </div>

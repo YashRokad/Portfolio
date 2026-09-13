@@ -25,6 +25,9 @@ export function useSmoothScroll() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.6,
+      /* Lenis preventDefaults every wheel event, which kills native scrolling
+         inside overlays. Opt those subtrees out entirely. */
+      prevent: (node) => node.closest?.('[data-lenis-prevent]') != null,
     });
     lenisInstance = lenis;
 

@@ -14,7 +14,6 @@ export default function Layout() {
 
   return (
     <div className={s.root} data-route={pathname}>
-      <a className="skipLink" href="#main">Skip to content</a>
       <div className="grain" aria-hidden="true" />
       <Cursor />
       <Header name={about?.name} about={about} />

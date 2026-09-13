@@ -82,8 +82,6 @@ export default function ProjectDetail() {
         <dl className={s.aboutFacts} data-reveal>
           <div><dt>Client</dt><dd>{project.client}</dd></div>
           <div><dt>Year</dt><dd>{project.year}</dd></div>
-          <div><dt>Sector</dt><dd>{project.industry}</dd></div>
-          <div><dt>Role</dt><dd>{project.role}</dd></div>
         </dl>
       </Section>
 

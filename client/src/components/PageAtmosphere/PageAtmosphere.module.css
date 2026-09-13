@@ -1,0 +1,60 @@
+/* A quieter relative of the home hero's mesh. Same colour language, roughly
+   a third of the intensity, so interior pages read as part of the same site
+   without competing with the front door. */
+.root {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mesh {
+  position: absolute;
+  inset: -30%;
+  opacity: var(--atmos-strength, 0.3);
+}
+
+.bloom {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+.bloom[data-bloom='green'] {
+  top: -14%; left: 6%;
+  width: 56vw; height: 56vw;
+  background: radial-gradient(circle at 50% 50%, var(--mesh-green) 0%, rgba(15, 68, 56, 0.46) 36%, transparent 68%);
+}
+.bloom[data-bloom='magenta'] {
+  top: 6%; right: -12%;
+  width: 62vw; height: 62vw;
+  background: radial-gradient(circle at 50% 50%, var(--mesh-magenta) 0%, rgba(141, 31, 82, 0.46) 36%, transparent 68%);
+}
+.bloom[data-bloom='ember'] {
+  top: 44%; right: 18%;
+  width: 54vw; height: 54vw;
+  background: radial-gradient(circle at 50% 50%, var(--mesh-ember) 0%, rgba(176, 69, 32, 0.4) 36%, transparent 68%);
+}
+
+/* A single hairline arc, echoing the home hero's line work at a smaller
+   radius so it reads as a detail rather than a repeat. */
+.arc {
+  position: absolute;
+  top: -52vw;
+  left: 62%;
+  width: 104vw;
+  height: 104vw;
+  transform: translateX(-50%);
+  border: 1px solid var(--line-arc);
+  border-radius: 50%;
+  opacity: 0.55;
+}
+
+/* Pulls the bottom back to solid --bg-base so the section below starts clean. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, transparent 0%, rgba(13, 13, 13, 0.2) 62%, var(--bg-base) 98%),
+    radial-gradient(ellipse 62% 46% at 6% 16%, rgba(13, 13, 13, 0.55), transparent 72%);
+}

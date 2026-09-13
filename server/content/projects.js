@@ -15,12 +15,10 @@ export const projects = [
     tagline: 'Twelve contradictions found in a scope of work, before a line of it was built.',
     summary:
       'A discovery audit of the scope of work for a group-and-crew travel operations platform, and the role research the document was missing.',
-    industry: 'Travel operations',
+    industry: 'Travel Operations',
     year: '2025',
-    role: 'UX research and design intelligence',
-    timeline: 'PLACEHOLDER — engagement dates pending. Ran as phases 2 to 5 of a structured discovery session.',
-    team: 'PLACEHOLDER — team pending',
-    tools: ['FigJam'],
+    role: 'UI/UX Designer and Business Analyst',
+    timeline: '6 Months',
     client: 'Reverie Moments',
     accent: '#ffffff',
     artTone: '#cfcecb',
@@ -34,7 +32,7 @@ export const projects = [
       solutionCaption: 'PLACEHOLDER — replace with the OPS user flow export',
     },
     about:
-      'Reverie Moments runs group and crew travel services — programs made of individual services, each assigned to vendors, drivers and Guest Ambassadors, and executed to the minute on the day. Today that entire operation runs on paper and Excel; there is no digital system at all, which the scope of work names directly as the inefficiency the platform exists to remove. I was brought in against the SOW itself, at version 0.1, to audit what it specified before it was built, and to write the role research it was missing. The finding that shaped the engagement: Operations — the role that owns the platform’s two most time-critical dashboards — had no documented journey. Section 1.22, the section reserved for it, was marked work-in-progress, and its only sentence described the Sales team.',
+      'Reverie Moments is a platform designed to centralize multi-day event logistics, bringing programs, services, guests, vendors, drivers, and internal teams into one role-based system. I joined at SOW v0.1 to audit the requirements before implementation, where I identified gaps in the role journeys - most notably the Operations journey, which was still marked WIP despite its responsibility for daily and live OPSKED, service assignments, and real-time execution.',
     metrics: [
       {
         value: 12, suffix: '',

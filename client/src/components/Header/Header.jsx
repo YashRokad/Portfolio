@@ -4,6 +4,7 @@ import { gsap, DUR, EASE, STAGGER } from '../../animations/gsapConfig';
 import { splitText } from '../../animations/splitText';
 import { useMotion } from '../../hooks/useMotionPreference';
 import TransitionLink from '../Transition/TransitionLink';
+import { useTransition } from '../Transition/TransitionProvider';
 import s from './Header.module.css';
 
 const NAV = [
@@ -19,6 +20,7 @@ export default function Header({ name = 'Yash Rokad', about }) {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
   const { reduced } = useMotion();
+  const { go } = useTransition();
 
   const headerRef = useRef(null);
   const panelRef = useRef(null);
@@ -28,6 +30,11 @@ export default function Header({ name = 'Yash Rokad', about }) {
   /* Set when a close should hand focus back; the toggle is hidden until the
      reverse finishes, so focusing it any earlier silently fails. */
   const returnFocus = useRef(false);
+  /* Set when a menu-link close should navigate once the reverse finishes,
+     rather than mid-animation on a guessed timeout. */
+  const pendingTo = useRef(null);
+  const goRef = useRef(go);
+  goRef.current = go;
 
   /* One timeline, built once. Opening plays it; closing reverses it, so the
      close is the exact inverse rather than a separate animation. */
@@ -49,6 +56,12 @@ export default function Header({ name = 'Yash Rokad', about }) {
         paused: true,
         defaults: { ease: EASE.curtain },
         onReverseComplete() {
+          if (pendingTo.current) {
+            const to = pendingTo.current;
+            pendingTo.current = null;
+            goRef.current(to);
+            return;
+          }
           if (!returnFocus.current) return;
           returnFocus.current = false;
           toggleRef.current?.focus();
@@ -99,10 +112,18 @@ export default function Header({ name = 'Yash Rokad', about }) {
     document.body.style.overflow = open ? 'hidden' : '';
   }, [open]);
 
-  const close = useCallback(() => {
+  const closeMenu = useCallback(() => {
     returnFocus.current = true;
     setOpen(false);
   }, []);
+
+  /* Delay menu link navigation until the close animation actually
+     completes (via onReverseComplete), rather than guessing a timeout. */
+  const handleMenuLink = useCallback((to) => (e) => {
+    e.preventDefault();
+    pendingTo.current = to;
+    closeMenu();
+  }, [closeMenu]);
 
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => () => { document.body.style.overflow = ''; }, []);
@@ -114,7 +135,7 @@ export default function Header({ name = 'Yash Rokad', about }) {
     panel.querySelector(FOCUSABLE)?.focus();
 
     const onKey = (e) => {
-      if (e.key === 'Escape') { close(); return; }
+      if (e.key === 'Escape') { closeMenu(); return; }
       if (e.key !== 'Tab') return;
       const items = [...panel.querySelectorAll(FOCUSABLE)];
       if (!items.length) return;
@@ -126,7 +147,7 @@ export default function Header({ name = 'Yash Rokad', about }) {
 
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open, close]);
+  }, [open, closeMenu]);
 
   const socials = about?.contact?.socials ?? [];
   const email = about?.contact?.email;
@@ -155,7 +176,7 @@ export default function Header({ name = 'Yash Rokad', about }) {
       <div
         ref={scrimRef}
         className={s.scrim}
-        onClick={close}
+        onClick={closeMenu}
         aria-hidden="true"
       />
 
@@ -168,7 +189,7 @@ export default function Header({ name = 'Yash Rokad', about }) {
         role={open ? 'dialog' : undefined}
         inert={open ? undefined : ''}
       >
-        <button type="button" className={s.close} onClick={close}>
+        <button type="button" className={s.close} onClick={closeMenu}>
           <span className={s.closeIcon} aria-hidden="true"><i /><i /></span>
           Close
         </button>
@@ -181,7 +202,7 @@ export default function Header({ name = 'Yash Rokad', about }) {
               className={s.menuLink}
               data-active={isActive(pathname, item.to) || undefined}
               aria-current={isActive(pathname, item.to) ? 'page' : undefined}
-              onClick={close}
+              onClick={handleMenuLink(item.to)}
             >
               {item.label}
             </TransitionLink>
