@@ -1,5 +1,56 @@
 .intro { padding-top: calc(var(--sp-11) + var(--sp-2)); }
-.gridSection { padding-bottom: var(--section-y); }
+.gridSection { padding-block: clamp(3rem, 6vw, 5rem) var(--section-y); }
+
+/* ---- Mode rail: a chapter index rather than a pill switch ---- */
+.modeSection { border-block: 1px solid var(--border-subtle); }
+.modeShell { padding-block: 0; }
+
+.modeRail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 640px) { .modeRail { grid-template-columns: 1fr; } }
+
+.modeItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--sp-4);
+  row-gap: var(--sp-1);
+  align-items: baseline;
+  padding-block: clamp(1.75rem, 4vw, 2.75rem);
+  text-align: left;
+  transition: background var(--dur-micro) linear;
+}
+.modeItem:hover { background: var(--bg-elevated); }
+
+.modeIndex {
+  grid-row: 1 / 3;
+  font-size: var(--fs-caption);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--text-tertiary);
+  transition: color var(--dur-micro) linear;
+}
+.modeLabel {
+  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-heading);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  transition: color var(--dur-standard) var(--ease-editorial), transform var(--dur-standard) var(--ease-editorial);
+  transform-origin: left center;
+}
+.modeNote {
+  font-size: var(--fs-caption);
+  color: var(--text-tertiary);
+  opacity: 0;
+  transition: opacity var(--dur-micro) linear;
+}
+
+.modeItem[data-active] .modeIndex,
+.modeItem[data-active] .modeLabel { color: var(--text-primary); }
+.modeItem[data-active] .modeLabel { transform: scale(1.03); }
+.modeItem[data-active] .modeNote { opacity: 1; }
 
 .filters {
   display: flex;
@@ -31,7 +82,6 @@
   border-bottom-color: var(--text-primary);
 }
 .filter[data-empty] { opacity: 0.45; }
-.filterCount { font-size: var(--fs-eyebrow); font-variant-numeric: tabular-nums; opacity: 0.7; }
 
 .grid {
   position: relative;
@@ -99,3 +149,8 @@
   color: var(--text-primary);
   border-bottom: 1px solid var(--border-strong);
 }
+
+/* Design shots reuse the case-study card/grid exactly — only the frame
+   goes horizontal instead of square, since these are wide screenshots. */
+.frameWide { aspect-ratio: 16 / 10; }
+@media (max-width: 760px) { .frameWide { aspect-ratio: 4 / 3; } }

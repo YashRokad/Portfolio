@@ -1,0 +1,91 @@
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(8, 9, 10, 0.6);
+  --scrim-blur: 0px;
+  backdrop-filter: blur(var(--scrim-blur));
+  -webkit-backdrop-filter: blur(var(--scrim-blur));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 81;
+  height: min(92vh, 100%);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-base);
+  border-top: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  visibility: hidden;
+  pointer-events: none;
+  overflow-y: auto;
+  will-change: transform;
+}
+
+.close {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: var(--sp-4) var(--sp-4) 0 0;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border-radius: 50%;
+  transition: color var(--dur-micro) linear, background var(--dur-micro) linear;
+}
+.close:hover { color: var(--text-primary); background: var(--border-subtle); }
+.closeIcon { position: relative; display: block; width: 16px; height: 16px; }
+.closeIcon i {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+}
+.closeIcon i:first-child { transform: rotate(45deg); }
+.closeIcon i:last-child { transform: rotate(-45deg); }
+
+.body {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  max-width: var(--max-w);
+  width: 100%;
+  margin-inline: auto;
+  padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+}
+.image { width: 100%; height: 100%; object-fit: cover; }
+
+.copy { display: grid; gap: var(--sp-2); max-width: 60ch; }
+.title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-heading);
+  line-height: 1.05;
+}
+.sub {
+  font-size: var(--fs-body-lg);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
