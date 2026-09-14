@@ -449,14 +449,10 @@ export const projects = [
     client: 'APTEN',
     accent: '#ffffff',
     artTone: '#b6b5b2',
-    cover: '/media/apten-cover.svg',
+    cover: '/media/APTEN/IMG 1.png',
     bands: {
-      about: '/media/apten-band-about.svg',
-      aboutCaption: 'PLACEHOLDER — replace with a real platform shot',
-      problem: '/media/apten-band-problem.svg',
-      problemCaption: 'PLACEHOLDER — replace with a research or flow artefact',
-      solution: '/media/apten-band-solution.svg',
-      solutionCaption: 'PLACEHOLDER — replace with the Data Room or RFP flow',
+      about: '/media/APTEN/IMG 2.png',
+      problem: '/media/APTEN/IMG 3.png',
     },
     about:
       'APTEN is a B2B marketplace that connects brands and manufacturers with third-party logistics providers through a structured RFP process. Instead of brands cold-calling warehouses, the platform handles the whole path — profile and volume data intake, algorithmic matching, long list to short list curation, a shared Data Room for evaluation, proposal comparison, and final award and onboarding.',
@@ -533,7 +529,7 @@ export const projects = [
       {
         name: 'Alex William',
         role: 'Operations / Fulfillment Lead',
-        photo: '/media/apten-persona-1.svg',
+        photo: '/media/user-persona/case_study_2-user1.png',
         quote: 'I can’t expect a fulfillment partner to care about my brand as much as I do every single day.',
         goals: [
           'Find a 3PL that genuinely fits their volume and SKU profile without weeks of unstructured comparison.',
@@ -547,9 +543,9 @@ export const projects = [
         ],
       },
       {
-        name: 'Jack Anderson',
+        name: 'Jemmy Anderson',
         role: 'Business Development / Sales Lead',
-        photo: '/media/apten-persona-2.svg',
+        photo: '/media/user-persona/case_study_2-user2.png',
         quote: 'Generic pitches about warehouse locations and carrier relationships won’t win business anymore.',
         goals: [
           'Be matched with brands whose volume genuinely fits operational capacity, instead of chasing poor-fit prospects.',
@@ -646,13 +642,12 @@ export const projects = [
     ],
     visualDesign: {
       statement:
-        'PLACEHOLDER — the visual design rationale for APTEN is still to be written. Replace this with the argument for why this interface language suits a high-consequence procurement tool.',
+        'The visual language was designed to make complex procurement decisions feel clear, structured, and trustworthy. A restrained interface, strong hierarchy, and data-forward layouts help users quickly evaluate providers, compare proposals, track progress, and make high-consequence decisions without unnecessary visual noise.',
       gallery: [
-        { src: '/media/apten-ui-1.svg', caption: 'PLACEHOLDER — replace with a real screen' },
-        { src: '/media/apten-ui-2.svg', caption: 'PLACEHOLDER — replace with a real screen' },
-        { src: '/media/apten-ui-3.svg', caption: 'PLACEHOLDER — replace with a real screen' },
-        { src: '/media/apten-ui-4.svg', caption: 'PLACEHOLDER — replace with a real screen' },
-        { src: '/media/apten-ui-5.svg', caption: 'PLACEHOLDER — replace with a real screen' },
+        { src: '/media/APTEN/design_1.png' },
+        { src: '/media/APTEN/design_2.png' },
+        { src: '/media/APTEN/design_3.png' },
+        { src: '/media/APTEN/design_4.png' },
       ],
     },
   },

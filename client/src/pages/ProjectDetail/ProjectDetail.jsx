@@ -193,8 +193,6 @@ export default function ProjectDetail() {
           </ol>
       </Section>
 
-      <ImageBand src={bands.solution} caption={bands.solutionCaption} accent={accent} />
-
       {/* -------------------------------------------------------- Visual design */}
       <Section id="visual" n={nVisual} label="Visual design" wide scopeRef={visualScope}>
         <p className={s.visualStatement} data-reveal>{project.visualDesign.statement}</p>

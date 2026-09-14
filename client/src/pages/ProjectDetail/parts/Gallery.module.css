@@ -1,35 +1,21 @@
-.root { display: grid; gap: var(--sp-4); }
+.root { display: grid; }
 
-.viewport { overflow: hidden; }
-/* Without the drag layer the same track becomes a snapping scroller. */
-.viewport:not([data-drag]) {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: var(--sp-3);
-}
-
-.track {
-  display: flex;
+/* Two up, so a pair of mockups reads side by side and the rest stack below. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--grid-gap);
-  will-change: transform;
 }
-.viewport[data-drag] .track { width: max-content; }
+@media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
 
-.item {
-  flex: 0 0 clamp(280px, 46vw, 620px);
-  scroll-snap-align: start;
-  will-change: transform;
-}
+.item { min-width: 0; will-change: transform; }
 
-.figure { display: grid; gap: var(--sp-3); }
+.figure { display: grid; }
+/* Full height, not cropped — these are complete mockups, so trimming them to
+   a fixed ratio would cut the design being shown. */
 .img {
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius-sm);
   user-select: none;
-  -webkit-user-drag: none;
 }
-.caption { font-size: var(--fs-caption); color: var(--text-tertiary); }
-.hint { color: var(--text-tertiary); }
