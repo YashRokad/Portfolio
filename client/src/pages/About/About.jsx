@@ -113,7 +113,7 @@ export default function About() {
       {/* ---- Career rail ---- */}
       <section ref={careerRef} className={`section ${s.career}`}>
         <div className="shell">
-          <SectionHeading eyebrow="Career" title="Ten years, four rooms." tight />
+          <SectionHeading eyebrow="Career" title="Four years, one room." tight />
           <ol className={s.careerList}>
             {(about?.timeline ?? []).map((entry) => (
               <li key={entry.period} className={s.careerRow}>

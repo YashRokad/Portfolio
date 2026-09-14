@@ -94,8 +94,7 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   gap: clamp(2.5rem, 5vw, 4rem) var(--sp-7);
 }
-.metricCell { border-top: 1px solid var(--border-strong); }
-.metricCell > * { border-top: none; padding-top: var(--sp-5); }
+.metricCell > * { padding-top: var(--sp-5); }
 
 /* ---------- 04 Research ---------- */
 .researchIntro {
@@ -140,11 +139,10 @@
   margin-bottom: var(--sp-5);
 }
 .insightText {
-  font-size: clamp(1.35rem, 2.9vw, 2.6rem);
-  font-weight: var(--fw-light);
-  line-height: 1.24;
-  letter-spacing: -0.02em;
-  max-width: 30ch;
+  font-size: var(--fs-body-lg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  max-width: 58ch;
   text-wrap: pretty;
 }
 .insightFoot {

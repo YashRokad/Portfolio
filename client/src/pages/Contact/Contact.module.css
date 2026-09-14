@@ -1,8 +1,12 @@
 .hero {
-  padding-block: calc(var(--sp-11) + var(--sp-2)) var(--sp-9);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: calc(var(--sp-11) + var(--sp-2)) var(--sp-6);
   display: grid;
   gap: var(--sp-6);
 }
+.hero > .shell { position: relative; z-index: 1; }
 .eyebrow {
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-semibold);
@@ -16,6 +20,7 @@
 .email {
   visibility: hidden;
   display: inline-block;
+  padding-block: var(--sp-2);
   /* Capped so the address always sits on one line inside the content width,
      however wide the window gets. */
   font-size: clamp(1.6rem, 7.2vw, 6.2rem);
@@ -28,64 +33,28 @@
 
 .actions {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-4) var(--sp-6);
-  padding-bottom: var(--sp-7);
-  border-bottom: 1px solid var(--border-subtle);
 }
-.actionNote { font-size: var(--fs-caption); color: var(--text-tertiary); }
-
-.meta {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--sp-7);
-  align-items: start;
-  padding-top: var(--sp-7);
-}
-@media (max-width: 760px) { .meta { grid-template-columns: 1fr; gap: var(--sp-6); } }
 
 .copy {
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-2);
-  padding: var(--sp-2) 0;
-  border-bottom: 1px solid var(--border-subtle);
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-semibold);
-  color: var(--text-tertiary);
-  transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
-}
-.copy:hover { color: var(--text-primary); border-color: var(--border-strong); }
-.copy[data-copied] { color: var(--text-primary); border-color: var(--text-primary); }
-.copyIcon { display: grid; place-items: center; }
-
-/* ---- Availability ---- */
-.status { display: flex; align-items: flex-start; gap: var(--sp-4); }
-.statusLabel { font-weight: var(--fw-semibold); font-size: var(--fs-body-lg); letter-spacing: var(--ls-heading); }
-.dotWrap { position: relative; display: grid; place-items: center; width: 12px; height: 12px; margin-top: 0.55em; flex: 0 0 auto; }
-.dot, .pulse {
-  position: absolute;
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: var(--state-positive);
-}
-.dotWrap[data-status='busy'] .dot, .dotWrap[data-status='busy'] .pulse { background: var(--state-caution); }
-.pulse { opacity: 0.5; }
-
-.socials { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
-.social {
-  display: inline-block;
-  padding: var(--sp-2) 0;
-  margin-right: var(--sp-6);
-  border-bottom: 1px solid var(--border-subtle);
+  gap: var(--sp-3);
+  height: 44px;
+  padding-inline: var(--sp-5);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   font-size: var(--fs-caption);
   font-weight: var(--fw-medium);
   color: var(--text-secondary);
-  will-change: transform;
-  transition: color var(--dur-micro) linear, border-color var(--dur-micro) linear;
+  transition:
+    color var(--dur-micro) linear,
+    background var(--dur-micro) linear,
+    border-color var(--dur-micro) linear;
 }
-.social:hover { color: var(--text-primary); border-color: var(--text-primary); }
+.copy:hover { color: var(--text-primary); background: var(--bg-elevated); border-color: var(--border-strong); }
+.copy[data-copied] { color: var(--text-primary); border-color: var(--text-primary); }
+.copyIcon { display: grid; place-items: center; }
 
 /* ---- FAQ ---- */
 .faqList { margin-top: var(--sp-6); border-top: 1px solid var(--border-subtle); }

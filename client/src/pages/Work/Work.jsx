@@ -220,7 +220,6 @@ export default function Work() {
       <CtaBanner
         eyebrow="Next"
         title="Want the version of this with your numbers in it?"
-        body={about?.availability?.detail}
         action="Start a conversation"
       />
 

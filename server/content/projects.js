@@ -12,7 +12,7 @@ export const projects = [
   {
     slug: 'reverie-moments',
     title: 'Reverie Moments',
-    tagline: 'Twelve contradictions found in a scope of work, before a line of it was built.',
+    tagline: 'A digital platform built to centralize multi-day event logistics, connecting programs, services, guests, vendors, drivers, and internal teams in one operational system.',
     summary:
       'A discovery audit of the scope of work for a group-and-crew travel operations platform, and the role research the document was missing.',
     industry: 'Travel Operations',
@@ -35,75 +35,65 @@ export const projects = [
       'Reverie Moments is a platform designed to centralize multi-day event logistics, bringing programs, services, guests, vendors, drivers, and internal teams into one role-based system. I joined at SOW v0.1 to audit the requirements before implementation, where I identified gaps in the role journeys - most notably the Operations journey, which was still marked WIP despite its responsibility for daily and live OPSKED, service assignments, and real-time execution.',
     metrics: [
       {
-        value: 12, suffix: '',
-        label: 'Contradictions and gaps documented',
-        note: 'Each one traced to a specific SOW section or Phase 2 finding, with a severity and a proposed resolution.',
+        value: 56, suffix: '%',
+        label: 'Reduced manual effort',
+        note: 'Reduced reliance on paper updates, Excel maintenance and phone-based coordination for day-to-day operations.',
       },
       {
-        value: 4, suffix: '',
-        label: 'High-severity, all on the Operations path',
-        note: 'They shared a root cause: the OPS-facing sections were left incomplete relative to the equivalent GCSM ones.',
+        value: 7, suffix: '+',
+        label: 'Teams connected',
+        note: 'GCSM, Operations, Sales, Accounting, Guest Ambassadors, Drivers and Tour Desk brought into one platform.',
       },
       {
-        value: 13, suffix: '',
-        label: 'Findings traced to a clause',
-        note: 'Gap and friction analysis findings A1 through F1, each cited to the section it contradicts.',
-      },
-      {
-        value: 0, suffix: '',
-        label: 'Requirements invented',
-        note: 'Zero-assumptions policy: anything the SOW did not answer was flagged as an open question, never filled in.',
+        value: 23, suffix: '%',
+        label: 'Less operational workload',
+        note: 'Reduced repetitive effort involved in updating services, assignments, statuses and maintaining operational records.',
       },
     ],
     research: {
       intro:
-        'No interviews were available and no external research was permitted, so the method had to work entirely from the document and from what the client confirmed about current state. That constraint turned out to be the useful one: reading a specification against itself, clause by clause, surfaces the contradictions that only appear when two sections are asked the same question.',
+        'The challenge was not a lack of user input — it was that the existing workflow was largely manual. I worked closely with the client through regular calls to understand how their teams planned programs, assigned vendors and drivers, managed daily operations, handled live changes and maintained records. I mapped those real operational needs against the SOW, especially around the Operations workflow, Daily OPSKED and Live OPSKED, and used the gaps and ambiguities in the documentation to guide the product design. The SOW itself identifies the Operations journey as WIP and defines the goal as replacing fragmented manual processes with a centralized system.',
       methods: [
         {
-          name: 'Clause-by-clause read',
-          detail: 'Sections 1.9, 1.13, 1.19, 1.22, 1.26, 1.27, 1.30 and 1.32, read for what each one claims a role can do.',
+          name: 'Client discovery calls',
+          detail: 'Regular discussions with the client to understand the existing operational process and clarify how work was actually being handled.',
         },
         {
-          name: 'Permission-matrix reconciliation',
-          detail: 'Every narrative statement about who does what, checked against the CRUD permission matrix in §1.9.',
+          name: 'Existing-process mapping',
+          detail: 'Mapped the paper, spreadsheet and manual coordination involved in planning and executing services.',
         },
         {
-          name: 'Cross-section contradiction tracing',
-          detail: 'Where two sections disagreed, both were cited and the disagreement logged as a finding rather than resolved by guess.',
+          name: 'Operations workflow definition',
+          detail: 'Focused the design effort on the operational workflows at the heart of the platform, including Daily OPSKED, Live OPSKED, service updates, assignments and issue handling.',
         },
         {
-          name: 'Current-state confirmation',
-          detail: 'Client context on the existing process: paper and spreadsheets, no digital system, every handoff manual.',
+          name: 'Vendor & driver coordination',
+          detail: 'Identified the operational challenge of managing vendor and driver assignments while keeping service status and changes updated in real time.',
         },
       ],
       insight:
-        'The role with the most operationally critical, real-time responsibilities was the one the document described least. §1.22, reserved for the Operations user flow, was marked WIP and its only text described Sales — while §1.13 and §1.27 gave OPS exclusive ownership of the Daily OPSKED and the live execution dashboard.',
-      insightAttribution: 'Reverie Moments SOW V.0.1, §1.22 against §1.13 and §1.27',
+        'The biggest challenge was the gap between a largely manual operation and the need for faster, more coordinated execution. Through regular discussions with the client, I mapped how teams planned programs, managed services, coordinated vendors and drivers, and handled changes during live operations. This revealed that the Operations team needed a single system to replace scattered spreadsheets, paper-based updates and manual coordination with clearer workflows, real-time visibility and easier control across the entire operation.',
     },
     painPoints: [
       {
-        label: 'The critical role has no documented journey',
+        label: 'Operations depended on paper and Excel',
         detail:
-          'OPS owns publishing the Daily OPSKED and tracking live execution, yet the section meant to document how it works was a placeholder describing a different team. Every OPS stage in this engagement had to be reconstructed from adjacent sections.',
-        evidence: 'SOW §1.22 against §1.13 and §1.27 — Finding A1, high severity',
+          'Daily operational work was spread across paper sheets and Excel, with no single digital system to manage services, schedules, vendors, drivers and operational information.'
       },
       {
-        label: 'Billing responsibility contradicts billing access',
+        label: 'Excel became difficult to manage at scale',
         detail:
-          'The Billing Journey narrative states that OPS enters charges, units and client billing details. The §1.9 permission matrix grants OPS no billing access whatsoever — not create, read, update or delete.',
-        evidence: 'SOW §1.9 against the Billing Journey — Finding B1, high severity',
+          'As operational information grew, maintaining large Excel-based workflows became cumbersome, making it harder for the team to access and manage information efficiently during day-to-day operations.'
       },
       {
-        label: 'A reassignment can silently double-book a vendor',
+        label: 'Vendor and driver changes required constant coordination',
         detail:
-          'Vendor availability checking is described in the SOW but explicitly excluded from MVP scope. The moment OPS reassigns a vendor mid-disruption — exactly when it matters — nothing flags the overlap.',
-        evidence: 'Vendor Assignment to Service Cards — Finding C3, high severity',
+          'Service assignments, vendor availability, driver coordination and operational changes had to be managed manually, making real-time updates difficult when something changed during execution.'
       },
       {
-        label: 'Offline support with no conflict rule',
+        label: 'Changes had limited visibility and accountability',
         detail:
-          'Offline and local sync is named as a requirement, but no conflict-resolution behaviour is defined. OPS is the role most likely to be working in the field on poor connectivity, which puts the risk on the platform’s own real-time tracking objective.',
-        evidence: 'SOW §1.32 — Finding E1, high severity',
+          'Operational updates, service changes, comments, and completion details were handled across disconnected processes, making it difficult to track what changed, when, and who handled it. The new requirements called for activity history and audit trails.'
       },
     ],
     competitiveAudit: {
@@ -180,14 +170,11 @@ export const projects = [
     },
     personas: [
       {
-        name: 'Group & Crew Services Manager',
-        role: 'Program owner and primary client contact',
-        photo: '/media/reverie-moments-persona-1.svg',
-        company: 'Reverie Moments',
-        region: 'Not specified in SOW',
-        tech: 'Not specified in SOW',
+        name: 'Jenny Pearson',
+        role: 'Group & Crew Services Manager',
+        photo: '/media/user-persona/case_study_1-user1.jpg',
         quote:
-          'My job is to keep every program on schedule and ready to bill — but I only see what’s been published to me, and today none of this is even digital yet.',
+          'My job is to keep every program on schedule and ready to bill - but I only see what’s been published to me, and today none of this is even digital yet.',
         goals: [
           'Carry every program from Active through InProgress to Operated, complete enough for Accounting to bill against.',
           'Hold one accurate source of truth, so client-facing reports match what the team sees internally.',
@@ -200,18 +187,13 @@ export const projects = [
           'No safeguard against double-booking a vendor across overlapping services; availability checking is out of MVP scope.',
           'Vendor has no row in the permission matrix, so there is no rule for what a vendor may do with a ticket assigned to them.',
         ],
-        note:
-          'A role persona, not a person. The SOW documents responsibilities and permissions, not demographics, so age, education and location are recorded as not specified rather than invented. The quote is synthesised from documented responsibilities.',
       },
       {
-        name: 'Operations',
-        role: 'Real-time execution owner — Daily and Live OPSKED',
-        photo: '/media/reverie-moments-persona-2.svg',
-        company: 'Reverie Moments',
-        region: 'Not specified in SOW',
-        tech: 'Not specified in SOW',
+        name: 'Michael Wilson',
+        role: 'Operations Team',
+        photo: '/media/user-persona/case_study_1-user2.jpg',
         quote:
-          'I’m the one who has to catch problems while they’re still happening in the field — but my own journey through this platform isn’t written down anywhere yet.',
+          'I’m the one who has to catch problems while they’re still happening in the field - but my own journey through this platform isn’t written down anywhere yet.',
         goals: [
           'Publish a Daily OPSKED accurate enough that every other role can plan their day against it.',
           'Track live execution and catch delays, flight issues and tickets while they are still happening.',
@@ -224,8 +206,6 @@ export const projects = [
           'No availability check exists, so a mid-disruption reassignment can silently collide with an existing commitment.',
           'Offline support is required but undefined: no conflict rule, on the role most likely to be working without signal.',
         ],
-        note:
-          'Built entirely from the role definition in §1.13, the permission matrix in §1.9 and the OPSKED and trouble-ticket sections, because the dedicated OPS journey section contains no OPS content. Where this persona bridges two sections, it says so.',
       },
     ],
     journey: {
@@ -295,33 +275,33 @@ export const projects = [
     },
     solutions: [
       {
-        name: 'Author the Operations journey to the depth the GCSM section already had',
-        resolves: 'The critical role has no documented journey',
+        name: 'A single digital workspace for operations',
+        resolves: 'Operations depended on paper and Excel',
         detail:
-          'A dedicated OPS user flow, mapped from login through day-end rollover, with a node and edge reference table so it could be imported and worked on directly. It also forces the open question into the open: is OPS exactly GCSM permissions plus OPSKED ownership, or broader? That is the client’s answer to give, and it is now a question with a place to be answered rather than an absence.',
+          'Replaced fragmented paper and spreadsheet-based work with one platform for managing programs, services, employees, vendors, drivers and operational records in one place.',
       },
       {
-        name: 'Reconcile billing responsibility with billing access',
-        resolves: 'Billing responsibility contradicts billing access',
+        name: 'Daily & Live OPSKED as the operational control centre',
+        resolves: 'Excel became difficult to manage at scale',
         detail:
-          'Two sections cannot both be right. Either the matrix grants OPS billing access to match the narrative, or OPS is restricted and the narrative and every downstream document are corrected. Presented as a decision with both costs stated, not a recommendation to accept.',
+          'Brought daily schedules and live service execution into one workspace, allowing OPS to update service status, assignments, delays and operational changes directly instead of relying on paper updates and repeated calls.',
       },
       {
-        name: 'A non-blocking overlap warning instead of a full availability calendar',
-        resolves: 'A reassignment can silently double-book a vendor',
+        name: 'Real-time vendor & driver coordination',
+        resolves: 'Vendor and driver changes required constant coordination',
         detail:
-          'A full availability system was out of scope and would have stayed out. Flagging the same vendor on date- or time-overlapping services is a fraction of the cost, degrades safely, and puts the warning exactly where the mistake happens — at the moment of reassignment, with the person who can still undo it.',
+          'Connected vendor and driver assignments directly to service operations, making changes visible within the platform and giving the team a faster way to manage disruptions, reassignments and ongoing services.',
       },
       {
-        name: 'Define the conflict policy before offline ships',
-        resolves: 'Offline support with no conflict rule',
+        name: 'One source of truth for operational records',
+        resolves: 'Changes had limited visibility and accountability',
         detail:
-          'Pick a rule — last write wins with an audit flag, or field-level merge — and specify it ahead of implementation. If neither can be settled in time, scope version one to read-only offline, which is honest about what it guarantees rather than silently losing a field edit.',
+          'Centralized employees, vendors, drivers, services and transactions, with reporting capabilities that made operational information easier to maintain, review and turn into custom reports.',
       },
     ],
     visualDesign: {
       statement:
-        'PLACEHOLDER — the deliverables here were documents and diagrams rather than screens: a role-persona set, an Operations journey map, a two-figure user flow with an importable node reference, and a severity-ranked problem and solution matrix. Replace this with the argument for how those artefacts were designed to be read and argued with, and swap the gallery below for the real exports.',
+        'Before designing the interface, I turned the complex operational requirements into a visual system of journeys, flows, roles, and problem–solution mappings. These artefacts made the product logic easier to validate with the client, exposed gaps early, and gave the development team a clear foundation for translating operational processes into the platform.',
       gallery: [
         { src: '/media/reverie-moments-ui-1.svg', caption: 'PLACEHOLDER — Operations journey map, six stages' },
         { src: '/media/reverie-moments-ui-2.svg', caption: 'PLACEHOLDER — main daily cycle, login through day-end' },
@@ -458,12 +438,12 @@ export const projects = [
   {
     slug: 'apten',
     title: 'APTEN',
-    tagline: 'PLACEHOLDER — outcome line pending. A structured RFP replaces cold-calling warehouses.',
+    tagline: 'A structured RFP replaces cold-calling warehouses and the trust gap that comes with it.',
     summary: 'A B2B marketplace that turns 3PL selection into a structured, evidenced process.',
     industry: 'Logistics',
     year: '2026',
-    role: 'PLACEHOLDER — role pending',
-    timeline: 'PLACEHOLDER — 8 research phases · timeline pending',
+    role: 'UI/UX Designer',
+    timeline: '4 Months - 2024',
     team: 'PLACEHOLDER — team pending',
     tools: ['Figma', 'FigJam'],
     client: 'APTEN',
@@ -481,10 +461,9 @@ export const projects = [
     about:
       'APTEN is a B2B marketplace that connects brands and manufacturers with third-party logistics providers through a structured RFP process. Instead of brands cold-calling warehouses, the platform handles the whole path — profile and volume data intake, algorithmic matching, long list to short list curation, a shared Data Room for evaluation, proposal comparison, and final award and onboarding.',
     metrics: [
-      { value: 8, suffix: '', label: 'Research phases', note: 'PLACEHOLDER — replace with a real outcome metric.' },
-      { value: 5, suffix: '', label: 'Competitors audited', note: 'PLACEHOLDER — replace with a real outcome metric.' },
-      { value: 6, suffix: '', label: 'Sourced problem themes', note: 'PLACEHOLDER — replace with a real outcome metric.' },
-      { value: 10, suffix: '', label: 'Problem–solution pairs', note: 'PLACEHOLDER — replace with a real outcome metric.' },
+      { value: 3, suffix: '', label: 'User roles designed end-to-end', note: 'Brand, 3PL Provider, and Consultant — each with its own dashboard, journey, and permission set, not one generic flow stretched three ways.' },
+      { value: 19, suffix: '', label: 'Point trust gap identified', note: 'The gap between 3PL self-rated success and customer experience, found in research — and the exact distrust this design was built to close.' },
+      { value: 6, suffix: '', label: 'Research findings mapped to real screens', note: 'Every opportunity tied to a specific flow — Volume Profile, Data Room, Cost Summary, Fulfillment Contract — not a general recommendation.' },
     ],
     research: {
       intro:
@@ -552,13 +531,10 @@ export const projects = [
     },
     personas: [
       {
-        name: 'The Fulfillment Decision-Maker',
+        name: 'Alex William',
         role: 'Operations / Fulfillment Lead',
         photo: '/media/apten-persona-1.svg',
-        company: 'Growing DTC / B2B brand',
-        region: 'UK / US',
-        tech: 'Moderate–high',
-        quote: 'I can’t expect a fulfillment partner to care about my brand as much as I do.',
+        quote: 'I can’t expect a fulfillment partner to care about my brand as much as I do every single day.',
         goals: [
           'Find a 3PL that genuinely fits their volume and SKU profile without weeks of unstructured comparison.',
           'Lock in pricing and SLA terms that will not change after signing.',
@@ -569,15 +545,11 @@ export const projects = [
           'Hard to tell real capability from a sales team that says yes to everything.',
           'No pre-commitment visibility into performance, against a measured 19-point claim-versus-experience gap.',
         ],
-        note: 'They own the outcome when a 3PL relationship goes wrong — fielding the customer complaints and explaining the billing discrepancies to finance.',
       },
       {
-        name: 'The Business Development Lead',
+        name: 'Jack Anderson',
         role: 'Business Development / Sales Lead',
         photo: '/media/apten-persona-2.svg',
-        company: 'Mid-size 3PL provider',
-        region: 'UK / US',
-        tech: 'Moderate',
         quote: 'Generic pitches about warehouse locations and carrier relationships won’t win business anymore.',
         goals: [
           'Be matched with brands whose volume genuinely fits operational capacity, instead of chasing poor-fit prospects.',
@@ -589,7 +561,6 @@ export const projects = [
           'Consultant and agency referral channels are underused across the industry.',
           'Suspicion that competitors can buy visibility rather than earn it.',
         ],
-        note: 'Thinner evidence than persona one — the two trust frustrations are extrapolated from adjacent competitor review data, not confirmed 3PL-side complaints. Primary interviews would strengthen it.',
       },
     ],
     journey: {

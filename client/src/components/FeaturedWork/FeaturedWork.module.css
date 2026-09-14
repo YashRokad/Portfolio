@@ -17,6 +17,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
+  min-height: 44px;
   font-size: var(--fs-caption);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-eyebrow);

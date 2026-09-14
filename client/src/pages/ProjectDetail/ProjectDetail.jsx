@@ -71,24 +71,33 @@ export default function ProjectDetail() {
   const accent = project.accent;
   const bands = project.bands ?? {};
 
+  /* Section numbers are computed rather than hardcoded, so an optional
+     section (like the competitive audit) can be omitted per project without
+     leaving a gap in the sequence. */
+  let n = 1;
+  const num = () => String(n++).padStart(2, '0');
+  const nAbout = num();
+  const nMetrics = num();
+  const nResearch = num();
+  const nPain = num();
+  const nAudit = project.competitiveAudit ? num() : null;
+  const nPersonas = num();
+  const nJourney = num();
+  const nSolutions = num();
+  const nVisual = num();
+
   return (
     <article ref={articleRef} className={s.root} style={{ '--p-accent': accent }}>
       <ProjectHero project={project} />
       <ScrollProgress targetRef={articleRef} accent={accent} />
 
-      {/* ---------------------------------------------- 02 About project */}
-      <Section id="about" n="02" label="About the project" scopeRef={aboutScope}>
+      {/* -------------------------------------------------- About project */}
+      <Section id="about" n={nAbout} label="About the project" scopeRef={aboutScope}>
         <p className={s.aboutLead} data-reveal>{project.about}</p>
-        <dl className={s.aboutFacts} data-reveal>
-          <div><dt>Client</dt><dd>{project.client}</dd></div>
-          <div><dt>Year</dt><dd>{project.year}</dd></div>
-        </dl>
       </Section>
 
-      <ImageBand src={bands.about} caption={bands.aboutCaption} accent={accent} />
-
-      {/* -------------------------------------------- 03 Impact metrics */}
-      <Section id="metrics" n="03" label="Impact" scopeRef={metricsScope}>
+      {/* -------------------------------------------------- Impact metrics */}
+      <Section id="metrics" n={nMetrics} label="Impact" scopeRef={metricsScope}>
         <div className={s.metricGrid}>
           {project.metrics.map((metric) => (
             <div key={metric.label} className={s.metricCell} data-reveal>
@@ -98,8 +107,10 @@ export default function ProjectDetail() {
         </div>
       </Section>
 
-      {/* ------------------------------------ 04 User problem & research */}
-      <Section id="research" n="04" label="User problem &amp; research" scopeRef={researchScope}>
+      <ImageBand src={bands.about} caption={bands.aboutCaption} accent={accent} />
+
+      {/* -------------------------------------------- User problem & research */}
+      <Section id="research" n={nResearch} label="User problem &amp; research" scopeRef={researchScope}>
         <p className={s.researchIntro} data-reveal>{project.research.intro}</p>
 
         <ul className={s.methods}>
@@ -113,14 +124,14 @@ export default function ProjectDetail() {
         </ul>
 
         <blockquote className={s.insight} data-reveal>
-          <p className={s.insightLabel}>The finding everything turned on</p>
+          <p className={s.insightLabel}>THE FINDING THAT CHANGED THE DIRECTION</p>
           <p className={s.insightText}>{project.research.insight}</p>
           <footer className={s.insightFoot}>{project.research.insightAttribution}</footer>
         </blockquote>
       </Section>
 
-      {/* ------------------------------------------------ 05 Pain points */}
-      <Section id="pain-points" n="05" label="Pain points" scopeRef={painScope}>
+      {/* -------------------------------------------------------- Pain points */}
+      <Section id="pain-points" n={nPain} label="Pain points" scopeRef={painScope}>
           <ul className={s.painList}>
             {project.painPoints.map((point, i) => (
               <li key={point.label} className={s.painRow} data-reveal>
@@ -137,13 +148,15 @@ export default function ProjectDetail() {
 
       <ImageBand src={bands.problem} caption={bands.problemCaption} height="short" accent={accent} />
 
-      {/* ------------------------------------------ 06 Competitive audit */}
-      <Section id="audit" n="06" label="Competitive audit" wide scopeRef={auditScope}>
-        <AuditTable audit={project.competitiveAudit} accent={accent} />
-      </Section>
+      {/* -------------------------------------------------- Competitive audit */}
+      {nAudit && (
+        <Section id="audit" n={nAudit} label="Competitive audit" wide scopeRef={auditScope}>
+          <AuditTable audit={project.competitiveAudit} accent={accent} />
+        </Section>
+      )}
 
-      {/* ---------------------------------------------- 07 User personas */}
-      <Section id="personas" n="07" label="Who this is for" wide scopeRef={personaScope}>
+      {/* ------------------------------------------------------ User personas */}
+      <Section id="personas" n={nPersonas} label="Who this is for" wide scopeRef={personaScope}>
         <div className={s.personaGrid}>
           {project.personas.map((persona) => (
             <div key={persona.name} data-reveal>
@@ -153,13 +166,13 @@ export default function ProjectDetail() {
         </div>
       </Section>
 
-      {/* ------------------------------------------- 08 User journey map */}
-      <JourneyMap journey={project.journey} accent={accent} />
+      {/* ------------------------------------------------------ User journey map */}
+      <JourneyMap journey={project.journey} accent={accent} n={nJourney} />
 
-      {/* -------------------------------------------------- 09 Solutions */}
-      <Section id="solutions" n="09" label="Solutions" wide scopeRef={solutionScope}>
+      {/* ------------------------------------------------------------ Solutions */}
+      <Section id="solutions" n={nSolutions} label="Solutions" wide scopeRef={solutionScope}>
           <p className={s.solutionsLead} data-reveal>
-            Each one answers a problem named above — nothing here was added because it was interesting.
+            Move daily operations from paper to one platform
           </p>
 
           <ol className={s.solutionList}>
@@ -182,15 +195,15 @@ export default function ProjectDetail() {
 
       <ImageBand src={bands.solution} caption={bands.solutionCaption} accent={accent} />
 
-      {/* ---------------------------------------------- 10 Visual design */}
-      <Section id="visual" n="10" label="Visual design" wide scopeRef={visualScope}>
+      {/* -------------------------------------------------------- Visual design */}
+      <Section id="visual" n={nVisual} label="Visual design" wide scopeRef={visualScope}>
         <p className={s.visualStatement} data-reveal>{project.visualDesign.statement}</p>
         <div className={s.galleryWrap}>
           <Gallery gallery={project.visualDesign.gallery} title={project.title} accent={accent} />
         </div>
       </Section>
 
-      {/* ---------------------------------------------- 11 Next project */}
+      {/* -------------------------------------------------------- Next project */}
       <section ref={nextScope} id="next" className={s.next}>
         <TransitionLink
           to={`/work/${project.next.slug}`}
@@ -202,7 +215,6 @@ export default function ProjectDetail() {
             <div className={s.nextInner}>
               <div className={s.nextCopy}>
                 <p className={s.marker}>
-                  <span className={s.markerNum}>11</span>
                   <span className={s.markerLabel}>Next project</span>
                 </p>
                 <h2 className={s.nextTitle} data-reveal>{project.next.title}</h2>

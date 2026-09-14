@@ -213,7 +213,6 @@ export default function Header({ name = 'Yash Rokad', about }) {
           <div className={s.footCol}>
             <p className={s.footLabel}>Contact</p>
             {email && <a className={s.footLink} href={`mailto:${email}`}>{email}</a>}
-            <p className={s.footNote}>{about?.availability?.label}</p>
           </div>
           <div className={s.footCol}>
             <p className={s.footLabel}>Socials</p>

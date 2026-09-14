@@ -2,7 +2,12 @@
 
 /* ---- Matrix ---- */
 /* No frame, no fill — the matrix is held by its rules alone. */
-.scroller { overflow-x: auto; }
+.scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* The table is min-width 46rem, so it only scrolls below ~760px — that is
+   the only width where the hint is worth showing. */
+.hint { display: none; margin-top: calc(var(--sp-7) * -1 + var(--sp-2)); }
+@media (max-width: 760px) { .hint { display: block; } }
 .table {
   width: 100%;
   min-width: 46rem;

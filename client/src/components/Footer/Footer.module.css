@@ -14,13 +14,14 @@
 }
 @media (max-width: 900px) { .inner { grid-template-columns: 1fr; gap: var(--sp-8); } }
 
-/* ---- Left: identity + newsletter ---- */
+/* ---- Left: identity + contact ---- */
 .left { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-content: start; }
 
 .wordmark {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-3);
+  min-height: 44px;
   justify-self: start;
   font-size: var(--fs-h4);
   font-weight: var(--fw-bold);
@@ -33,65 +34,7 @@
   transform: rotate(45deg);
 }
 
-.newsletter { display: grid; gap: var(--sp-3); max-width: 30rem; }
-.newsletterLine {
-  font-size: var(--fs-body-lg);
-  font-weight: var(--fw-medium);
-  line-height: 1.35;
-  letter-spacing: -0.015em;
-  color: var(--text-primary);
-  margin-bottom: var(--sp-4);
-  text-wrap: pretty;
-}
-
-.form {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--sp-4);
-  align-items: end;
-}
-.field { position: relative; display: block; }
-.input {
-  width: 100%;
-  padding-block: var(--sp-3);
-  font-size: var(--fs-body);
-  color: var(--text-primary);
-  border-bottom: 1px solid var(--border-strong);
-}
-.input::placeholder { color: var(--text-tertiary); }
-.rule {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--text-primary);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
-.submit {
-  padding: var(--sp-3) var(--sp-6);
-  border-radius: var(--radius-button);
-  background: var(--fill-solid);
-  color: var(--accent-ink);
-  font-weight: var(--fw-semibold);
-  font-size: var(--fs-caption);
-  white-space: nowrap;
-  will-change: transform;
-  transition: opacity var(--dur-micro) linear;
-}
-.submit:hover:not(:disabled) { opacity: 0.82; }
-.submit:disabled { opacity: 0.5; cursor: progress; }
-
-.formError, .formOk {
-  grid-column: 1 / -1;
-  font-size: var(--fs-caption);
-}
-.formError { color: var(--state-negative); }
-.formOk { color: var(--text-primary); }
-
-/* ---- Right: link columns then contacts ---- */
+/* ---- Right: link columns ---- */
 .cols {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -99,7 +42,7 @@
   align-content: start;
 }
 
-.col ul { display: grid; gap: var(--sp-2); }
+.col ul { display: grid; }
 
 .colLabel {
   font-size: var(--fs-caption);
@@ -108,6 +51,10 @@
 }
 
 .link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  justify-self: start;
   font-size: var(--fs-body-lg);
   font-weight: var(--fw-regular);
   color: var(--text-primary);
@@ -115,27 +62,20 @@
 }
 .link:hover { opacity: 0.6; }
 
-/* Contacts sit under the columns, aligned to the same grid. */
-.contacts {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
-  gap: var(--sp-6);
-  margin-top: clamp(1.5rem, 5vw, 4rem);
-}
+/* Contacts, under the wordmark in the left column. */
+.contacts { display: grid; gap: var(--sp-2); }
 .contactValue {
-  font-size: var(--fs-body-lg);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  justify-self: start;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.01em;
   color: var(--text-primary);
   transition: opacity var(--dur-micro) linear;
 }
 .contactValue:hover { opacity: 0.6; }
-
-.baseline {
-  grid-column: 1 / -1;
-  font-size: var(--fs-caption);
-  color: var(--text-tertiary);
-}
-@media (max-width: 900px) { .baseline { grid-column: 1; } }
 
 /* ---- Sunken wordmark ---- */
 .watermark {

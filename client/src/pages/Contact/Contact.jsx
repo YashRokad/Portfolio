@@ -3,9 +3,9 @@ import { useOutletContext } from 'react-router-dom';
 import { gsap, DUR, EASE, STAGGER } from '../../animations/gsapConfig';
 import { splitText } from '../../animations/splitText';
 import { useMotion } from '../../hooks/useMotionPreference';
-import Magnetic from '../../components/Magnetic/Magnetic';
 import { useReveal } from '../../hooks/useReveal';
 import usePageTitle from '../../hooks/usePageTitle';
+import PageAtmosphere from '../../components/PageAtmosphere/PageAtmosphere';
 import s from './Contact.module.css';
 
 export default function Contact() {
@@ -44,6 +44,7 @@ export default function Contact() {
   return (
     <>
       <section ref={heroRef} className={s.hero}>
+        <PageAtmosphere />
         <div className="shell">
           <p className={s.eyebrow} data-hero-item>Contact</p>
 
@@ -61,29 +62,6 @@ export default function Contact() {
 
           <div className={s.actions} data-hero-item>
             <CopyButton value={email} />
-            <span className={s.actionNote}>Or copy it — I reply to everything within two working days.</span>
-          </div>
-
-          <div className={s.meta}>
-            <div className={s.status} data-hero-item>
-              <StatusDot status={about?.availability?.status} />
-              <div>
-                <p className={s.statusLabel}>{about?.availability?.label}</p>
-                <p className="meta">{about?.availability?.detail}</p>
-              </div>
-            </div>
-
-            <ul className={s.socials} data-hero-item>
-              {(about?.contact?.socials ?? []).map((soc) => (
-                <li key={soc.label}>
-                  <Magnetic strength={0.4}>
-                    <a className={s.social} href={soc.href} target="_blank" rel="noreferrer noopener">
-                      {soc.label}
-                    </a>
-                  </Magnetic>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
@@ -106,28 +84,6 @@ export default function Contact() {
 }
 
 /* ---------------------------------------------------------------- pieces */
-
-function StatusDot({ status }) {
-  const ref = useRef(null);
-  const { reduced } = useMotion();
-
-  useLayoutEffect(() => {
-    if (reduced) return undefined;
-    const ctx = gsap.context(() => {
-      gsap.to(ref.current.querySelector(`.${s.pulse}`), {
-        scale: 2.6, opacity: 0, duration: 1.8, ease: 'power2.out', repeat: -1,
-      });
-    }, ref);
-    return () => ctx.revert();
-  }, [reduced]);
-
-  return (
-    <span ref={ref} className={s.dotWrap} data-status={status}>
-      <span className={s.pulse} aria-hidden="true" />
-      <span className={s.dot} aria-hidden="true" />
-    </span>
-  );
-}
 
 function CopyButton({ value }) {
   const [copied, setCopied] = useState(false);
@@ -152,20 +108,26 @@ function CopyButton({ value }) {
   };
 
   return (
-    <button type="button" className={s.copy} onClick={copy} data-copied={copied || undefined}>
+    <button
+      type="button"
+      className={s.copy}
+      onClick={copy}
+      data-copied={copied || undefined}
+      aria-label={copied ? 'Address copied' : 'Copy address'}
+    >
       <span ref={iconRef} className={s.copyIcon} aria-hidden="true">
         {copied ? (
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
             <path data-check d="M4 12.5 9.5 18 20 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6">
             <rect x="9" y="9" width="11" height="11" rx="2.5" />
             <path d="M15 5.5A2.5 2.5 0 0 0 12.5 3H6a3 3 0 0 0-3 3v6.5A2.5 2.5 0 0 0 5.5 15" strokeLinecap="round" />
           </svg>
         )}
       </span>
-      {copied ? 'Copied' : 'Copy address'}
+      {copied ? 'Copied' : 'Copy Email'}
     </button>
   );
 }

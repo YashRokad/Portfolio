@@ -15,7 +15,7 @@
   max-height: 900px;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5), transparent 62%);
+  background: radial-gradient(circle at 50% 50%, rgba(90, 140, 255, 0.5), transparent 62%);
   opacity: 0.05;
   filter: blur(80px);
   pointer-events: none;

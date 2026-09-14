@@ -144,6 +144,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
+  min-height: 44px;
   font-weight: var(--fw-semibold);
   border-bottom: 1px solid var(--border-strong);
   padding-bottom: var(--sp-1);

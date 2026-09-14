@@ -79,10 +79,13 @@
   --fw-bold: 700;
   --fw-black: 800;
 
-  /* Fluid modular scale, ~1.25 minor third at the small end. */
-  --fs-eyebrow: clamp(0.688rem, 0.66rem + 0.14vw, 0.78rem);
-  --fs-caption: clamp(0.75rem, 0.72rem + 0.15vw, 0.84rem);
-  --fs-body: clamp(0.95rem, 0.9rem + 0.24vw, 1.06rem);
+  /* Fluid modular scale, ~1.25 minor third at the small end.
+     The small ends are floored for phone reading: caption carries real
+     paragraph copy (persona goals, journey cells, method details), so it
+     must not fall to 12px. Desktop maxima are unchanged. */
+  --fs-eyebrow: clamp(0.75rem, 0.7rem + 0.14vw, 0.78rem);
+  --fs-caption: clamp(0.9rem, 0.84rem + 0.15vw, 0.94rem);
+  --fs-body: clamp(1rem, 0.94rem + 0.24vw, 1.06rem);
   --fs-body-lg: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
   --fs-h4: clamp(1.2rem, 1.08rem + 0.6vw, 1.56rem);
   --fs-h3: clamp(1.5rem, 1.28rem + 1.1vw, 2.2rem);

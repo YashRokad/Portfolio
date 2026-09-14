@@ -74,6 +74,10 @@ export default function AuditTable({ audit, accent }) {
             </tbody>
           </table>
         </div>
+      ) : null}
+
+      {matrix ? (
+        <p className={`meta ${s.hint}`}>Scroll the table sideways to compare every column.</p>
       ) : (
         <ul className={s.list}>
           {competitors.map((c, i) => (

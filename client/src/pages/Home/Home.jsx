@@ -117,7 +117,6 @@ export default function Home() {
       <CtaBanner
         eyebrow="Next"
         title={about?.closingCta?.line ?? ''}
-        body={about?.availability?.detail}
         action={about?.closingCta?.action ?? 'Start a conversation'}
       />
     </>

@@ -11,7 +11,7 @@ const TONE_LEVEL = { low: 1, mid: 2, neutral: 3, high: 4 };
  * horizontally like any wide table, with the dimension labels pinned to the
  * left edge; nothing is hijacked and nothing is hidden behind a carousel.
  */
-export default function JourneyMap({ journey, accent }) {
+export default function JourneyMap({ journey, accent, n = '08' }) {
   const root = useRef(null);
   const { reduced } = useMotion();
 
@@ -48,7 +48,7 @@ export default function JourneyMap({ journey, accent }) {
     <section ref={root} id="journey" className={s.root} style={{ '--p-accent': accent }}>
       <div className="shell">
         <p className={s.marker}>
-          <span className={s.markerNum}>08</span>
+          <span className={s.markerNum}>{n}</span>
           User journey map
         </p>
         <h2 className={s.title}>{journey.label}</h2>

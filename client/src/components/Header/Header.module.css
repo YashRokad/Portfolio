@@ -26,6 +26,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--sp-3);
+  min-height: 44px;
+  padding-block: var(--sp-3);
+  margin-block: calc(var(--sp-3) * -1);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-heading);
 }
@@ -40,10 +43,15 @@
 .wordmarkText { font-size: var(--fs-body); }
 
 /* ---- Toggle ---- */
+/* Negative margin keeps the visual position identical while the padding
+   grows the hit area to a comfortable thumb target. */
 .toggle {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-3);
+  min-height: 44px;
+  padding-block: var(--sp-3);
+  margin-block: calc(var(--sp-3) * -1);
   font-size: var(--fs-caption);
   font-weight: var(--fw-semibold);
   letter-spacing: 0.08em;
@@ -108,6 +116,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--sp-3);
+  min-height: 44px;
+  padding-block: var(--sp-3);
+  margin-block: calc(var(--sp-3) * -1);
   font-size: var(--fs-caption);
   font-weight: var(--fw-semibold);
   letter-spacing: 0.08em;
@@ -141,6 +152,9 @@
 
 .menuLink {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: clamp(2.4rem, 6.5vw, 4.75rem);
   font-weight: var(--fw-black);
   letter-spacing: var(--ls-display);
@@ -178,6 +192,9 @@
   margin-bottom: var(--sp-1);
 }
 .footLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--text-secondary);
   font-weight: var(--fw-medium);
   justify-self: start;
