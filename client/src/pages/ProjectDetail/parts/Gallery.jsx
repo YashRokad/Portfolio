@@ -1,15 +1,19 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap, DUR, EASE, revealTrigger } from '../../../animations/gsapConfig';
 import { useMotion } from '../../../hooks/useMotionPreference';
+import ShotSheet from '../../../components/ShotSheet/ShotSheet';
 import s from './Gallery.module.css';
 
 /**
  * Section 10 — Visual Design gallery. A plain grid: every mockup is visible
- * on the page rather than hidden behind a horizontal scroll.
+ * on the page rather than hidden behind a horizontal scroll. Tapping one
+ * opens it full size in the same bottom sheet the design shots use, minus
+ * the title block — these screens carry no copy.
  */
 export default function Gallery({ gallery = [], title, accent }) {
   const root = useRef(null);
   const { reduced } = useMotion();
+  const [active, setActive] = useState(null);
 
   useLayoutEffect(() => {
     if (!gallery.length) return undefined;
@@ -33,16 +37,26 @@ export default function Gallery({ gallery = [], title, accent }) {
   if (!gallery.length) return null;
 
   return (
-    <div ref={root} className={s.root} style={{ '--p-accent': accent }}>
-      <ul className={s.grid} aria-label={`${title} — interface gallery`}>
-        {gallery.map((shot) => (
-          <li key={shot.src} className={s.item}>
-            <figure className={s.figure}>
-              <img className={s.img} src={shot.src} alt={shot.caption ?? ''} loading="lazy" />
-            </figure>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div ref={root} className={s.root} style={{ '--p-accent': accent }}>
+        <ul className={s.grid} aria-label={`${title} — interface gallery`}>
+          {gallery.map((shot) => (
+            <li key={shot.src} className={s.item}>
+              <button
+                type="button"
+                className={s.trigger}
+                onClick={() => setActive({ image: shot.src })}
+                data-cursor="view"
+                data-cursor-label="Open"
+              >
+                <img className={s.img} src={shot.src} alt={shot.caption ?? ''} loading="lazy" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <ShotSheet shot={active} onClose={() => setActive(null)} />
+    </>
   );
 }

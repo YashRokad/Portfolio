@@ -46,10 +46,12 @@ export default function Work() {
         });
         return;
       }
+      /* The radius animates back to 0 — it belongs to the reveal, not to the
+         resting card, which sits square like everything else on the site. */
       gsap.fromTo(cards,
         { y: 70, autoAlpha: 0, clipPath: 'inset(6% 6% 6% 6% round 14px)' },
         {
-          y: 0, autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0% round 14px)',
+          y: 0, autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0% round 0px)',
           duration: DUR.slow, ease: EASE.editorial, stagger: STAGGER.cards,
           scrollTrigger: revealTrigger(gridRef.current),
         });
@@ -169,7 +171,7 @@ export default function Work() {
                       skipCurtain={!reduced && !touch}
                     >
                       <span className={s.frame}>
-                        <img className={s.image} src={project.cover} alt="" loading="lazy" />
+                        <img className={s.image} src={project.thumbnail ?? project.cover} alt="" loading="lazy" />
                       </span>
                       <span className={s.caption}>
                         <h2 className={s.cardTitle}>{project.title}</h2>

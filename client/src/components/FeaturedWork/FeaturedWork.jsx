@@ -46,7 +46,7 @@ export default function FeaturedWork({ project, totalCount = 0 }) {
       gsap.timeline({ scrollTrigger: revealTrigger(root.current, { start: 'top 74%' }) })
         .fromTo(frame,
           { clipPath: 'inset(14% 8% 14% 8% round 20px)' },
-          { clipPath: 'inset(0% 0% 0% 0% round 20px)', duration: 1.25, ease: EASE.curtain })
+          { clipPath: 'inset(0% 0% 0% 0% round 0px)', duration: 1.25, ease: EASE.curtain })
         .fromTo(imageRef.current,
           { scale: 1.22 },
           { scale: 1, duration: 1.5, ease: EASE.editorial }, 0)
@@ -115,7 +115,7 @@ export default function FeaturedWork({ project, totalCount = 0 }) {
           skipCurtain={!reduced && !touch}
         >
           <div className={s.frame}>
-            <img ref={imageRef} className={s.image} src={project.cover} alt="" />
+            <img ref={imageRef} className={s.image} src={project.thumbnail ?? project.cover} alt="" />
             <span className={s.badge} data-fw-meta>{project.industry} · {project.year}</span>
           </div>
 

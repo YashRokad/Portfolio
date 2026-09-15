@@ -23,6 +23,7 @@ export const projects = [
     accent: '#ffffff',
     artTone: '#cfcecb',
     cover: '/media/Reverie Moments/IMG 1.png',
+    thumbnail: '/media/Reverie Moments/Thumbnail IMG.png',
     bands: {
       about: '/media/Reverie Moments/IMG 2.png',
       problem: '/media/Reverie Moments/IMG 3.png',
@@ -299,11 +300,10 @@ export const projects = [
       statement:
         'Before designing the interface, I turned the complex operational requirements into a visual system of journeys, flows, roles, and problem–solution mappings. These artefacts made the product logic easier to validate with the client, exposed gaps early, and gave the development team a clear foundation for translating operational processes into the platform.',
       gallery: [
-        { src: '/media/reverie-moments-ui-1.svg', caption: 'PLACEHOLDER — Operations journey map, six stages' },
-        { src: '/media/reverie-moments-ui-2.svg', caption: 'PLACEHOLDER — main daily cycle, login through day-end' },
-        { src: '/media/reverie-moments-ui-3.svg', caption: 'PLACEHOLDER — issue-handling sub-flow, three branches' },
-        { src: '/media/reverie-moments-ui-4.svg', caption: 'PLACEHOLDER — narrative against the permission matrix' },
-        { src: '/media/reverie-moments-ui-5.svg', caption: 'PLACEHOLDER — problem and solution summary, ranked by severity' },
+        { src: '/media/Reverie Moments/design_1.png' },
+        { src: '/media/Reverie Moments/design_2.png' },
+        { src: '/media/Reverie Moments/design_3.png' },
+        { src: '/media/Reverie Moments/design_4.png' },
       ],
     },
   },
@@ -446,6 +446,7 @@ export const projects = [
     accent: '#ffffff',
     artTone: '#b6b5b2',
     cover: '/media/APTEN/IMG 1.png',
+    thumbnail: '/media/APTEN/Thumbnail IMG.png',
     bands: {
       about: '/media/APTEN/IMG 2.png',
       problem: '/media/APTEN/IMG 3.png',

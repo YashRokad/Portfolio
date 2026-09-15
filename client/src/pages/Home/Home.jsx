@@ -19,6 +19,16 @@ import s from './Home.module.css';
    data fetch and styles all stay in place, just unrendered until then. */
 const SHOW_TESTIMONIALS = false;
 
+/* The hero paints from these rather than waiting on /api/about. On a
+   serverless host that fetch can cost a cold start, and gating the intro
+   animation on it left the page showing the bare gradient for seconds.
+   Live data still overrides them the moment it lands. */
+const HERO_FALLBACK = {
+  wordmark: 'Yash Rokad',
+  headline: 'I design the software that decides how somebody’s Tuesday goes.',
+  sub: 'Four years inside enterprise verticals nobody puts on a showreel — payables, claims, shop floors, dock yards. The work is figuring out what the people using it are actually afraid of, then removing that.',
+};
+
 export default function Home() {
   const { about } = useOutletContext();
   const { data: projects } = useResource('projects', api.getProjects);
@@ -34,10 +44,9 @@ export default function Home() {
   return (
     <>
       <Hero
-        wordmark={about?.wordmark ?? about?.name ?? ''}
-        statement={about?.heroHeadline ?? ''}
-        sub={about?.heroSub ?? ''}
-        play={Boolean(about)}
+        wordmark={about?.wordmark ?? about?.name ?? HERO_FALLBACK.wordmark}
+        statement={about?.heroHeadline ?? HERO_FALLBACK.headline}
+        sub={about?.heroSub ?? HERO_FALLBACK.sub}
       />
 
       {/* ---- Design shots ---- */}

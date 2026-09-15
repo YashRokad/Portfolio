@@ -94,7 +94,7 @@ export default function ShotSheet({ shot, onClose }) {
         data-lenis-prevent
         role="dialog"
         aria-modal={open ? 'true' : undefined}
-        aria-label={shot?.name}
+        aria-label={shot?.name ?? 'Enlarged view'}
         inert={open ? undefined : ''}
       >
         <button ref={closeRef} type="button" className={s.close} onClick={onClose}>
@@ -103,10 +103,14 @@ export default function ShotSheet({ shot, onClose }) {
 
         {shot && (
           <div className={s.body}>
-            <div className={s.copy}>
-              <h2 className={s.title}>{shot.name}</h2>
-              <p className={s.sub}>{shot.subtitle}</p>
-            </div>
+            {/* Visual-design screens open with no copy — only design shots
+                carry a name and subtitle. */}
+            {(shot.name || shot.subtitle) && (
+              <div className={s.copy}>
+                {shot.name && <h2 className={s.title}>{shot.name}</h2>}
+                {shot.subtitle && <p className={s.sub}>{shot.subtitle}</p>}
+              </div>
+            )}
             <div className={s.frame}>
               <img className={s.image} src={shot.image} alt="" />
             </div>
