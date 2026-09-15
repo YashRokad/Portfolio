@@ -115,7 +115,7 @@ export default function Work() {
           </h1>
 
           <div className={s.introRow}>
-            <p className={s.introLead}>{about?.introStatement}</p>
+            <p className={s.introLead}>{about?.workStatement}</p>
             <dl className={s.tally}>
               <div className={s.tallyItem}>
                 <dt className={s.tallyLabel}>Case studies</dt>

@@ -10,6 +10,10 @@ export const about = {
   aboutHeadline: 'Four years spent in the rooms where software gets worked around.',
   introStatement:
     'I work on operational software: the systems people are required to use, on a deadline, often badly lit and rarely willingly. That constraint is the interesting part. When someone cannot walk away from your product, every unclear label becomes a cost the business pays forever.',
+  /* The Work index has its own line — it introduces the projects below it,
+     not me, so it must not repeat introStatement. */
+  workStatement:
+    'Case studies for platforms that run real operations, plus the design shots in between. Each one starts with the same question: what does this team actually do on the worst day of the month, and where does the current system make that harder?',
   /* The About page ledger — label on the left, answer on the right. */
   ledger: [
     {

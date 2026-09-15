@@ -22,14 +22,10 @@ export const projects = [
     client: 'Reverie Moments',
     accent: '#ffffff',
     artTone: '#cfcecb',
-    cover: '/media/reverie-moments-cover.svg',
+    cover: '/media/Reverie Moments/IMG 1.png',
     bands: {
-      about: '/media/reverie-moments-band-about.svg',
-      aboutCaption: 'PLACEHOLDER — replace with the OPSKED concept or a photograph of the paper process it replaces',
-      problem: '/media/reverie-moments-band-problem.svg',
-      problemCaption: 'PLACEHOLDER — replace with the permission-matrix audit artefact',
-      solution: '/media/reverie-moments-band-solution.svg',
-      solutionCaption: 'PLACEHOLDER — replace with the OPS user flow export',
+      about: '/media/Reverie Moments/IMG 2.png',
+      problem: '/media/Reverie Moments/IMG 3.png',
     },
     about:
       'Reverie Moments is a platform designed to centralize multi-day event logistics, bringing programs, services, guests, vendors, drivers, and internal teams into one role-based system. I joined at SOW v0.1 to audit the requirements before implementation, where I identified gaps in the role journeys - most notably the Operations journey, which was still marked WIP despite its responsibility for daily and live OPSKED, service assignments, and real-time execution.',
